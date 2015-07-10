@@ -9,13 +9,15 @@
 #ifndef KeySkyBandQuery_Bucket_h
 #define KeySkyBandQuery_Bucket_h
 
+#include "Point.h"
+
 struct gtBucket {
     int bitmap;
     //bool **dominanceTable;  // I think we don't need it
-    //vector <gtPoint *>data;   //  这几个vector我在思考怎么弄
-    //vector <gtPoint *>Sl;
-    //vector <gtPoint *>Sln;
-    //vector <gtPoint *>StwhSes;
+    gtPoint * data;   //  这几个vector我在思考怎么弄
+    gtPoint *  Sl;
+    gtPoint * Sln;
+    gtPoint * StwhSes;
     struct gtBucket *next;
     struct gtBucket *previous;
 };

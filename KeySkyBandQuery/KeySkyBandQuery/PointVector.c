@@ -91,3 +91,12 @@ void FreeAllPoints(struct gtPoint * Node){
     }
     TotalSize = 0;
 }
+
+int size(gtPoint * Head){
+		int count=0;
+		while(Head!=NULL){
+						count++;
+						Head = Head->next;
+		}
+		return count;
+}
