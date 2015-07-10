@@ -6,33 +6,33 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#include "Point.h"
+//#include "Point.h"
 #include "Bucket.h"
 #include "PointVector.c"
 #include "BucketVector.c"
 
-int32_t kValue;
-int32_t dataDimension;
-int32_t dataCount;
+int kValue;
+int dataDimension;
+int dataCount;
 
-struct gtPoint *tmpInput = NULL;
-struct gtBucket *bucket = NULL;
-vector<gtPoint *> S, Stwh, Ses, Sg;
+gtPoint *tmpInput = NULL;
+gtBucket *bucket = NULL;
+gtPoint * S, * Stwh, * Ses, * Sg;
 
-void inputData(int32_t dataDimension, int32_t dataCount) {      // [!!!] Not catching failed
+void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
     raw = new gtPoint[dataCount];
 
-    for (int32_t i = 0; i < dataCount; i++) {
+    for (int i = 0; i < dataCount; i++) {
         tmpInput[i].dimension = dataDimension;
 
-        tmpInput[i].data = new int32_t *[dataDimension];
-        for(int32_t j = 0; j < dataDimension; j++) {
-            tmpInput[i].data[j] = new int32_t;
+        tmpInput[i].data = new int *[dataDimension];
+        for(int j = 0; j < dataDimension; j++) {
+            tmpInput[i].data[j] = new int;
             cin >> *(tmpInput[i].data[j]);                           // Input Actual Data
         }
 
-        for(int32_t j = 0; j < dataDimension; j++) {            // Set Bit Map
-            int32_t bitValid;   cin >> bitValid;
+        for(int j = 0; j < dataDimension; j++) {            // Set Bit Map
+            int bitValid;   cin >> bitValid;
             if (bitValid != 1)  {
                 tmpInput[i].data[j] = NULL;
                 tmpInput[i].bitmap <<= 1;
@@ -47,43 +47,46 @@ void inputData(int32_t dataDimension, int32_t dataCount) {      // [!!!] Not cat
 }
 
 void printAllPoint() {
-    for (int32_t i=0; i < S.size(); i++) {
+    for (int i=0; i < S.size(); i++) {
         S[i] -> printPoint();
     }
 }
 
-bool inline isPoint1DominatePoint2(gtPoint *p1, gtPoint *p2) {
+//Alan Ruijia has changed this function to suit vector. 
+int isPoint1DominatePoint2(gtPoint *p1, gtPoint *p2) {
+    int dimension = p1->dimension;
+    int smallCount = 0;
+    int atLeastOneSmall = 0; //C doesn't have bool type
+    int i;
+    int x1,x2;
     if (!p1 || !p2) return false;
-    int32_t dimension = p1->dimension;
-    int32_t smallCount = 0;
-    bool atLeastOneSmall = false;
-    for (int32_t i = 0; i < dimension; i++) {
-        int32_t x1= (p1->data[i])==NULL?0:*(p1->data[i]);
-        int32_t x2= (p2->data[i])==NULL?0:*(p2->data[i]);
+    for (i = 0; i < dimension; i++) {
+        x1= (p1->data[i])==NULL?0:*(p1->data[i]);
+        x2= (p2->data[i])==NULL?0:*(p2->data[i]);
         if (x1 <= x2) smallCount++;
-        if (x1 < x2) atLeastOneSmall = true;
+        if (x1 < x2) atLeastOneSmall = 1;
     }
 
-    if (smallCount == dimension && atLeastOneSmall) return true;
-    else return false;
+    if ((smallCount == dimension) && atLeastOneSmall) return 1;
+    else return 0;
 }
 
 bool gtSortAlgo(const gtPoint *v1, const gtPoint *v2) {
     return v1->domainatedCount > v2->domainatedCount;
 }
 
-void thicknessWarehouse(int32_t dataDimension, int32_t kValue) {
+void thicknessWarehouse(int dataDimension, int kValue) {
     Stwh.clear(); Ses.clear(); Sg.clear();
 
     // [STEP 1]
-    int32_t bucketCount = 1;
-    for (int32_t i = 0; i < dataDimension; i++) bucketCount *= 2;
+    int bucketCount = 1;
+    for (int i = 0; i < dataDimension; i++) bucketCount *= 2;
 
     bucket = new gtBucket[bucketCount];
     for (int i = 0; i < S.size(); i++) bucket[S[i]->bitmap].data.push_back(S[i]);
 
     // [STEP 2]
-    for (int32_t i = 0; i < bucketCount; i++) {
+    for (int i = 0; i < bucketCount; i++) {
         bucket[i].bitmap = i;                       // Set Bitmap
 
         size_t dataSize = bucket[i].data.size();
@@ -155,18 +158,18 @@ void thicknessWarehouse(int32_t dataDimension, int32_t kValue) {
 
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
         vector<gtPoint *> cmpS;
-        for (int32_t i = 0; i < bucketCount; i++) {
+        for (int i = 0; i < bucketCount; i++) {
             if (i == (*itHead)->bitmap) continue;
             else {
                 for (int j = 0; j < Stwh_b[i].StwhSes.size(); j++) cmpS.push_back(Stwh_b[i].StwhSes[j]);
                 for (int j = 0; j < Ses_b[i].StwhSes.size(); j++) cmpS.push_back(Ses_b[i].StwhSes[j]);
             }
         }
-        for (int32_t i = 0; i < cmpS.size(); i++) {
+        for (int i = 0; i < cmpS.size(); i++) {
             bool isIteratorErased = false;
             if (isPoint1DominatePoint2(*itHead, cmpS[i])) continue;
             else {
-                for (int32_t j = 0; j < bucket[cmpS[i]->bitmap].Sln.size(); j++) {
+                for (int j = 0; j < bucket[cmpS[i]->bitmap].Sln.size(); j++) {
                     if (isPoint1DominatePoint2(bucket[cmpS[i]->bitmap].Sln[j], *itHead)) (*itHead)->domainatedCount ++;
                     if ((*itHead)->domainatedCount > kValue) {;
                         Stwh.erase(itHead);
