@@ -15,12 +15,12 @@ int kValue;
 int dataDimension;
 int dataCount;
 
-gtPoint *tmpInput = NULL;
-gtBucket *bucket = NULL;
-gtPoint * S, * Stwh, * Ses, * Sg;
+struct gtPoint *tmpInput;
+struct gtPoint *S, *Stwh, *Ses, *Sg;
+struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-    raw = new gtPoint[dataCount];
+    tmpInput = StartPoint(struct gtPoint *StartNode, int TotalSize);
 
     for (int i = 0; i < dataCount; i++) {
         tmpInput[i].dimension = dataDimension;
@@ -47,36 +47,35 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
 }
 
 void printAllPoint() {
-    for (int i=0; i < S.size(); i++) {
-        S[i] -> printPoint();
+    for (int i = 0; i < SizePoint(S); i++) {
+        printf("%d", *(S->data[i]));
     }
 }
 
 //Alan Ruijia has changed this function to suit vector. 
-int isPoint1DominatePoint2(gtPoint *p1, gtPoint *p2) {
+int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
     int dimension = p1->dimension;
     int smallCount = 0;
     int atLeastOneSmall = 0; //C doesn't have bool type
     int i;
-    int x1,x2;
-    if (!p1 || !p2) return false;
+    int x1, x2;
+    if (!p1 || !p2) return 0;
     for (i = 0; i < dimension; i++) {
-        x1= (p1->data[i])==NULL?0:*(p1->data[i]);
-        x2= (p2->data[i])==NULL?0:*(p2->data[i]);
+        x1 = (p1->data[i]) == NULL? 0: *(p1->data[i]);
+        x2 = (p2->data[i]) == NULL? 0: *(p2->data[i]);
         if (x1 <= x2) smallCount++;
         if (x1 < x2) atLeastOneSmall = 1;
     }
-
     if ((smallCount == dimension) && atLeastOneSmall) return 1;
     else return 0;
 }
 
-bool gtSortAlgo(const gtPoint *v1, const gtPoint *v2) {
+int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
     return v1->domainatedCount > v2->domainatedCount;
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    Stwh.clear(); Ses.clear(); Sg.clear();
+    Stwh->clear(); Ses.clear(); Sg.clear();
 
     // [STEP 1]
     int bucketCount = 1;
@@ -192,8 +191,9 @@ int main(int argc, const char * argv[]) {
     cout << "Count: [" << dataCount << "]data in " << dataDimension << "-Dimensions\n";
     cout << "K-Value: " << kValue << endl;
      */
+    scanf("%d %d", dataDimension, dataCount);
     inputData(dataDimension, dataCount);
-    thicknessWarehouse(dataDimension, kValue);
+    //thicknessWarehouse(dataDimension, kValue);
     /*
     for (int i = 0; i < Sg.size(); i++) {
         Sg[i]->printPoint();

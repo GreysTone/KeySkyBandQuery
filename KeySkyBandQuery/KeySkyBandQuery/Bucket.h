@@ -14,10 +14,10 @@
 struct gtBucket {
     int bitmap;
     //bool **dominanceTable;  // I think we don't need it
-    gtPoint * data;   //  这几个vector我在思考怎么弄
-    gtPoint *  Sl;
-    gtPoint * Sln;
-    gtPoint * StwhSes;
+    struct gtPoint *data;
+    struct gtPoint *Sl;
+    struct gtPoint *Sln;
+    struct gtPoint *StwhSes;
     struct gtBucket *next;
     struct gtBucket *previous;
 };
