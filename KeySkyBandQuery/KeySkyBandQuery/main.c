@@ -24,7 +24,7 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-    tmpInput = StartPoint(tmpInput, tmpSize, tmpHead, tmpTail);
+    tmpInput = StartPoint(tmpInput, &tmpSize, tmpHead, tmpTail);
 
     for (int i = 0; i < dataCount; i++) {
         tmpInput->dimension = dataDimension;
@@ -45,14 +45,17 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
             }
         }
 
-        PushPoint(tmpInput, SSize, STail);
+        PushPoint(tmpInput, &SSize, STail);
         //S.push_back(tmpInput[i]);
     }
 }
 
 void printAllPoint() {
     for (int i = 0; i < SSize; i++) {
-        printf("%d", *(S->data[i]));
+        tmpInput = GetPoint(i, SHead);
+        for (int j = 0; j < dataDimension; j++) {
+            printf("%d", *(tmpInput->data[j]));
+        }
     }
 }
 
@@ -79,26 +82,51 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    Stwh = StartPoint(Stwh, StwhSize, StwhHead, StwhTail);
-    Ses = StartPoint(Ses, SesSize, SesHead, SesTail);
-    Sg = StartPoint(Sg, SgSize, SgHead, SgTail);
+    Stwh = StartPoint(Stwh, &StwhSize, StwhHead, StwhTail);
+    Ses = StartPoint(Ses, &SesSize, SesHead, SesTail);
+    Sg = StartPoint(Sg, &SgSize, SgHead, SgTail);
+
+    struct gtPoint *tmpPoint = NULL;
+    struct gtBucket *tmpBucket;
 
     // [STEP 1]
+    int bucketSize = 0;
     int bucketCount = 1;
-    for (int i = 0; i < dataDimension; i++) bucketCount *= 2;
+    struct gtBucket *bucketHead, *bucketTail;
 
-    // bucket = new gtBucket[bucketCount];
-    bucket = StartBucket(bucket, bucketCount, bucketHead, bucketTail);
+    for (int i = 0; i < dataDimension; i++)
+        bucketCount *= 2;
+
+    ////////////////////////////////////////////////////
+    // Origin: bucket = new gtBucket[bucketCount];
+    bucket = StartBucket(bucket, &bucketSize, bucketHead, bucketTail);
+
+    for (int i = 0; i < bucketCount; i++) {
+        tmpBucket->data = NULL;
+        tmpBucket->bitmap = 0;
+        PushBucket(tmpBucket, &bucketSize, bucketTail);
+    }
+    ////////////////////////////////////////////////////
+
     for (int i = 0; i < SSize; i++)
-        bucket[S[i]->bitmap].data.push_back(S[i]);
+        ////////////////////////////////////////////////////
+        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+        tmpPoint = GetPoint(i, SHead);
+        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
+        tmpBucket->data = tmpPoint;
+        ////////////////////////////////////////////////////
 
     // [STEP 2]
     for (int i = 0; i < bucketCount; i++) {
-        bucket[i].bitmap = i;                       // Set Bitmap
-
-        size_t dataSize = bucket[i].data.size();
-        bucket[i].dominanceTable = new bool *[dataSize];
-        for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
+        ////////////////////////////////////////////////////
+        // Origin: bucket[i].bitmap = i;
+        tmpBucket = GetBucket(i, bucketHead);
+        tmpBucket->bitmap = i;                      // Set Bitmap
+        ////////////////////////////////////////////////////
+/*
+        //size_t dataSize = bucket[i].data.size();
+        //bucket[i].dominanceTable = new bool *[dataSize];
+        //for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
         for (int j = 0; j < dataSize; j++) {
             for (int k = j+1; k < dataSize; k++) {
                 bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(bucket[i].data[j], bucket[i].data[k]);
@@ -115,6 +143,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 }
             }
         }
+        
         // Bucket data into Sl & Sln
         for (int j = 0; j < dataSize; j++) {
             if (bucket[i].data[j]->domainatedCount == kValue) bucket[i].Sln.push_back(bucket[i].data[j]);
@@ -125,9 +154,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         // [STEP 3] Push Bucket.Sl -> Stwh
         for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
 
-
+*/
     }
-
+    /*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;
@@ -190,6 +219,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         }
     }
     Sg = Stwh;
+     */
 }
 
 
@@ -199,9 +229,10 @@ int main(int argc, const char * argv[]) {
     cout << "Count: [" << dataCount << "]data in " << dataDimension << "-Dimensions\n";
     cout << "K-Value: " << kValue << endl;
      */
-    scanf("%d %d", dataDimension, dataCount);
+    scanf("%d %d", &dataDimension, &dataCount);
     inputData(dataDimension, dataCount);
-    //thicknessWarehouse(dataDimension, kValue);
+    kValue = 1;
+    thicknessWarehouse(dataDimension, kValue);
     /*
     for (int i = 0; i < Sg.size(); i++) {
         Sg[i]->printPoint();

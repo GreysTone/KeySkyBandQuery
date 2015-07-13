@@ -11,8 +11,8 @@ void InitPoint(struct gtPoint *Node){
     Node -> previous = NULL;
 }
 
-struct gtPoint *StartPoint(struct gtPoint *StartNode, int TotalSize, struct gtPoint *PointHead, struct gtPoint *PointTail) {
-    StartNode = (struct gtPoint *)malloc(sizeof(struct gtPoint) * TotalSize);
+struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtPoint *PointHead, struct gtPoint *PointTail) {
+    StartNode = (struct gtPoint *)malloc(sizeof(struct gtPoint) * *TotalSize);
     //StartNode = (gtPoint *)palloc(sizeof(gtPoint));
     //if (StartNode == NULL)
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
@@ -20,12 +20,12 @@ struct gtPoint *StartPoint(struct gtPoint *StartNode, int TotalSize, struct gtPo
     InitPoint(StartNode);
     PointHead = StartNode;
     PointTail = StartNode;
-    TotalSize = 1;
+    *TotalSize = 1;
     //}
     return StartNode;
 }
 
-void PushPoint(struct gtPoint *NewElement, int TotalSize, struct gtPoint *PointTail) {
+void PushPoint(struct gtPoint *NewElement, int *TotalSize, struct gtPoint *PointTail) {
     //NewElement = (gtPoint *)malloc(sizeof(gtPoint));
     //NewElement = (gtPoint *)palloc(sizeof(gtPoint));
     //if (NewElement == NULL)
@@ -36,7 +36,7 @@ void PushPoint(struct gtPoint *NewElement, int TotalSize, struct gtPoint *PointT
     NewElement -> previous = PointTail;
     NewElement -> next = NULL;
     PointTail = NewElement;
-    TotalSize++;
+    *TotalSize = *TotalSize + 1;
 }
 
 struct gtPoint *GetPoint(int Position, struct gtPoint *PointHead) {
@@ -53,7 +53,7 @@ struct gtPoint *GetPoint(int Position, struct gtPoint *PointHead) {
     return Pointer;
 }
 
-void DeletePoint(int Position, struct gtPoint *PointHead, int TotalSize) {
+void DeletePoint(int Position, struct gtPoint *PointHead, int *TotalSize) {
     struct gtPoint *Pointer;
     int i = 0;
     Pointer = PointHead;
@@ -69,11 +69,11 @@ void DeletePoint(int Position, struct gtPoint *PointHead, int TotalSize) {
     Pointer -> next = NULL;
     Pointer -> previous = NULL;
     free(Pointer);
-    TotalSize--;
+    *TotalSize = *TotalSize - 1;
     //pfree(Pointer);
 }
 
-void FreeAllPoints(struct gtPoint *Node, int TotalSize) {
+void FreeAllPoints(struct gtPoint *Node, int *TotalSize) {
     struct gtPoint *Pointer;
     struct gtPoint *FreePointer;
     Pointer = Node;
@@ -83,7 +83,7 @@ void FreeAllPoints(struct gtPoint *Node, int TotalSize) {
         free(FreePointer);
         FreePointer = Pointer;
     }
-    TotalSize = 0;
+    *TotalSize = 0;
 }
 
 int SizePoint(struct gtPoint *PointHead) {

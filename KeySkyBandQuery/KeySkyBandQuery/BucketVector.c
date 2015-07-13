@@ -13,7 +13,7 @@ void InitBucket(struct gtBucket *Bucket) {
     Bucket -> previous = NULL;
 }
 
-struct gtBucket *StartBucket(struct gtBucket *StartBucket, int TotalSize, struct gtBucket *BucketHead, struct gtBucket *BucketTail) {
+struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket *BucketHead, struct gtBucket *BucketTail) {
     StartBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
 	//StartNode = (gtPoint *)palloc(sizeof(gtPoint));
 	//if (StartNode == NULL)
@@ -22,12 +22,12 @@ struct gtBucket *StartBucket(struct gtBucket *StartBucket, int TotalSize, struct
 	InitBucket(StartBucket);
 	BucketHead = StartBucket;
 	BucketTail = StartBucket;
-    TotalSize = 1;
+    *TotalSize = 1;
 	//}
     return StartBucket;
 }
 
-void PushBucket(struct gtBucket * NewBucket, int TotalSize, struct gtBucket *BucketTail) {
+void PushBucket(struct gtBucket * NewBucket, int *TotalSize, struct gtBucket *BucketTail) {
 	//NewBucket = (gtPoint *)malloc(sizeof(gtPoint));
 	//NewBucket = (gtPoint *)palloc(sizeof(gtPoint));
 	//if (NewBucket == NULL)
@@ -38,7 +38,7 @@ void PushBucket(struct gtBucket * NewBucket, int TotalSize, struct gtBucket *Buc
     NewBucket -> previous = BucketTail;
 	NewBucket -> next = NULL;
     BucketTail = NewBucket;
-	TotalSize++;
+	*TotalSize = *TotalSize + 1;
 }
 
 struct gtBucket *GetBucket(int Position, struct gtBucket *BucketHead) {
@@ -55,7 +55,7 @@ struct gtBucket *GetBucket(int Position, struct gtBucket *BucketHead) {
     return Pointer;
 }
 
-void DeleteBucket(int Position, struct gtBucket *BucketHead, int TotalSize) {
+void DeleteBucket(int Position, struct gtBucket *BucketHead, int *TotalSize) {
     struct gtBucket *Pointer;
     int i = 0;
     Pointer = BucketHead;
@@ -71,11 +71,11 @@ void DeleteBucket(int Position, struct gtBucket *BucketHead, int TotalSize) {
     Pointer -> next = NULL;
     Pointer -> previous = NULL;
     free(Pointer);
-    TotalSize--;
+    *TotalSize = *TotalSize - 1;
     //pfree(Pointer);
 }
 
-void FreeAllBuckets(struct gtBucket *Bucket, int TotalSize) {
+void FreeAllBuckets(struct gtBucket *Bucket, int *TotalSize) {
     struct gtBucket *Pointer;
     struct gtBucket *FreePointer;
     Pointer = Bucket;
@@ -85,7 +85,7 @@ void FreeAllBuckets(struct gtBucket *Bucket, int TotalSize) {
         free(FreePointer);
         FreePointer = Pointer;
     }
-    TotalSize = 0;
+    *TotalSize = 0;
 }
 
 int SizeBucket(struct gtBucket *BucketHead) {
