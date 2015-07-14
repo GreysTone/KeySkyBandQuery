@@ -13,8 +13,9 @@
 
 struct gtBucket {
     int bitmap;
-    //bool **dominanceTable;  // I think we don't need it
+    int dataSize;
     struct gtPoint *data;
+    struct gtPoint *dataTail;
     struct gtPoint *Sl;
     struct gtPoint *Sln;
     struct gtPoint *StwhSes;
