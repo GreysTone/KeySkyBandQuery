@@ -31,6 +31,8 @@
 		766B59411B4FA18F008C43E8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		766B59421B4FA18F008C43E8 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		766B59431B4FA18F008C43E8 /* PointVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointVector.c; sourceTree = "<group>"; };
+		767617591B5498E600F327FC /* PointVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointVector.h; sourceTree = "<group>"; };
+		7676175A1B5499A300F327FC /* BucketVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketVector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				766B593F1B4FA18F008C43E8 /* Bucket.h */,
+				7676175A1B5499A300F327FC /* BucketVector.h */,
 				766B59401B4FA18F008C43E8 /* BucketVector.c */,
 				766B59421B4FA18F008C43E8 /* Point.h */,
+				767617591B5498E600F327FC /* PointVector.h */,
 				766B59431B4FA18F008C43E8 /* PointVector.c */,
 				766B59411B4FA18F008C43E8 /* main.c */,
 			);

@@ -1,41 +1,47 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "Point.h"
+#include "PointVector.h"
 
-void InitPoint(struct gtPoint *Node){
+int *tmpInt;
+
+void InitPoint(struct gtPoint *Node) {
     Node -> dimension = 0;
-    Node -> data = NULL;
     Node -> bitmap = 0;
     Node -> domainatedCount = 0;
     Node -> next = NULL;
     Node -> previous = NULL;
 }
 
-struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtPoint *PointHead, struct gtPoint *PointTail) {
-    StartNode = (struct gtPoint *)malloc(sizeof(struct gtPoint) * *TotalSize);
+struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtPoint **PointHead, struct gtPoint **PointTail, int dataDimension) {
+
+    StartNode = (struct gtPoint *)malloc(sizeof(struct gtPoint));
+    tmpInt = (int *)malloc(sizeof(int) * dataDimension);
+    
     //StartNode = (gtPoint *)palloc(sizeof(gtPoint));
     //if (StartNode == NULL)
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
     //else{
+
     InitPoint(StartNode);
-    PointHead = StartNode;
-    PointTail = StartNode;
+    (StartNode->data) = &tmpInt;
+
+    *PointHead = StartNode;
+    *PointTail = StartNode;
     *TotalSize = 1;
     //}
     return StartNode;
 }
 
-void PushPoint(struct gtPoint *NewElement, int *TotalSize, struct gtPoint *PointTail) {
+void PushPoint(struct gtPoint *NewElement, int *TotalSize, struct gtPoint **PointTail) {
     //NewElement = (gtPoint *)malloc(sizeof(gtPoint));
     //NewElement = (gtPoint *)palloc(sizeof(gtPoint));
     //if (NewElement == NULL)
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
     //else{
     //Initialized(NewElement);
-    PointTail -> next = NewElement;
-    NewElement -> previous = PointTail;
+    (*PointTail) -> next = NewElement;
+    NewElement -> previous = *PointTail;
     NewElement -> next = NULL;
-    PointTail = NewElement;
+    *PointTail = NewElement;
     *TotalSize = *TotalSize + 1;
 }
 
@@ -53,10 +59,10 @@ struct gtPoint *GetPoint(int Position, struct gtPoint *PointHead) {
     return Pointer;
 }
 
-void DeletePoint(int Position, struct gtPoint *PointHead, int *TotalSize) {
+void DeletePoint(int Position, struct gtPoint **PointHead, int *TotalSize) {
     struct gtPoint *Pointer;
     int i = 0;
-    Pointer = PointHead;
+    Pointer = *PointHead;
     for (i = 0; i < Position; i++) {
         if (Pointer == NULL){
             Pointer = Pointer -> next;

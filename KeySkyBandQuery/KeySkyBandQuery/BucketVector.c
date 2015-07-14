@@ -1,7 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "Point.h"
-#include "Bucket.h"
+#include "BucketVector.h"
 
 void InitBucket(struct gtBucket *Bucket) {
     Bucket -> bitmap = 0;
@@ -13,31 +11,33 @@ void InitBucket(struct gtBucket *Bucket) {
     Bucket -> previous = NULL;
 }
 
-struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket *BucketHead, struct gtBucket *BucketTail) {
+struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail) {
     StartBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
 	//StartNode = (gtPoint *)palloc(sizeof(gtPoint));
 	//if (StartNode == NULL)
 	//	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
 	//else{
+
 	InitBucket(StartBucket);
-	BucketHead = StartBucket;
-	BucketTail = StartBucket;
+
+    *BucketHead = StartBucket;
+	*BucketTail = StartBucket;
     *TotalSize = 1;
 	//}
     return StartBucket;
 }
 
-void PushBucket(struct gtBucket * NewBucket, int *TotalSize, struct gtBucket *BucketTail) {
+void PushBucket(struct gtBucket *NewBucket, int *TotalSize, struct gtBucket **BucketTail) {
 	//NewBucket = (gtPoint *)malloc(sizeof(gtPoint));
 	//NewBucket = (gtPoint *)palloc(sizeof(gtPoint));
 	//if (NewBucket == NULL)
 	//	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
 	//else{
 	//Initialized(NewBucket);
-	BucketTail -> next = NewBucket;
-    NewBucket -> previous = BucketTail;
+	(*BucketTail) -> next = NewBucket;
+    NewBucket -> previous = *BucketTail;
 	NewBucket -> next = NULL;
-    BucketTail = NewBucket;
+    *BucketTail = NewBucket;
 	*TotalSize = *TotalSize + 1;
 }
 
@@ -55,10 +55,10 @@ struct gtBucket *GetBucket(int Position, struct gtBucket *BucketHead) {
     return Pointer;
 }
 
-void DeleteBucket(int Position, struct gtBucket *BucketHead, int *TotalSize) {
+void DeleteBucket(int Position, struct gtBucket **BucketHead, int *TotalSize) {
     struct gtBucket *Pointer;
     int i = 0;
-    Pointer = BucketHead;
+    Pointer = *BucketHead;
     for (i = 0; i < Position; i++) {
         if (Pointer == NULL){
             Pointer = Pointer -> next;

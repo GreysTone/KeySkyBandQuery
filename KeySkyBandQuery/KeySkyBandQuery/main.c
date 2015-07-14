@@ -7,9 +7,11 @@
 //
 
 //#include "Point.h"
-#include "Bucket.h"
-#include "PointVector.c"
-#include "BucketVector.c"
+//#include "Bucket.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "PointVector.h"
+#include "BucketVector.h"
 
 int kValue;
 int dataDimension;
@@ -24,28 +26,44 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-    tmpInput = StartPoint(tmpInput, &tmpSize, tmpHead, tmpTail);
+    S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
+    tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
 
     for (int i = 0; i < dataCount; i++) {
         tmpInput->dimension = dataDimension;
 
+        //*(tmpInput->data) = (int *)malloc(sizeof(int) * dataDimension);
         for(int j = 0; j < dataDimension; j++) {
-            *tmpInput->data[j] = 1;      // Input Actual Data
+            *(*(tmpInput->data) + j) = 233;             // Input Actual Data
+            printf("%d \n", *(*(tmpInput->data) + j));
         }
+
+        //for(int j = 0; j < dataDimension; j++) {
+        //    printf("%d \n", *(*(tmpInput->data) + j));
+        //}
+
+        tmpInput->bitmap = 0;
 
         for(int j = 0; j < dataDimension; j++) {            // Set Bit Map
             int bitValid;
             //cin >> bitValid;
+            bitValid = j % 2;
             if (bitValid != 1)  {
-                tmpInput->data[j] = NULL;
+                *(*(tmpInput->data) + j) = 0;
                 tmpInput->bitmap <<= 1;
+                //tmpInput->bitmap &= 0;
             } else {
                 tmpInput->bitmap <<= 1;
                 tmpInput->bitmap |= 1;
             }
+            //printf("%d ", tmpInput->bitmap);
         }
 
-        PushPoint(tmpInput, &SSize, STail);
+        //for(int j = 0; j < dataDimension; j++) {
+        //    printf("%d\n", *(*(tmpInput->data) + j));
+        //}
+
+        PushPoint(tmpInput, &SSize, &STail);
         //S.push_back(tmpInput[i]);
     }
 }
@@ -82,9 +100,9 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    Stwh = StartPoint(Stwh, &StwhSize, StwhHead, StwhTail);
-    Ses = StartPoint(Ses, &SesSize, SesHead, SesTail);
-    Sg = StartPoint(Sg, &SgSize, SgHead, SgTail);
+    Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
+    Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
+    Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
 
     struct gtPoint *tmpPoint = NULL;
     struct gtBucket *tmpBucket;
@@ -99,12 +117,12 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
-    bucket = StartBucket(bucket, &bucketSize, bucketHead, bucketTail);
+    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail);
 
     for (int i = 0; i < bucketCount; i++) {
-        tmpBucket->data = NULL;
-        tmpBucket->bitmap = 0;
-        PushBucket(tmpBucket, &bucketSize, bucketTail);
+        tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
+        InitBucket(tmpBucket);
+        PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
 
