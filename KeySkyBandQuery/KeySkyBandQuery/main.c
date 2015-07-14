@@ -160,68 +160,29 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpBucket = GetBucket(i, bucketHead);
         tmpBucket->bitmap = i;                      // Set Bitmap
         ////////////////////////////////////////////////////
-/* Original:
-        //size_t dataSize = bucket[i].data.size();
-        //bucket[i].dominanceTable = new bool *[dataSize];
-        //for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
-        for (int j = 0; j < dataSize; j++) {
-            for (int k = j+1; k < dataSize; k++) {
-                bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(&bucket[i].data[j], &bucket[i].data[k]);
-            }
-            bucket[i].dominanceTable[j][j] = 0;
-        }
-*/
-        for (j = 0; j < SSize; j++) {
-            for (k = j+1; k < SSize; k++) {
-                bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(&bucket[i].data[j], &bucket[i].data[k]);
-                bucket[i].dominanceTable[k][j] = isPoint1DominatePoint2(&bucket[i].data[k], &bucket[i].data[j]);
-            }
-            bucket[i].dominanceTable[j][j] = 0;
-        }
-/* Original
-        //Calculate Dominance Count
-        for (int j = 0; j < dataSize; j++) {
-            for (int k = j+1; k < dataSize; k++) {
-                if (bucket[i].dominanceTable[j][k]) {
-                    bucket[i].data[k]->domainatedCount++;
-                }
-            }
-        }
-*/ 
-        //Calculate Dominance Count
+        //Calculate DominanceCount and put each node into Sl or Sln
         for (j = 0; j < SSize; j++) {
             for (k = 0; k < SSize; k++) { //Changed
-                if (bucket[i].dominanceTable[j][k]) {
-                    bucket[i].data[k]->domainatedCount++;
-                }
-            }
-        }
-
-/*Original:
-        // Bucket data into Sl & Sln
-        for (int j = 0; j < dataSize; j++) {
-        // Bucket data into Sl & Sln
-        for (int j = 0; j < dataSize; j++) {
-            if (bucket[i].data[j]->domainatedCount == kValue) bucket[i].Sln.push_back(bucket[i].data[j]);
-            else bucket[i].Sl.push_back(bucket[i].data[j]);
-        }
-        bucket[i].data.clear();
+								if (isPoint1DominatePoint2(&bucket[i].data[k], &bucket[i].data[j])){
+                    bucket[i].data[j]->domainatedCount++;
+								}
+								if (bucket[i].data[j]->domainatedCount >= kValue){
+										PushPoint(&bucket[i].data[j],&(bucket[i].SlnSize),bucket[i].SlnTail);
+										break;
+								}
+						}
+						if (k == SSize) // which means data[j] is not dominted more than k times, then put it into Sl.
+								PushPoint(&bucket[i].data[j],&(bucket[i].SlTaillSize),bucket[i].SlTail);
+				}
+				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize);
+/*
         // [STEP 3] Push Bucket.Sl -> Stwh
-        for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
+        for (int j = 0; j < bucket[i].SlSize(); j++) Stwh.push_back(bucket[i].Sl[j]);
     }
 */
-        // Bucket data into Sl & Sln
-        for (j = 0; j < SSize; j++) {
-        // Bucket data into Sl & Sln
-        for (j = 0; j < SSize; j++) {
-            if (bucket[i].data[j]->domainatedCount >= kValue) bucket[i].Sln.push_back(bucket[i].data[j]);
-            else bucket[i].Sl.push_back(bucket[i].data[j]);
-        }
-        //Original: bucket[i].data.clear();
-				FreeAllPoints(bucket[i].data,bucket.data.SizePoint(bucket[i].data));
         // [STEP 3] Push Bucket.Sl -> Stwh
-        //for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
-    }
+        //for (int j = 0; j < bucket[i].Sl.size(); j++) 
+				//	Stwh.push_back(bucket[i].Sl[j]);
 /*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
