@@ -135,13 +135,14 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         ////////////////////////////////////////////////////
 
     // [STEP 2]
-    for (int i = 0; i < bucketCount; i++) {
+    for (int i = 0; i < bucketSize; i++) {
         ////////////////////////////////////////////////////
         // Origin: bucket[i].bitmap = i;
         tmpBucket = GetBucket(i, bucketHead);
         tmpBucket->bitmap = i;                      // Set Bitmap
         ////////////////////////////////////////////////////
-/*
+
+        /*
         //size_t dataSize = bucket[i].data.size();
         //bucket[i].dominanceTable = new bool *[dataSize];
         //for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
@@ -171,9 +172,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
         // [STEP 3] Push Bucket.Sl -> Stwh
         for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
-
-*/
+    */
     }
+
     /*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
@@ -194,9 +195,27 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 Stwh.erase(itTail);
             }
         }
+    }*/
+
+    //[STEP 5] (Stwh, Ses) -> Sg
+
+    struct gtPoint *iterA;
+    struct gtPoint *iterB;
+
+    iterA = StwhHead;
+    iterB = SesHead;
+
+    while (iterA->next != NULL) {
+        while (iterB->next != NULL) {
+            if (isPoint1DominatePoint2(iterB, iterA)) {
+                iterA->domainatedCount++;
+                if (iterA->domainatedCount > kValue) {
+                    DeletePoint(, StwhHead, StwhSize);
+                }
+            }
+        }
     }
 
-    // [STEP 5] (Stwh, Ses) -> Sg
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
         for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
             if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
@@ -237,7 +256,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         }
     }
     Sg = Stwh;
-     */
 }
 
 
