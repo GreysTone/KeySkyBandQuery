@@ -139,7 +139,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
         ////////////////////////////////////////////////////
     }
-/*
+
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
@@ -161,12 +161,14 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 						if (k == SSize) // which means data[j] is not dominted more than k times, then put it into Sl.
 								PushPoint(&bucket[i].data[j],&(bucket[i].SlTaillSize),bucket[i].SlTail);
 				}
-				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize);
+				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize));
 
         // [STEP 3] Push Bucket.Sl -> Stwh
-        //for (int j = 0; j < bucket[i].Sl.size(); j++) 
-				//	Stwh.push_back(bucket[i].Sl[j]);
-
+        for (int j = 0; j < bucket[i].SlSize(); j++) 
+					//Stwh.push_back(bucket[i].Sl[j]);
+					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
+		}
+/*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;
