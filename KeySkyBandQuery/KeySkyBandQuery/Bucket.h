@@ -14,15 +14,18 @@
 struct gtBucket {
     int bitmap;
     int dataSize;
-		int SlSize;
-		int SlnSize;
+	int SlSize;
+	int SlnSize;
     struct gtPoint *data;
     struct gtPoint *dataTail;
     struct gtPoint *Sl;
     struct gtPoint *SlTail;
     struct gtPoint *Sln;
     struct gtPoint *SlnTail;
-    struct gtPoint *StwhSes;
+    struct gtPoint *Stwh;
+	struct gtPoint *StwhTail;
+	struct gtPoint *Ses;
+	struct gtPoint *SesTail;
     struct gtBucket *next;
     struct gtBucket *previous;
 };
