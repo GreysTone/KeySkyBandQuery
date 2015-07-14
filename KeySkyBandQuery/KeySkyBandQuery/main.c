@@ -28,7 +28,7 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-		int i,j;
+    int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
     tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
@@ -72,7 +72,7 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
 }
 
 void printAllPoint() {
-		int i,j;
+    int i, j;
     for (i = 0; i < SSize; i++) {
         tmpInput = GetPoint(i, SHead);
         for (j = 0; j < dataDimension; j++) {
@@ -104,7 +104,7 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-		int i,j,k;
+    int i, j, k;
     struct gtPoint *tmpPoint = NULL;
     struct gtBucket *tmpBucket;
 
@@ -161,11 +161,13 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 						if (k == SSize) // which means data[j] is not dominted more than k times, then put it into Sl.
 								PushPoint(&bucket[i].data[j],&(bucket[i].SlTaillSize),bucket[i].SlTail);
 				}
-				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize);
+				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize));
 
         // [STEP 3] Push Bucket.Sl -> Stwh
-        //for (int j = 0; j < bucket[i].Sl.size(); j++) 
-				//	Stwh.push_back(bucket[i].Sl[j]);
+        for (int j = 0; j < bucket[i].SlSize(); j++) 
+					//Stwh.push_back(bucket[i].Sl[j]);
+					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
+		}
 /*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
