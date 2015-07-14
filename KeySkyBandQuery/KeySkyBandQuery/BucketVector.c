@@ -3,10 +3,13 @@
 
 void InitBucket(struct gtBucket *Bucket) {
     Bucket -> bitmap = 0;
+    Bucket -> dataSize = 0;
     Bucket -> data = NULL;
+    Bucket -> dataTail = NULL;
     Bucket -> Sl = NULL;
     Bucket -> Sln = NULL;
-    Bucket -> StwhSes = NULL;
+    Bucket -> Stwh = NULL;
+    Bucket -> Ses = NULL;
     Bucket -> next = NULL;
     Bucket -> previous = NULL;
 }

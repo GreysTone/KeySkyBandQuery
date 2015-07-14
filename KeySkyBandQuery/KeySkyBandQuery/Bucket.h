@@ -18,7 +18,8 @@ struct gtBucket {
     struct gtPoint *dataTail;
     struct gtPoint *Sl;
     struct gtPoint *Sln;
-    struct gtPoint *StwhSes;
+    struct gtPoint *Stwh;
+    struct gtPoint *Ses;
     struct gtBucket *next;
     struct gtBucket *previous;
 };
