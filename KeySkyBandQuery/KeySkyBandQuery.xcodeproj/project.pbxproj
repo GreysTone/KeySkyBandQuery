@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0E234271B3C36C70046A698 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E234261B3C36C70046A698 /* main.cpp */; };
-		D0E2342F1B3C371E0046A698 /* gtPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E2342D1B3C371E0046A698 /* gtPoint.cpp */; };
-		D0E234331B3C37530046A698 /* gtBucket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E234311B3C37530046A698 /* gtBucket.cpp */; };
+		766B59441B4FA18F008C43E8 /* BucketVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59401B4FA18F008C43E8 /* BucketVector.c */; };
+		766B59451B4FA18F008C43E8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59411B4FA18F008C43E8 /* main.c */; };
+		766B59461B4FA18F008C43E8 /* PointVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59431B4FA18F008C43E8 /* PointVector.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D0E234211B3C36C70046A698 /* CopyFiles */ = {
+		766B59331B4FA164008C43E8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -25,16 +25,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D0E234231B3C36C70046A698 /* gtKeySkyBandQueryPlus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gtKeySkyBandQueryPlus; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0E234261B3C36C70046A698 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		D0E2342D1B3C371E0046A698 /* gtPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gtPoint.cpp; sourceTree = "<group>"; };
-		D0E2342E1B3C371E0046A698 /* gtPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtPoint.h; sourceTree = "<group>"; };
-		D0E234311B3C37530046A698 /* gtBucket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gtBucket.cpp; sourceTree = "<group>"; };
-		D0E234321B3C37530046A698 /* gtBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gtBucket.h; sourceTree = "<group>"; };
+		766B59351B4FA164008C43E8 /* KeySkyBandQuery */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KeySkyBandQuery; sourceTree = BUILT_PRODUCTS_DIR; };
+		766B593F1B4FA18F008C43E8 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
+		766B59401B4FA18F008C43E8 /* BucketVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BucketVector.c; sourceTree = "<group>"; };
+		766B59411B4FA18F008C43E8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		766B59421B4FA18F008C43E8 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		766B59431B4FA18F008C43E8 /* PointVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointVector.c; sourceTree = "<group>"; };
+		767617591B5498E600F327FC /* PointVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointVector.h; sourceTree = "<group>"; };
+		7676175A1B5499A300F327FC /* BucketVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketVector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D0E234201B3C36C70046A698 /* Frameworks */ = {
+		766B59321B4FA164008C43E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -44,108 +46,102 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D0E2341A1B3C36C70046A698 = {
+		766B592C1B4FA164008C43E8 = {
 			isa = PBXGroup;
 			children = (
-				D0E234251B3C36C70046A698 /* gtKeySkyBandQueryPlus */,
-				D0E234241B3C36C70046A698 /* Products */,
+				766B59371B4FA164008C43E8 /* KeySkyBandQuery */,
+				766B59361B4FA164008C43E8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D0E234241B3C36C70046A698 /* Products */ = {
+		766B59361B4FA164008C43E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D0E234231B3C36C70046A698 /* gtKeySkyBandQueryPlus */,
+				766B59351B4FA164008C43E8 /* KeySkyBandQuery */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D0E234251B3C36C70046A698 /* gtKeySkyBandQueryPlus */ = {
+		766B59371B4FA164008C43E8 /* KeySkyBandQuery */ = {
 			isa = PBXGroup;
 			children = (
-				D0E234301B3C37260046A698 /* Class */,
-				D0E234261B3C36C70046A698 /* main.cpp */,
+				766B593F1B4FA18F008C43E8 /* Bucket.h */,
+				7676175A1B5499A300F327FC /* BucketVector.h */,
+				766B59401B4FA18F008C43E8 /* BucketVector.c */,
+				766B59421B4FA18F008C43E8 /* Point.h */,
+				767617591B5498E600F327FC /* PointVector.h */,
+				766B59431B4FA18F008C43E8 /* PointVector.c */,
+				766B59411B4FA18F008C43E8 /* main.c */,
 			);
-			path = gtKeySkyBandQueryPlus;
-			sourceTree = "<group>";
-		};
-		D0E234301B3C37260046A698 /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				D0E2342D1B3C371E0046A698 /* gtPoint.cpp */,
-				D0E2342E1B3C371E0046A698 /* gtPoint.h */,
-				D0E234311B3C37530046A698 /* gtBucket.cpp */,
-				D0E234321B3C37530046A698 /* gtBucket.h */,
-			);
-			name = Class;
+			path = KeySkyBandQuery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D0E234221B3C36C70046A698 /* gtKeySkyBandQueryPlus */ = {
+		766B59341B4FA164008C43E8 /* KeySkyBandQuery */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0E2342A1B3C36C70046A698 /* Build configuration list for PBXNativeTarget "gtKeySkyBandQueryPlus" */;
+			buildConfigurationList = 766B593C1B4FA164008C43E8 /* Build configuration list for PBXNativeTarget "KeySkyBandQuery" */;
 			buildPhases = (
-				D0E2341F1B3C36C70046A698 /* Sources */,
-				D0E234201B3C36C70046A698 /* Frameworks */,
-				D0E234211B3C36C70046A698 /* CopyFiles */,
+				766B59311B4FA164008C43E8 /* Sources */,
+				766B59321B4FA164008C43E8 /* Frameworks */,
+				766B59331B4FA164008C43E8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = gtKeySkyBandQueryPlus;
-			productName = gtKeySkyBandQueryPlus;
-			productReference = D0E234231B3C36C70046A698 /* gtKeySkyBandQueryPlus */;
+			name = KeySkyBandQuery;
+			productName = KeySkyBandQuery;
+			productReference = 766B59351B4FA164008C43E8 /* KeySkyBandQuery */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D0E2341B1B3C36C70046A698 /* Project object */ = {
+		766B592D1B4FA164008C43E8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = GreysTone;
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = ZJU;
 				TargetAttributes = {
-					D0E234221B3C36C70046A698 = {
-						CreatedOnToolsVersion = 6.3.2;
+					766B59341B4FA164008C43E8 = {
+						CreatedOnToolsVersion = 6.4;
 					};
 				};
 			};
-			buildConfigurationList = D0E2341E1B3C36C70046A698 /* Build configuration list for PBXProject "gtKeySkyBandQueryPlus" */;
+			buildConfigurationList = 766B59301B4FA164008C43E8 /* Build configuration list for PBXProject "KeySkyBandQuery" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = D0E2341A1B3C36C70046A698;
-			productRefGroup = D0E234241B3C36C70046A698 /* Products */;
+			mainGroup = 766B592C1B4FA164008C43E8;
+			productRefGroup = 766B59361B4FA164008C43E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D0E234221B3C36C70046A698 /* gtKeySkyBandQueryPlus */,
+				766B59341B4FA164008C43E8 /* KeySkyBandQuery */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D0E2341F1B3C36C70046A698 /* Sources */ = {
+		766B59311B4FA164008C43E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E234331B3C37530046A698 /* gtBucket.cpp in Sources */,
-				D0E234271B3C36C70046A698 /* main.cpp in Sources */,
-				D0E2342F1B3C371E0046A698 /* gtPoint.cpp in Sources */,
+				766B59451B4FA18F008C43E8 /* main.c in Sources */,
+				766B59461B4FA18F008C43E8 /* PointVector.c in Sources */,
+				766B59441B4FA18F008C43E8 /* BucketVector.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D0E234281B3C36C70046A698 /* Debug */ = {
+		766B593A1B4FA164008C43E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -187,7 +183,7 @@
 			};
 			name = Debug;
 		};
-		D0E234291B3C36C70046A698 /* Release */ = {
+		766B593B1B4FA164008C43E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -222,14 +218,14 @@
 			};
 			name = Release;
 		};
-		D0E2342B1B3C36C70046A698 /* Debug */ = {
+		766B593D1B4FA164008C43E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		D0E2342C1B3C36C70046A698 /* Release */ = {
+		766B593E1B4FA164008C43E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -239,25 +235,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D0E2341E1B3C36C70046A698 /* Build configuration list for PBXProject "gtKeySkyBandQueryPlus" */ = {
+		766B59301B4FA164008C43E8 /* Build configuration list for PBXProject "KeySkyBandQuery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0E234281B3C36C70046A698 /* Debug */,
-				D0E234291B3C36C70046A698 /* Release */,
+				766B593A1B4FA164008C43E8 /* Debug */,
+				766B593B1B4FA164008C43E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0E2342A1B3C36C70046A698 /* Build configuration list for PBXNativeTarget "gtKeySkyBandQueryPlus" */ = {
+		766B593C1B4FA164008C43E8 /* Build configuration list for PBXNativeTarget "KeySkyBandQuery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0E2342B1B3C36C70046A698 /* Debug */,
-				D0E2342C1B3C36C70046A698 /* Release */,
+				766B593D1B4FA164008C43E8 /* Debug */,
+				766B593E1B4FA164008C43E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D0E2341B1B3C36C70046A698 /* Project object */;
+	rootObject = 766B592D1B4FA164008C43E8 /* Project object */;
 }
