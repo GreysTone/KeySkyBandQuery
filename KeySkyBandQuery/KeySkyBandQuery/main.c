@@ -28,7 +28,7 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-		int i,j;
+    int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
     tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
@@ -72,7 +72,7 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
 }
 
 void printAllPoint() {
-		int i,j;
+    int i, j;
     for (i = 0; i < SSize; i++) {
         tmpInput = GetPoint(i, SHead);
         for (j = 0; j < dataDimension; j++) {
@@ -104,7 +104,7 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-		int i,j,k;
+    int i, j, k;
     struct gtPoint *tmpPoint = NULL;
     struct gtBucket *tmpBucket;
 
@@ -139,7 +139,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
         ////////////////////////////////////////////////////
     }
-
+/*
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
@@ -166,7 +166,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         // [STEP 3] Push Bucket.Sl -> Stwh
         //for (int j = 0; j < bucket[i].Sl.size(); j++) 
 				//	Stwh.push_back(bucket[i].Sl[j]);
-/*
+
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;
