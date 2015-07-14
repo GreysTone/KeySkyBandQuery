@@ -130,28 +130,15 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
-		/*
-    for (int i = 0; i < SSize; i++){
-        ////////////////////////////////////////////////////
-        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
-        tmpPoint = GetPoint(i, SHead);
-        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
-        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
-				tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
-				////////////////////////////////////////////////////
-		}*/
-    
-		for (i = 0; i < SSize; ){ //i will automatically increment in tmpBucket->data->PushPint();
-        ////////////////////////////////////////////////////
-        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
-        tmpPoint = GetPoint(i, SHead);
-        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
-        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
-				//tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
-				//PushPoint(tmpPoint,&i,&bucketTail);   
-				////////////////////////////////////////////////////
 
-		}
+    for (i = 0; i < SSize; i++) {
+        ////////////////////////////////////////////////////
+        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+        tmpPoint = GetPoint(i, SHead);
+        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
+        PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
+        ////////////////////////////////////////////////////
+    }
 
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
@@ -160,7 +147,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpBucket = GetBucket(i, bucketHead);
         tmpBucket->bitmap = i;                      // Set Bitmap
         ////////////////////////////////////////////////////
-/* Original:
+
+        /* Original:
         //size_t dataSize = bucket[i].data.size();
         //bucket[i].dominanceTable = new bool *[dataSize];
         //for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
@@ -170,7 +158,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
             }
             bucket[i].dominanceTable[j][j] = 0;
         }
-*/
+        */
+
         for (j = 0; j < SSize; j++) {
             for (k = j+1; k < SSize; k++) {
                 bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(&bucket[i].data[j], &bucket[i].data[k]);
@@ -246,23 +235,27 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     //[STEP 5] (Stwh, Ses) -> Sg
 
-    /* struct gtPoint *iterA;
+    /* struct gtPoint *iterA; // Armour: here not finished 
     struct gtPoint *iterB;
+    int iterCount = 0;
 
-    iterA = StwhHead;
-    iterB = SesHead;
+    iterA = Stwh;
+    iterB = Ses;
 
-    while (iterA->next != NULL) {
-        while (iterB->next != NULL) {
+    while (iterA != NULL) {
+        while (iterB != NULL) {
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->domainatedCount++;
                 if (iterA->domainatedCount > kValue) {
-                    DeletePoint(, StwhHead, StwhSize);
+                    DeletePoint(iterCount, &StwhHead, StwhSize);
                 }
             }
+            iterB = iterB->next;
         }
+        iterA = iterA->next;
     }
-
+    */
+    /*Origin:
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
         for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
             if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
@@ -270,7 +263,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 Stwh.erase(itHead);
             }
         }
-    }
+    }*/
+    /*
     gtBucket *Stwh_b = new gtBucket [bucketCount];
     gtBucket *Ses_b  = new gtBucket [bucketCount];
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++)  (Stwh_b[(*itHead)->bitmap]).StwhSes.push_back((*itHead));
