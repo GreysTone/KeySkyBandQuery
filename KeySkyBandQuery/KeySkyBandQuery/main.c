@@ -17,7 +17,9 @@ int kValue;
 int dataDimension;
 int dataCount;
 
-int tmpSize = 0, SSize = 0, StwhSize = 0, SesSize = 0, SgSize = 0;
+int tmpSize = 0;
+int SSize = 0; //Total data size.
+int StwhSize = 0, SesSize = 0, SgSize = 0;
 struct gtPoint *tmpInput, *tmpHead, *tmpTail;
 struct gtPoint *S, *SHead, *STail;
 struct gtPoint *Stwh, *StwhHead, *StwhTail;
@@ -26,14 +28,16 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
+		int i,j;
+    int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
     tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
 
-    for (int i = 0; i < dataCount; i++) {
+    for (i = 0; i < dataCount; i++) {
         tmpInput->dimension = dataDimension;
 
         //*(tmpInput->data) = (int *)malloc(sizeof(int) * dataDimension);
-        for(int j = 0; j < dataDimension; j++) {
+        for(j = 0; j < dataDimension; j++) {
             *(*(tmpInput->data) + j) = 233;             // Input Actual Data
             printf("%d \n", *(*(tmpInput->data) + j));
         }
@@ -44,8 +48,7 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
 
         tmpInput->bitmap = 0;
 
-        for(int j = 0; j < dataDimension; j++) {            // Set Bit Map
-            int bitValid;
+        for(j = 0; j < dataDimension; j++) {            // Set Bit Map
             //cin >> bitValid;
             bitValid = j % 2;
             if (bitValid != 1)  {
@@ -69,9 +72,10 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
 }
 
 void printAllPoint() {
-    for (int i = 0; i < SSize; i++) {
+		int i,j;
+    for (i = 0; i < SSize; i++) {
         tmpInput = GetPoint(i, SHead);
-        for (int j = 0; j < dataDimension; j++) {
+        for (j = 0; j < dataDimension; j++) {
             printf("%d", *(tmpInput->data[j]));
         }
     }
@@ -100,59 +104,81 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
-    Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
-    Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
-
+		int i,j,k;
     struct gtPoint *tmpPoint = NULL;
     struct gtBucket *tmpBucket;
 
-    // [STEP 1]
     int bucketSize = 0;
     int bucketCount = 1;
     struct gtBucket *bucketHead, *bucketTail;
 
-    for (int i = 0; i < dataDimension; i++)
+    Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
+    Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
+    Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
+
+    // [STEP 1]
+    for (i = 0; i < dataDimension; i++)
         bucketCount *= 2;
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
     bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail);
 
-    for (int i = 0; i < bucketCount; i++) {
+    for (i = 0; i < bucketCount; i++) {
         tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
         InitBucket(tmpBucket);
         PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
-
-    for (int i = 0; i < SSize; i++)
+		/*
+    for (int i = 0; i < SSize; i++){
         ////////////////////////////////////////////////////
         // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
         tmpPoint = GetPoint(i, SHead);
         tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
-        tmpBucket->data = tmpPoint;
+        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
+				tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
+				////////////////////////////////////////////////////
+		}*/
+    
+		for (i = 0; i < SSize; ){ //i will automatically increment in tmpBucket->data->PushPint();
         ////////////////////////////////////////////////////
+        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+        tmpPoint = GetPoint(i, SHead);
+        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
+        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
+				//tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
+				//PushPoint(tmpPoint,&i,&bucketTail);   
+				////////////////////////////////////////////////////
+
+		}
 
     // [STEP 2]
-    for (int i = 0; i < bucketCount; i++) {
+    for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
         // Origin: bucket[i].bitmap = i;
         tmpBucket = GetBucket(i, bucketHead);
         tmpBucket->bitmap = i;                      // Set Bitmap
         ////////////////////////////////////////////////////
-/*
+/* Original:
         //size_t dataSize = bucket[i].data.size();
         //bucket[i].dominanceTable = new bool *[dataSize];
         //for (int j = 0; j < dataSize; j++) bucket[i].dominanceTable[j] = new bool [dataSize];
         for (int j = 0; j < dataSize; j++) {
             for (int k = j+1; k < dataSize; k++) {
-                bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(bucket[i].data[j], bucket[i].data[k]);
-                bucket[i].dominanceTable[k][j] = !bucket[i].dominanceTable[j][k];
+                bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(&bucket[i].data[j], &bucket[i].data[k]);
             }
             bucket[i].dominanceTable[j][j] = 0;
         }
-
+*/
+        for (j = 0; j < SSize; j++) {
+            for (k = j+1; k < SSize; k++) {
+                bucket[i].dominanceTable[j][k] = isPoint1DominatePoint2(&bucket[i].data[j], &bucket[i].data[k]);
+                bucket[i].dominanceTable[k][j] = isPoint1DominatePoint2(&bucket[i].data[k], &bucket[i].data[j]);
+            }
+            bucket[i].dominanceTable[j][j] = 0;
+        }
+/* Original
         //Calculate Dominance Count
         for (int j = 0; j < dataSize; j++) {
             for (int k = j+1; k < dataSize; k++) {
@@ -161,20 +187,42 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 }
             }
         }
-        
+*/ 
+        //Calculate Dominance Count
+        for (j = 0; j < SSize; j++) {
+            for (k = 0; k < SSize; k++) { //Changed
+                if (bucket[i].dominanceTable[j][k]) {
+                    bucket[i].data[k]->domainatedCount++;
+                }
+            }
+        }
+
+/*Original:
+        // Bucket data into Sl & Sln
+        for (int j = 0; j < dataSize; j++) {
         // Bucket data into Sl & Sln
         for (int j = 0; j < dataSize; j++) {
             if (bucket[i].data[j]->domainatedCount == kValue) bucket[i].Sln.push_back(bucket[i].data[j]);
             else bucket[i].Sl.push_back(bucket[i].data[j]);
         }
         bucket[i].data.clear();
-
         // [STEP 3] Push Bucket.Sl -> Stwh
         for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
-
-*/
     }
-    /*
+*/
+        // Bucket data into Sl & Sln
+        for (j = 0; j < SSize; j++) {
+        // Bucket data into Sl & Sln
+        for (j = 0; j < SSize; j++) {
+            if (bucket[i].data[j]->domainatedCount >= kValue) bucket[i].Sln.push_back(bucket[i].data[j]);
+            else bucket[i].Sl.push_back(bucket[i].data[j]);
+        }
+        //Original: bucket[i].data.clear();
+				FreeAllPoints(bucket[i].data,bucket.data.SizePoint(bucket[i].data));
+        // [STEP 3] Push Bucket.Sl -> Stwh
+        //for (int j = 0; j < bucket[i].Sl.size(); j++) Stwh.push_back(bucket[i].Sl[j]);
+    }
+/*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;
@@ -194,9 +242,27 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 Stwh.erase(itTail);
             }
         }
+    }*/
+
+    //[STEP 5] (Stwh, Ses) -> Sg
+
+    /* struct gtPoint *iterA;
+    struct gtPoint *iterB;
+
+    iterA = StwhHead;
+    iterB = SesHead;
+
+    while (iterA->next != NULL) {
+        while (iterB->next != NULL) {
+            if (isPoint1DominatePoint2(iterB, iterA)) {
+                iterA->domainatedCount++;
+                if (iterA->domainatedCount > kValue) {
+                    DeletePoint(, StwhHead, StwhSize);
+                }
+            }
+        }
     }
 
-    // [STEP 5] (Stwh, Ses) -> Sg
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
         for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
             if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
