@@ -130,15 +130,28 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
-
-    for (i = 0; i < SSize; i++) {
+		/*
+    for (int i = 0; i < SSize; i++){
         ////////////////////////////////////////////////////
         // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
         tmpPoint = GetPoint(i, SHead);
         tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
-        PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
+        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
+				tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
+				////////////////////////////////////////////////////
+		}*/
+    
+		for (i = 0; i < SSize; ){ //i will automatically increment in tmpBucket->data->PushPint();
         ////////////////////////////////////////////////////
-    }
+        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+        tmpPoint = GetPoint(i, SHead);
+        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
+        //Armour: tmpBucket->data = tmpPoint;There seems to have some problems.
+				//tmpBucket->data->PushPoint(tmpPoint,&i,&bucketTail);   
+				//PushPoint(tmpPoint,&i,&bucketTail);   
+				////////////////////////////////////////////////////
+
+		}
 
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
@@ -162,7 +175,11 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 								PushPoint(&bucket[i].data[j],&(bucket[i].SlTaillSize),bucket[i].SlTail);
 				}
 				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize);
-
+/*
+        // [STEP 3] Push Bucket.Sl -> Stwh
+        for (int j = 0; j < bucket[i].SlSize(); j++) Stwh.push_back(bucket[i].Sl[j]);
+    }
+*/
         // [STEP 3] Push Bucket.Sl -> Stwh
         //for (int j = 0; j < bucket[i].Sl.size(); j++) 
 				//	Stwh.push_back(bucket[i].Sl[j]);
@@ -186,31 +203,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 Stwh.erase(itTail);
             }
         }
-    }*/
-
-    //[STEP 5] (Stwh, Ses) -> Sg
-
-    /* struct gtPoint *iterA; // Armour: here not finished 
-    struct gtPoint *iterB;
-    int iterCount = 0;
-
-    iterA = Stwh;
-    iterB = Ses;
-
-    while (iterA != NULL) {
-        while (iterB != NULL) {
-            if (isPoint1DominatePoint2(iterB, iterA)) {
-                iterA->domainatedCount++;
-                if (iterA->domainatedCount > kValue) {
-                    DeletePoint(iterCount, &StwhHead, StwhSize);
-                }
-            }
-            iterB = iterB->next;
-        }
-        iterA = iterA->next;
     }
-    */
-    /*Origin:
+
+    // [STEP 5] (Stwh, Ses) -> Sg
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
         for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
             if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
@@ -218,8 +213,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 Stwh.erase(itHead);
             }
         }
-    }*/
-    /*
+    }
     gtBucket *Stwh_b = new gtBucket [bucketCount];
     gtBucket *Ses_b  = new gtBucket [bucketCount];
     for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++)  (Stwh_b[(*itHead)->bitmap]).StwhSes.push_back((*itHead));
