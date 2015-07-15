@@ -110,12 +110,15 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 
 void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j, k;
+    int bucketSize = 0;
+    int bucketCount = 1;
+    int iterCount = 0, iterCountB;
+
+    struct gtPoint *iterA;
+    struct gtPoint *iterB;
     struct gtPoint *tmpPoint = NULL;
     struct gtPoint *tmpPointNext;
     struct gtBucket *tmpBucket;
-
-    int bucketSize = 0;
-    int bucketCount = 1;
     struct gtBucket *bucketHead, *bucketTail;
 
     Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
@@ -150,7 +153,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     }
     ////////////////////////////////////////////////////
 
-/*
+    /*
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
@@ -179,58 +182,98 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 					//Stwh.push_back(bucket[i].Sl[j]);
 					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
 		}
+
+    */
+
     // [STEP 4] Push Swth -> Ses
-    std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
-    vector<gtPoint *>::iterator itHead, itTail;
-    for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
-        if(!*itHead) continue;
-        for (itTail = Stwh.end(); itTail != Stwh.begin(); itTail--) {
-            if(!*itTail) continue;
-            if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
-            if ((*itHead)->domainatedCount > kValue) {
-                Ses.push_back(*itHead);
-                Stwh.erase(itHead);
-                break;
-            }
-            if (isPoint1DominatePoint2(*itHead, *itTail)) (*itTail)->domainatedCount ++;
-            if ((*itTail)->domainatedCount > kValue) {
-                Ses.push_back(*itTail);
-                Stwh.erase(itTail);
-            }
-        }
-    }*/
 
-    //[STEP 5] (Stwh, Ses) -> Sg
+    //std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
 
-    /* struct gtPoint *iterA; // Armour: here not finished 
-    struct gtPoint *iterB;
-    int iterCount = 0;
+
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    // Origin:
+    // vector<gtPoint *>::iterator itHead, itTail;
+    // for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
+    //    if(!*itHead) continue;
+    //    for (itTail = Stwh.end(); itTail != Stwh.begin(); itTail--) {
+    //        if(!*itTail) continue;
+    //        if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
+    //        if ((*itHead)->domainatedCount > kValue) {
+    //            Ses.push_back(*itHead);
+    //            Stwh.erase(itHead);
+    //            break;
+    //        }
+    //        if (isPoint1DominatePoint2(*itHead, *itTail)) (*itTail)->domainatedCount ++;
+    //        if ((*itTail)->domainatedCount > kValue) {
+    //            Ses.push_back(*itTail);
+    //            Stwh.erase(itTail);
+    //        }
+    //    }
+    // }
 
     iterA = Stwh;
-    iterB = Ses;
-
-    while (iterA != NULL) {
-        while (iterB != NULL) {
+    while (iterA->next != NULL) {
+        iterA = iterA->next;
+        iterCount++;
+        iterB = StwhTail;
+        iterCountB = 0;
+        while (iterB->previous != NULL) {
+            iterB = iterB->previous;
+            iterCountB++;
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->domainatedCount++;
                 if (iterA->domainatedCount > kValue) {
-                    DeletePoint(iterCount, &StwhHead, StwhSize);
+                    PushPoint(iterA, &SesSize, &SesTail);
+                    DeletePoint(iterCount, &StwhHead, &StwhSize);
+                    break;
                 }
             }
-            iterB = iterB->next;
+            if (isPoint1DominatePoint2(iterA, iterB)) {
+                iterB->domainatedCount++;
+                if (iterB->domainatedCount > kValue) {
+                    PushPoint(iterB, &SesSize, &SesTail);
+                    DeletePoint(iterCountB, &StwhHead, &StwhSize);
+                }
+            }
+
         }
-        iterA = iterA->next;
     }
-    */
-    /*Origin:
-    for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
-        for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
-            if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
-            if ((*itHead)->domainatedCount > kValue) {
-                Stwh.erase(itHead);
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+    //[STEP 5] (Stwh, Ses) -> Sg
+    /////////////////////////////////////////////////////////////////////////////////////
+    // Origin:
+    // for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
+    //    for (itTail = Ses.begin(); itTail != Ses.end(); itTail++) {
+    //        if (isPoint1DominatePoint2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
+    //        if ((*itHead)->domainatedCount > kValue) {
+    //            Stwh.erase(itHead);
+    //        }
+    //    }
+    // }
+
+    iterCount = 0;
+    iterA = Stwh;
+    while (iterA->next != NULL) {
+        iterA = iterA->next;
+        iterCount++;
+        iterB = Ses;
+        while (iterB->next != NULL) {
+            iterB = iterB->next;
+            if (isPoint1DominatePoint2(iterB, iterA)) {
+                iterA->domainatedCount++;
+                if (iterA->domainatedCount > kValue) {
+                    DeletePoint(iterCount, &StwhHead, &StwhSize);
+                    break;
+                }
             }
         }
-    }*/
+    }
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
     /*
     gtBucket *Stwh_b = new gtBucket [bucketCount];
     gtBucket *Ses_b  = new gtBucket [bucketCount];
@@ -264,7 +307,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         }
     }
     Sg = Stwh;
-     */
+    */
 }
 
 
