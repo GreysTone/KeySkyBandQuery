@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include "PointVector.h"
 
-int *tmpInt;
-
-void InitPoint(struct gtPoint *Node) {
+void InitPoint(struct gtPoint *Noden) {
     Node -> dimension = 0;
+    Node -> data = NULL;
     Node -> bitmap = 0;
     Node -> domainatedCount = 0;
     Node -> next = NULL;
@@ -14,15 +13,13 @@ void InitPoint(struct gtPoint *Node) {
 struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtPoint **PointHead, struct gtPoint **PointTail, int dataDimension) {
 
     StartNode = (struct gtPoint *)malloc(sizeof(struct gtPoint));
-    tmpInt = (int *)malloc(sizeof(int) * dataDimension);
-    
+
     //StartNode = (gtPoint *)palloc(sizeof(gtPoint));
     //if (StartNode == NULL)
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
     //else{
 
     InitPoint(StartNode);
-    (StartNode->data) = &tmpInt;
 
     *PointHead = StartNode;
     *PointTail = StartNode;
