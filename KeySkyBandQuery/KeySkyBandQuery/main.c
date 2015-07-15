@@ -8,7 +8,7 @@
 
 //#include "Point.h"
 //#include "Bucket.h"
-//#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h"
 #include "stdlib.h"
 #include "PointVector.h"
@@ -114,8 +114,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 	int flag;
   struct gtPoint *tmpPoint = NULL;
   struct gtPoint *tmpPointNext;
-	struct gtPoint *tmpPoint2,*tmpPoint3;
-	struct gtBucket *tmpBucket;
+	struct gtPoint *tmpPoint2=NULL,*tmpPoint3=NULL;
+	struct gtBucket *tmpBucket=NULL;
 	struct gtBucket *Temporary;
 	struct gtBucket *NextBucket;
 
@@ -152,17 +152,17 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     }
     ////////////////////////////////////////////////////
 
-/*
+
     // [STEP 2]
-	Temporary = bucket;
-	for (i = 0; i < bucketCount; i++) {
-		Temporary->bitmap = i;
-		tmpPoint = Temporary->data;
-		for (j = 0; j < Temporary->dataSize; j++){
-			tmpPoint = Temporary->data;
-			for (k = 0; k < Temporary->dataSize; k++){
-				tmpPoint2 = Temporary->data;
-				if (isPoint1DominatePoint2(tmpPoint->data, tmpPoint2->data)){
+	Temporary = tmpBucket;
+	
+	for (i = 1; i < bucketCount; i++) {
+		//Temporary->bitmap = i;
+		tmpPoint = Temporary->data->next;
+		for (j = 1; j < Temporary->dataSize; j++){
+			tmpPoint2 = Temporary->data->next;
+			for (k = 1; k < Temporary->dataSize; k++){
+				if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)){
 					tmpPoint->domainatedCount++;
 				}
 				if (tmpPoint->domainatedCount >= kValue){
