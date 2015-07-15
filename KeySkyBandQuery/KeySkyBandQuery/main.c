@@ -111,6 +111,7 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j, k;
     struct gtPoint *tmpPoint = NULL;
+    struct gtPoint *tmpPointNext;
     struct gtBucket *tmpBucket;
 
     int bucketSize = 0;
@@ -127,23 +128,28 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
-    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail);
+    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail, dataDimension);
 
     for (i = 0; i < bucketCount; i++) {
         tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
-        InitBucket(tmpBucket);
+        InitBucket(tmpBucket, dataDimension);
         PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
 
-    for (i = 0; i < SSize; i++) {
-        ////////////////////////////////////////////////////
-        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
-        tmpPoint = GetPoint(i, SHead);
+
+    ////////////////////////////////////////////////////
+    // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+    tmpPoint = S;
+    tmpPointNext = tmpPoint->next;
+    while (tmpPointNext != NULL) {
+        tmpPoint = tmpPointNext;
+        tmpPointNext = tmpPoint->next;
         tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
-        ////////////////////////////////////////////////////
     }
+    ////////////////////////////////////////////////////
+
 /*
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
@@ -173,7 +179,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 					//Stwh.push_back(bucket[i].Sl[j]);
 					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
 		}
-/*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;

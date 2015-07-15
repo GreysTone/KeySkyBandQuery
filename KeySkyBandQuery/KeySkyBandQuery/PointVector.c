@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "PointVector.h"
 
@@ -35,6 +36,7 @@ void PushPoint(struct gtPoint *NewElement, int *TotalSize, struct gtPoint **Poin
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
     //else{
     //Initialized(NewElement);
+    if (*PointTail == NULL) return;
     (*PointTail) -> next = NewElement;
     NewElement -> previous = *PointTail;
     NewElement -> next = NULL;
