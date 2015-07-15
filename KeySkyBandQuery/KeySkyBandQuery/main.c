@@ -16,6 +16,7 @@
 int kValue;
 int dataDimension;
 int dataCount;
+int **tmpIntStar;
 
 int tmpSize = 0;
 int SSize = 0; //Total data size.
@@ -31,30 +32,33 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
     int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
-    tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
+    tmpIntStar = (int **)malloc(sizeof(int*) * dataCount);
 
     for (i = 0; i < dataCount; i++) {
+        tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
         tmpInput->dimension = dataDimension;
 
-        //*(tmpInput->data) = (int *)malloc(sizeof(int) * dataDimension);
-        for(j = 0; j < dataDimension; j++) {
-            *(*(tmpInput->data) + j) = 233;             // Input Actual Data
-            printf("%d \n", *(*(tmpInput->data) + j));
-        }
+        tmpIntStar[i] = (int *)malloc(sizeof(int) * dataDimension);
+        tmpInput->data = &(tmpIntStar[i]);
 
-        //for(int j = 0; j < dataDimension; j++) {
-        //    printf("%d \n", *(*(tmpInput->data) + j));
-        //}
+        for(j = 0; j < dataDimension; j++) {
+            *(*(tmpInput->data) + j) = (i+1) * (j+1);             // Input Actual Data
+            printf("%d  ", *(*(tmpInput->data) + j));
+        }
+        printf("\n");
+
+//        for(int j = 0; j < dataDimension; j++) {
+//            printf("%d  ", *(*(tmpInput->data) + j));
+//        }
+//        printf("\n");
 
         tmpInput->bitmap = 0;
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            //cin >> bitValid;
-            bitValid = j % 2;
+            bitValid = (j + 1) % 2;
             if (bitValid != 1)  {
                 *(*(tmpInput->data) + j) = 0;
                 tmpInput->bitmap <<= 1;
-                //tmpInput->bitmap &= 0;
             } else {
                 tmpInput->bitmap <<= 1;
                 tmpInput->bitmap |= 1;
@@ -69,6 +73,7 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
         PushPoint(tmpInput, &SSize, &STail);
         //S.push_back(tmpInput[i]);
     }
+
 }
 
 void printAllPoint() {
@@ -139,7 +144,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
         ////////////////////////////////////////////////////
     }
-
+/*
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
