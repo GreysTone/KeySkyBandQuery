@@ -1,11 +1,13 @@
 #include <stdlib.h>
+#include "PointVector.h"
 #include "BucketVector.h"
 
-void InitBucket(struct gtBucket *Bucket) {
+void InitBucket(struct gtBucket *Bucket, int Dimension) {
     Bucket -> bitmap = 0;
-    Bucket -> dataSize = 0;
-    Bucket -> data = NULL;
-    Bucket -> dataTail = NULL;
+    Bucket -> data = StartPoint(Bucket->data, &Bucket->dataSize, &Bucket->data, &Bucket->dataTail, Dimension);
+    //Bucket -> dataSize = 0;
+    //Bucket -> data = NULL;
+    //Bucket -> dataTail = NULL;
     Bucket -> Sl = NULL;
     Bucket -> Sln = NULL;
     Bucket -> Stwh = NULL;
@@ -14,14 +16,14 @@ void InitBucket(struct gtBucket *Bucket) {
     Bucket -> previous = NULL;
 }
 
-struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail) {
+struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail, int Dimension) {
     StartBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
 	//StartNode = (gtPoint *)palloc(sizeof(gtPoint));
 	//if (StartNode == NULL)
 	//	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
 	//else{
 
-	InitBucket(StartBucket);
+	InitBucket(StartBucket, Dimension);
 
     *BucketHead = StartBucket;
 	*BucketTail = StartBucket;

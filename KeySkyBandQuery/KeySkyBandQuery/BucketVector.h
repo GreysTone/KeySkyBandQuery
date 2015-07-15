@@ -12,8 +12,8 @@
 #include "Point.h"
 #include "Bucket.h"
 
-void InitBucket(struct gtBucket *Bucket);
-struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail);
+void InitBucket(struct gtBucket *Bucket, int Dimension);
+struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail, int Dimension);
 void PushBucket(struct gtBucket *NewBucket, int *TotalSize, struct gtBucket **BucketTail);
 struct gtBucket *GetBucket(int Position, struct gtBucket *BucketHead);
 void DeleteBucket(int Position, struct gtBucket **BucketHead, int *TotalSize);

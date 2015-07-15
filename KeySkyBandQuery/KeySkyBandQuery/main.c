@@ -16,6 +16,7 @@
 int kValue;
 int dataDimension;
 int dataCount;
+int **tmpIntStar;
 
 int tmpSize = 0;
 int SSize = 0; //Total data size.
@@ -28,33 +29,36 @@ struct gtPoint *Sg, *SgHead, *SgTail;
 struct gtBucket *bucket;
 
 void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching failed
-		int i,j;
+    int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
-    tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
+    tmpIntStar = (int **)malloc(sizeof(int*) * dataCount);
 
     for (i = 0; i < dataCount; i++) {
+        tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
         tmpInput->dimension = dataDimension;
 
-        //*(tmpInput->data) = (int *)malloc(sizeof(int) * dataDimension);
-        for(j = 0; j < dataDimension; j++) {
-            *(*(tmpInput->data) + j) = 233;             // Input Actual Data
-            printf("%d \n", *(*(tmpInput->data) + j));
-        }
+        tmpIntStar[i] = (int *)malloc(sizeof(int) * dataDimension);
+        tmpInput->data = &(tmpIntStar[i]);
 
-        //for(int j = 0; j < dataDimension; j++) {
-        //    printf("%d \n", *(*(tmpInput->data) + j));
-        //}
+        for(j = 0; j < dataDimension; j++) {
+            *(*(tmpInput->data) + j) = (i+1) * (j+1);             // Input Actual Data
+            printf("%d  ", *(*(tmpInput->data) + j));
+        }
+        printf("\n");
+
+//        for(int j = 0; j < dataDimension; j++) {
+//            printf("%d  ", *(*(tmpInput->data) + j));
+//        }
+//        printf("\n");
 
         tmpInput->bitmap = 0;
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            //cin >> bitValid;
-            bitValid = j % 2;
+            bitValid = (j + 1) % 2;
             if (bitValid != 1)  {
                 *(*(tmpInput->data) + j) = 0;
                 tmpInput->bitmap <<= 1;
-                //tmpInput->bitmap &= 0;
             } else {
                 tmpInput->bitmap <<= 1;
                 tmpInput->bitmap |= 1;
@@ -69,10 +73,11 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
         PushPoint(tmpInput, &SSize, &STail);
         //S.push_back(tmpInput[i]);
     }
+
 }
 
 void printAllPoint() {
-		int i,j;
+    int i, j;
     for (i = 0; i < SSize; i++) {
         tmpInput = GetPoint(i, SHead);
         for (j = 0; j < dataDimension; j++) {
@@ -104,8 +109,9 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-		int i,j,k;
+    int i, j, k;
     struct gtPoint *tmpPoint = NULL;
+    struct gtPoint *tmpPointNext;
     struct gtBucket *tmpBucket;
 
     int bucketSize = 0;
@@ -122,24 +128,29 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
-    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail);
+    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail, dataDimension);
 
     for (i = 0; i < bucketCount; i++) {
         tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
-        InitBucket(tmpBucket);
+        InitBucket(tmpBucket, dataDimension);
         PushBucket(tmpBucket, &bucketSize, &bucketTail);
     }
     ////////////////////////////////////////////////////
 
-    for (i = 0; i < SSize; i++) {
-        ////////////////////////////////////////////////////
-        // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
-        tmpPoint = GetPoint(i, SHead);
+
+    ////////////////////////////////////////////////////
+    // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+    tmpPoint = S;
+    tmpPointNext = tmpPoint->next;
+    while (tmpPointNext != NULL) {
+        tmpPoint = tmpPointNext;
+        tmpPointNext = tmpPoint->next;
         tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
-        ////////////////////////////////////////////////////
     }
+    ////////////////////////////////////////////////////
 
+/*
     // [STEP 2]
     for (i = 0; i < bucketCount; i++) {
         ////////////////////////////////////////////////////
@@ -168,7 +179,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 					//Stwh.push_back(bucket[i].Sl[j]);
 					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
 		}
-/*
     // [STEP 4] Push Swth -> Ses
     std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     vector<gtPoint *>::iterator itHead, itTail;
