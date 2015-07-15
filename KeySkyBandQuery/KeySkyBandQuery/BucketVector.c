@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "PointVector.h"
 #include "BucketVector.h"
+#include "PointVector.h"
 
 void InitBucket(struct gtBucket *Bucket, int Dimension) {
     Bucket -> bitmap = 0;
@@ -8,8 +9,8 @@ void InitBucket(struct gtBucket *Bucket, int Dimension) {
     //Bucket -> dataSize = 0;
     //Bucket -> data = NULL;
     //Bucket -> dataTail = NULL;
-    Bucket -> Sl = NULL;
-    Bucket -> Sln = NULL;
+	Bucket->Sl = StartPoint(Bucket->Sl, &Bucket->SlSize, &Bucket->Sl, &Bucket->SlTail, Dimension);
+	Bucket->Sln = StartPoint(Bucket->Sln, &Bucket->SlnSize, &Bucket->Sln, &Bucket->SlnTail, Dimension);;
     Bucket -> Stwh = NULL;
     Bucket -> Ses = NULL;
     Bucket -> next = NULL;
@@ -24,7 +25,6 @@ struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struc
 	//else{
 
 	InitBucket(StartBucket, Dimension);
-
     *BucketHead = StartBucket;
 	*BucketTail = StartBucket;
     *TotalSize = 1;

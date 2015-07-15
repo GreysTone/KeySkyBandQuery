@@ -8,6 +8,7 @@
 
 //#include "Point.h"
 //#include "Bucket.h"
+#define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h"
 #include "stdlib.h"
 #include "PointVector.h"
@@ -95,8 +96,8 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
     int x1, x2;
     if (!p1 || !p2) return 0;
     for (i = 0; i < dimension; i++) {
-        x1 = (p1->data[i]) == NULL? 0: *(p1->data[i]);
-        x2 = (p2->data[i]) == NULL? 0: *(p2->data[i]);
+        x1 = (*(p1->data)+i) == NULL? 0: *(*(p1->data)+i);
+        x2 = (*(p2->data)+i) == NULL? 0: *(*(p2->data)+i);
         if (x1 <= x2) smallCount++;
         if (x1 < x2) atLeastOneSmall = 1;
     }
@@ -110,6 +111,7 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 
 void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j, k;
+	int flag;
     int bucketSize = 0;
     int bucketCount = 1;
     int iterCount = 0, iterCountB;
@@ -117,8 +119,12 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     struct gtPoint *iterA;
     struct gtPoint *iterB;
     struct gtPoint *tmpPoint = NULL;
+	struct gtPoint *tmpPoint2 = NULL;
+	struct gtPoint *tmpPoint3 = NULL;
     struct gtPoint *tmpPointNext;
     struct gtBucket *tmpBucket;
+	struct gtBucket *Temporary;
+	struct gtBucket *NextBucket;
     struct gtBucket *bucketHead, *bucketTail;
 
     Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
@@ -153,38 +159,41 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     }
     ////////////////////////////////////////////////////
 
-    /*
-    // [STEP 2]
-    for (i = 0; i < bucketCount; i++) {
-        ////////////////////////////////////////////////////
-        // Origin: bucket[i].bitmap = i;
-        tmpBucket = GetBucket(i, bucketHead);
-        tmpBucket->bitmap = i;                      // Set Bitmap
-        ////////////////////////////////////////////////////
-        //Calculate DominanceCount and put each node into Sl or Sln
-        for (j = 0; j < SSize; j++) {
-            for (k = 0; k < SSize; k++) { //Changed
-								if (isPoint1DominatePoint2(&bucket[i].data[k], &bucket[i].data[j])){
-                    bucket[i].data[j]->domainatedCount++;
-								}
-								if (bucket[i].data[j]->domainatedCount >= kValue){
-										PushPoint(&bucket[i].data[j],&(bucket[i].SlnSize),bucket[i].SlnTail);
-										break;
-								}
-						}
-						if (k == SSize) // which means data[j] is not dominted more than k times, then put it into Sl.
-								PushPoint(&bucket[i].data[j],&(bucket[i].SlTaillSize),bucket[i].SlTail);
-				}
-				FreeAllPoints(bucket[i].data,&(bucket[i].dataSize));
 
+    // [STEP 2]
+	Temporary = tmpBucket;
+	
+	for (i = 1; i < bucketCount; i++) {
+		//Temporary->bitmap = i;
+		tmpPoint = Temporary->data->next;
+		for (j = 1; j < Temporary->dataSize; j++){
+			tmpPoint2 = Temporary->data->next;
+			for (k = 1; k < Temporary->dataSize; k++){
+				if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)){
+					tmpPoint->domainatedCount++;
+				}
+				if (tmpPoint->domainatedCount >= kValue){
+					tmpPoint3 = tmpPoint->next;
+					PushPoint(tmpPoint, &Temporary->SlnSize, &Temporary->SlnTail);
+					break;
+				}
+				tmpPoint2 = tmpPoint2->next;
+			}
+			if (k == Temporary->dataSize) // which means data[j] is not dominted more than k times, then put it into Sl.
+			{
+				tmpPoint3 = tmpPoint->next;
+				PushPoint(tmpPoint, &Temporary->SlSize, &Temporary->SlTail);
+			}
+			tmpPoint = tmpPoint3;
+		}
+	Temporary = Temporary->next;
+	}
+	/*
         // [STEP 3] Push Bucket.Sl -> Stwh
         for (int j = 0; j < bucket[i].SlSize(); j++) 
 					//Stwh.push_back(bucket[i].Sl[j]);
 					PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
 		}
-
-    */
-
     // [STEP 4] Push Swth -> Ses
 
     //std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
