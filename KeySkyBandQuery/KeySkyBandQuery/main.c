@@ -119,8 +119,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     struct gtPoint *iterB;
     struct gtPoint *tmpPoint = NULL;
 	struct gtPoint *tmpPoint2 = NULL;
-	struct gtPoint *tmpPoint3 = NULL;
     struct gtPoint *tmpPointNext;
+    struct gtPoint **tmpPointArray;
     struct gtBucket *tmpBucket = NULL;
     struct gtBucket *bucketHead, *bucketTail;
 
@@ -128,7 +128,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
     Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
 
-    // [STEP 1]
+    // [STEP 1] Push all points in S to every bucket according to bitmap
     for (i = 0; i < dataDimension; i++)
         bucketCount *= 2;
 
@@ -157,39 +157,48 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     ////////////////////////////////////////////////////
 
 
-    // [STEP 2]
-	tmpBucket = bucket;
+    // [STEP 2] Divide points in every bucket into Sl and Sln
+    tmpBucket = bucket;
+    tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
 	
 	for (i = 1; i < bucketCount; i++) {
-		tmpBucket->bitmap = i;
-		tmpPoint = tmpBucket->data->next;
-		for (j = 1; j < tmpBucket->dataSize; j++) {
-			tmpPoint2 = tmpBucket->data->next;
-			for (k = 1; k < tmpBucket->dataSize; k++) {
+        tmpBucket->bitmap = i;
+        tmpPoint = tmpBucket->data;
+        tmpPointArray[0] = tmpPoint;
+        for (j = 1; j < tmpBucket->dataSize; j++) {
+            tmpPoint = tmpPoint->next;
+            tmpPointArray[j] = tmpPoint;
+        }
+        for (j = 1; j < tmpBucket->dataSize; j++) {
+            tmpPoint = tmpPointArray[j];
+            for (k = 1; k < tmpBucket->dataSize; k++) {
+                tmpPoint2 = tmpPointArray[k];
                 if (j != k ) {
                     if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)) {
                         tmpPoint->domainatedCount++;
                         if (tmpPoint->domainatedCount >= kValue) {
-                            tmpPoint3 = tmpPoint->next;
                             PushPoint(tmpPoint, &tmpBucket->SlnSize, &tmpBucket->SlnTail);
                             break;
                         }
                     }
                 }
-				tmpPoint2 = tmpPoint2->next;
 			}
             if (k == tmpBucket->dataSize) { // which means data[j] is not dominted more than k times, then put it into Sl.
-				tmpPoint3 = tmpPoint->next;
-				PushPoint(tmpPoint, &tmpBucket->SlSize, &tmpBucket->SlTail);
-			}
-			tmpPoint = tmpPoint3;
+                PushPoint(tmpPoint, &tmpBucket->SlSize, &tmpBucket->SlTail);
+                // I think we do not need the above line code, because every point in Sl will be pushed
+                // to Stwh, therefore, we can just put it to Stwh directly. is that right???
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+                // [STEP 3]  Push Bucket.Sl -> Stwh
+                // Origin:
+                // for (int j = 0; j < bucket[i].SlSize(); j++) {
+                //    PushPoint(bucket[i].Sl[j],&StwhSize,&StwhTail);
+                // }
+                PushPoint(tmpPoint, &StwhSize, &StwhTail);
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+            }
 		}
         tmpBucket = tmpBucket->next;
-
-        // [STEP 3] Push Bucket.Sl -> Stwh
-        //for (int j = 0; j < bucket[i].SlSize(); j++) {
-        //    PushPoint(bucket[i].Sl[j],&StwhSize,&StwhTail);
-        //}
 	}
 
 
