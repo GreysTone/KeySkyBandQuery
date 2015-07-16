@@ -122,7 +122,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 	struct gtPoint *tmpPoint3 = NULL;
     struct gtPoint *tmpPointNext;
     struct gtBucket *tmpBucket = NULL;
-	struct gtBucket *Temporary;
     struct gtBucket *bucketHead, *bucketTail;
 
     Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
@@ -159,43 +158,43 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
 
     // [STEP 2]
-	Temporary = tmpBucket;
+	tmpBucket = bucket;
 	
 	for (i = 1; i < bucketCount; i++) {
-		//Temporary->bitmap = i;
-		tmpPoint = Temporary->data->next;
-		for (j = 1; j < Temporary->dataSize; j++) {
-			tmpPoint2 = Temporary->data->next;
-			for (k = 1; k < Temporary->dataSize; k++) {
-				if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)) {
-                    tmpPoint->domainatedCount++;
-                    if (tmpPoint->domainatedCount >= kValue) {
-                        tmpPoint3 = tmpPoint->next;
-                        PushPoint(tmpPoint, &Temporary->SlnSize, &Temporary->SlnTail);
-                        break;
+		tmpBucket->bitmap = i;
+		tmpPoint = tmpBucket->data->next;
+		for (j = 1; j < tmpBucket->dataSize; j++) {
+			tmpPoint2 = tmpBucket->data->next;
+			for (k = 1; k < tmpBucket->dataSize; k++) {
+                if (j != k ) {
+                    if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)) {
+                        tmpPoint->domainatedCount++;
+                        if (tmpPoint->domainatedCount >= kValue) {
+                            tmpPoint3 = tmpPoint->next;
+                            PushPoint(tmpPoint, &tmpBucket->SlnSize, &tmpBucket->SlnTail);
+                            break;
+                        }
                     }
-				}
+                }
 				tmpPoint2 = tmpPoint2->next;
 			}
-            if (k == Temporary->dataSize) { // which means data[j] is not dominted more than k times, then put it into Sl.
+            if (k == tmpBucket->dataSize) { // which means data[j] is not dominted more than k times, then put it into Sl.
 				tmpPoint3 = tmpPoint->next;
-				PushPoint(tmpPoint, &Temporary->SlSize, &Temporary->SlTail);
+				PushPoint(tmpPoint, &tmpBucket->SlSize, &tmpBucket->SlTail);
 			}
 			tmpPoint = tmpPoint3;
 		}
-        Temporary = Temporary->next;
+        tmpBucket = tmpBucket->next;
+
+        // [STEP 3] Push Bucket.Sl -> Stwh
+        //for (int j = 0; j < bucket[i].SlSize(); j++) {
+        //    PushPoint(bucket[i].Sl[j],&StwhSize,&StwhTail);
+        //}
 	}
 
-	/*
-    // [STEP 3] Push Bucket.Sl -> Stwh
-       for (int j = 0; j < bucket[i].SlSize(); j++) {
-           //Stwh.push_back(bucket[i].Sl[j]);
-           PushPoint(&bucket[i].Sl[j],&StwhSize,&StwhTail);
-       }
 
     // [STEP 4] Push Swth -> Ses
     // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
-    */
 
 
     /////////////////////////////////////////////////////////////////////////////////////
