@@ -20,6 +20,8 @@ int dataCount;
 int *tmpInt;
 int **tmpIntStar;
 
+int *dominateBucket;
+
 int tmpSize = 0;
 int SSize = 0; //Total data size.
 int StwhSize = 0, SesSize = 0, SgSize = 0;
@@ -113,7 +115,7 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    int i, j, k;
+    int i, j, k, flag;
     int bucketSize = 0;
     int bucketCount = 1;
     int iterCount = 0;
@@ -122,6 +124,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     struct gtPoint *iterB;
     struct gtPoint *tmpPoint = NULL;
 	struct gtPoint *tmpPoint2 = NULL;
+	struct gtPoint *tmpPoint3 = NULL;
     struct gtPoint *tmpPointNext;
     struct gtPoint **tmpPointArray;
     struct gtBucket *tmpBucket = NULL;
@@ -264,7 +267,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     //////////////////////////////////////////////////////////////////////////////////////
 
 
-    /*
     //[STEP 5] (Stwh, Ses) -> Sg
     /////////////////////////////////////////////////////////////////////////////////////
     // Origin:
@@ -276,7 +278,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     //        }
     //    }
     // }
-
+	/*
     iterCount = 0;
     iterA = Stwh;
     while (iterA->next != NULL) {
@@ -287,16 +289,65 @@ void thicknessWarehouse(int dataDimension, int kValue) {
             iterB = iterB->next;
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->domainatedCount++;
-                if (iterA->domainatedCount > kValue) {
+                if (iterA->domainatedCount >= kValue) {
                     DeletePoint(iterCount, &StwhHead, &StwhSize);
                     break;
                 }
             }
         }
-    }*/
+    }
+	*/
     //////////////////////////////////////////////////////////////////////////////////////
-
-
+	tmpPoint = Stwh->next;
+	i = 1;
+	
+	do{ //To compare all the points in Stwh with all points in Stwh and Ses, to see whether they need to compare Slns in some Buckets.
+		dominateBucket = (int *)malloc(bucketCount*sizeof(int));
+		tmpPoint3 = tmpPoint->next;
+		tmpPoint2 = Ses->next;
+		while (tmpPoint2 != NULL){
+			if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)){
+				tmpPoint->domainatedCount++;
+				*(dominateBucket + tmpPoint2->bitmap)=1;
+			}
+			if (tmpPoint->domainatedCount >= kValue){
+				tmpPoint->previous->next = tmpPoint->next;
+				PushPoint(tmpPoint,SesSize,SesTail);
+				free(dominateBucket);
+				break;
+			}
+			tmpPoint2 = tmpPoint2->next;
+		}
+		if (tmpPoint2 == NULL){
+			tmpPoint2 = Stwh->next;
+			while (tmpPoint2 != NULL){
+				if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)){
+					*(dominateBucket + tmpPoint2->bitmap) = 1;
+				}
+				tmpPoint2 = tmpPoint2->next;
+			}
+			for (j = 1; j < bucketCount; j++){
+				if (*(dominateBucket + j) == 1){
+					tmpPoint2 = (bucket + *(dominateBucket + j))->Sln->next;
+					while (tmpPoint2 != NULL){
+						if (isPoint1DominatePoint2(tmpPoint2, tmpPoint))
+							tmpPoint->domainatedCount++;
+						if (tmpPoint->domainatedCount >= kValue){
+							tmpPoint->previous->next = tmpPoint->next;
+							PushPoint(tmpPoint, SesSize, SesTail);
+							free(dominateBucket);
+							break;
+						}
+					}
+					if (tmpPoint2 != NULL)
+						break;
+				}
+			}
+			if (j == bucketCount)
+				PushPoint(tmpPoint, &SgSize, &SgTail);
+		}
+		tmpPoint = tmpPoint3;
+	} while (tmpPoint);
     /*
     gtBucket *Stwh_b = new gtBucket [bucketCount];
     gtBucket *Ses_b  = new gtBucket [bucketCount];
