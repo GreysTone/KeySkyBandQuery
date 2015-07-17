@@ -244,9 +244,11 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         iterA = tmpPointArray[i];
         if (!tmpInt[i]) continue;
         iterCount++;
+        //iterCountB = 0;
         for (int j = StwhSize - 1; j >= 1; j--) {
             iterB = tmpPointArray[j];
             if (!tmpInt[j]) continue;
+            //iterCountB++;
             if (iterA != iterB) {
                 if (isPoint1DominatePoint2(iterB, iterA)) {
                     iterA->domainatedCount++;
@@ -258,6 +260,14 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                         break;
                     }
                 }
+                /*if (isPoint1DominatePoint2(iterA, iterB)) {
+                    iterB->domainatedCount++;
+                    if (iterB->domainatedCount >= kValue) {
+                        DeletePoint(iterCountB, &StwhHead, &StwhSize, &StwhTail);
+                        PushPoint(iterB, &SesSize, &SesTail);
+                        tmpInt[iterCountB] = 0;
+                    }
+                }*/
             }
         }
     }
