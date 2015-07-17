@@ -15,7 +15,7 @@ void InitPoint(struct gtPoint *Node);
 struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtPoint **PointHead, struct gtPoint **PointTail, int dataDimension);
 void PushPoint(struct gtPoint *NewElement, int *TotalSize, struct gtPoint **PointTail);
 struct gtPoint *GetPoint(int Position, struct gtPoint *PointHead);
-void DeletePoint(int Position, struct gtPoint **PointHead, int *TotalSize);
+void DeletePoint(int Position, struct gtPoint **PointHead, int *TotalSize, struct gtPoint **PointTail);
 void FreeAllPoints(struct gtPoint *Node, int *TotalSize);
 int SizePoint(struct gtPoint *PointHead);
 

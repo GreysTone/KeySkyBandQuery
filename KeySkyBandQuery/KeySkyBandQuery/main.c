@@ -17,6 +17,7 @@
 int kValue;
 int dataDimension;
 int dataCount;
+int *tmpInt;
 int **tmpIntStar;
 
 int tmpSize = 0;
@@ -43,8 +44,8 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
         tmpInput->data = &(tmpIntStar[i]);
 
         for(j = 0; j < dataDimension; j++) {
-            *(*(tmpInput->data) + j) = (i+1) * (j+1);             // Input Actual Data
-            printf("%d  ", *(*(tmpInput->data) + j));
+            *(*(tmpInput->data) + j) = rand() % 30;             // Input Actual Data
+            printf("%d ", *(*(tmpInput->data) + j));
         }
         printf("\n");
 
@@ -56,7 +57,8 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
         tmpInput->bitmap = 0;
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            bitValid = (j + 1) % 2;
+            bitValid = rand() % 2;
+            printf("%d ", bitValid);
             if (bitValid != 1)  {
                 *(*(tmpInput->data) + j) = 0;
                 tmpInput->bitmap <<= 1;
@@ -66,6 +68,7 @@ void inputData(int dataDimension, int dataCount) {      // [!!!] Not catching fa
             }
             //printf("%d ", tmpInput->bitmap);
         }
+        printf("\n");
 
         //for(int j = 0; j < dataDimension; j++) {
         //    printf("%d\n", *(*(tmpInput->data) + j));
@@ -113,7 +116,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j, k;
     int bucketSize = 0;
     int bucketCount = 1;
-    int iterCount = 0, iterCountB;
+    int iterCount = 0;
 
     struct gtPoint *iterA;
     struct gtPoint *iterB;
@@ -130,7 +133,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     // [STEP 1] Push all points in S to every bucket according to bitmap
     for (i = 0; i < dataDimension; i++)
-        bucketCount *= 2;
+        bucketCount *= 2;   // !!!!!! Dimension should not larger then 30 !!!!!!!!
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
@@ -161,7 +164,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     tmpBucket = bucket;
     tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
 	
-	for (i = 1; i < bucketCount; i++) {
+	for (i = 0; i < bucketCount; i++) {
         tmpBucket->bitmap = i;
         tmpPoint = tmpBucket->data;
         tmpPointArray[0] = tmpPoint;
@@ -201,6 +204,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpBucket = tmpBucket->next;
 	}
 
+    free(tmpPointArray);
 
     // [STEP 4] Push Swth -> Ses
     // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
@@ -226,37 +230,41 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     //        }
     //    }
     // }
-
-    iterA = Stwh;
-    while (iterA->next != NULL) {
-        iterA = iterA->next;
+    tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * StwhSize);
+    tmpInt = (int *)malloc(sizeof(int*) * StwhSize);
+    tmpPoint = Stwh;
+    tmpPointArray[0] = tmpPoint;
+    tmpInt[0] = 1;
+    for (i = 1; i < StwhSize; i++) {
+        tmpPoint = tmpPoint->next;
+        tmpPointArray[i] = tmpPoint;
+        tmpInt[i] = 1;
+    }
+    for (int i = 1; i < StwhSize; i++) {
+        iterA = tmpPointArray[i];
+        if (!tmpInt[i]) continue;
         iterCount++;
-        iterB = StwhTail;
-        iterCountB = 0;
-        while (iterB->previous != NULL) {
-            iterB = iterB->previous;
-            iterCountB++;
-            if (isPoint1DominatePoint2(iterB, iterA)) {
-                iterA->domainatedCount++;
-                if (iterA->domainatedCount > kValue) {
-                    PushPoint(iterA, &SesSize, &SesTail);
-                    DeletePoint(iterCount, &StwhHead, &StwhSize);
-                    break;
+        for (int j = StwhSize - 1; j >= 1; j--) {
+            iterB = tmpPointArray[j];
+            if (!tmpInt[j]) continue;
+            if (iterA != iterB) {
+                if (isPoint1DominatePoint2(iterB, iterA)) {
+                    iterA->domainatedCount++;
+                    if (iterA->domainatedCount >= kValue) {
+                        DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
+                        PushPoint(iterA, &SesSize, &SesTail);
+                        tmpInt[iterCount] = 0;
+                        iterCount--;
+                        break;
+                    }
                 }
             }
-            if (isPoint1DominatePoint2(iterA, iterB)) {
-                iterB->domainatedCount++;
-                if (iterB->domainatedCount > kValue) {
-                    PushPoint(iterB, &SesSize, &SesTail);
-                    DeletePoint(iterCountB, &StwhHead, &StwhSize);
-                }
-            }
-
         }
     }
     //////////////////////////////////////////////////////////////////////////////////////
 
 
+    /*
     //[STEP 5] (Stwh, Ses) -> Sg
     /////////////////////////////////////////////////////////////////////////////////////
     // Origin:
@@ -285,7 +293,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 }
             }
         }
-    }
+    }*/
     //////////////////////////////////////////////////////////////////////////////////////
 
 

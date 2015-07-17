@@ -58,22 +58,27 @@ struct gtPoint *GetPoint(int Position, struct gtPoint *PointHead) {
     return Pointer;
 }
 
-void DeletePoint(int Position, struct gtPoint **PointHead, int *TotalSize) {
+void DeletePoint(int Position, struct gtPoint **PointHead, int *TotalSize, struct gtPoint **PointTail) {
     struct gtPoint *Pointer;
     int i = 0;
     Pointer = *PointHead;
     for (i = 0; i < Position; i++) {
-        if (Pointer == NULL){
+        if (Pointer -> next != NULL)
             Pointer = Pointer -> next;
-        }
-        else break;
+        else
+            break;
+    }
+    if (Pointer -> next == NULL) {      // if delete the last node
+        *PointTail = (*PointTail)->previous;
     }
     //if (i != Position)
     //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Illegal GetNode."))));
     Pointer -> previous -> next = Pointer -> next;
+    if (Pointer -> next != NULL)
+        Pointer -> next -> previous = Pointer -> previous;
     Pointer -> next = NULL;
     Pointer -> previous = NULL;
-    free(Pointer);
+    //free(Pointer);    // we do not need free
     *TotalSize = *TotalSize - 1;
     //pfree(Pointer);
 }
