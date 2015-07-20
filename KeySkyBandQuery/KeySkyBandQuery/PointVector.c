@@ -21,7 +21,8 @@ struct gtPoint *StartPoint(struct gtPoint *StartNode, int *TotalSize, struct gtP
     //else{
 
     InitPoint(StartNode);
-
+    StartNode->dimension = dataDimension;
+    
     *PointHead = StartNode;
     *PointTail = StartNode;
     *TotalSize = 1;

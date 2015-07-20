@@ -5,10 +5,9 @@
 
 void InitBucket(struct gtBucket *Bucket, int Dimension) {
     Bucket -> bitmap = 0;
+    Bucket -> dataSize = 0;
+    Bucket -> dataTail = NULL;
     Bucket -> data = StartPoint(Bucket->data, &Bucket->dataSize, &Bucket->data, &Bucket->dataTail, Dimension);
-    //Bucket -> dataSize = 0;
-    //Bucket -> data = NULL;
-    //Bucket -> dataTail = NULL;
 	Bucket -> Sl = StartPoint(Bucket->Sl, &Bucket->SlSize, &Bucket->Sl, &Bucket->SlTail, Dimension);
 	Bucket -> Sln = StartPoint(Bucket->Sln, &Bucket->SlnSize, &Bucket->Sln, &Bucket->SlnTail, Dimension);;
     Bucket -> Stwh = NULL;
@@ -65,7 +64,7 @@ void DeleteBucket(int Position, struct gtBucket **BucketHead, int *TotalSize) {
     int i = 0;
     Pointer = *BucketHead;
     for (i = 0; i < Position; i++) {
-        if (Pointer == NULL){
+        if (Pointer->next != NULL){
             Pointer = Pointer -> next;
         }
         else break;
