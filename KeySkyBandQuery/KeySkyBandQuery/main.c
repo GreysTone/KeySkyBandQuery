@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-//#include "Point.h"
-//#include "Bucket.h"
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h"
 #include "stdlib.h"

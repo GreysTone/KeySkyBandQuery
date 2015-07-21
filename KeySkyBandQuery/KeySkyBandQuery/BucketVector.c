@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include "PointVector.h"
 #include "BucketVector.h"
-#include "PointVector.h"
 
 void InitBucket(struct gtBucket *Bucket, int Dimension) {
     Bucket -> bitmap = 0;
