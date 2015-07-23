@@ -12,7 +12,7 @@
 struct gtPoint {
     int dimension;            // point dimension
     int **data;
-    int bitmap;
+    char *bitmap;
     int domainatedCount;
     struct gtPoint *next;
     struct gtPoint *previous;

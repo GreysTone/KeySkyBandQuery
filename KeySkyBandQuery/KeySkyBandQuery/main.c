@@ -11,27 +11,30 @@
 #include "stdlib.h"
 #include "PointVector.h"
 #include "BucketVector.h"
+#include "HashTable.h"
 
-int two[30];
 int kValue;
 int dataDimension;
 int dataCount;
 int *tmpInt;
 int **tmpIntStar;
-
 int *dominateBucket;
+char *bitmapStr;
+
+struct HashTable *H;
 
 int tmpSize = 0;
 int SSize = 0; //Total data size.
 int StwhSize = 0, SesSize = 0, SgSize = 0;
-int bucketSize = 0;
 struct gtPoint *tmpInput, *tmpHead, *tmpTail;
 struct gtPoint *S, *SHead, *STail;
 struct gtPoint *Stwh, *StwhHead, *StwhTail;
 struct gtPoint *Ses, *SesHead, *SesTail;
 struct gtPoint *Sg, *SgHead, *SgTail;
-struct gtBucket *bucket;
-struct gtBucket *bucketHead, *bucketTail;
+struct gtBucket *tmpBucket = NULL;
+struct gtBucket *firstBucket = NULL, *lastBucket = NULL;
+struct ListNode *tmpListNode;
+
 
 void inputData(int dataDimension, int dataCount) {
     int i, j;
@@ -43,6 +46,7 @@ void inputData(int dataDimension, int dataCount) {
         tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
         tmpIntStar[i] = (int *)malloc(sizeof(int) * dataDimension);
         tmpInput->data = &(tmpIntStar[i]);
+        tmpInput->bitmap = (char *)malloc(sizeof(char) * dataDimension);
 
         for(j = 0; j < dataDimension; j++) {
             *(*(tmpInput->data) + j) = rand() % 30;             // Input Actual Data
@@ -53,12 +57,10 @@ void inputData(int dataDimension, int dataCount) {
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
             bitValid = rand() % 2;
             //printf("%d  ", bitValid);
-            if (bitValid != 1)  {
-                tmpInput->bitmap <<= 1;
-            } else {
-                tmpInput->bitmap <<= 1;
-                tmpInput->bitmap |= 1;
-            }
+            if (bitValid != 1)
+                *(tmpInput->bitmap + j) = '0';
+            else
+                *(tmpInput->bitmap + j) = '1';
         }
         //printf("\n");
 
@@ -76,8 +78,8 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
     for (i = 0; i < dimension; i++) {
         x1 = *(*(p1->data)+i);
         x2 = *(*(p2->data)+i);
-        x1IsNull = !(p1->bitmap & two[dimension - i]);
-        x2IsNull = !(p2->bitmap & two[dimension - i]);
+        x1IsNull = !(*(p1->bitmap + i));
+        x2IsNull = !(*(p2->bitmap + i));
         if (x1IsNull || x2IsNull) {
             smallCount++;
         } else {
@@ -93,9 +95,21 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
     return v1->domainatedCount > v2->domainatedCount;
 }
 
+void buildBucketHashTable(int depth) {
+    if (depth == dataDimension) {
+        tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));  // 1 bucket + 3 point => 232 bytes
+        InitBucket(tmpBucket, dataDimension);
+        Insert(bitmapStr, H, dataDimension, tmpBucket, &firstBucket, &lastBucket);
+        return;
+    }
+    *(bitmapStr + depth) = '0';
+    buildBucketHashTable(depth + 1);
+    *(bitmapStr + depth) = '1';
+    buildBucketHashTable(depth + 1);
+}
+
 void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j, k;
-    int bucketCount = 1;
     int iterCount = 0, iterCountB;
 
     struct gtPoint *iterA;
@@ -104,25 +118,18 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 	struct gtPoint *tmpPoint2 = NULL;
     struct gtPoint *tmpPointNext;
     struct gtPoint **tmpPointArray;
-    struct gtBucket *tmpBucket = NULL;
 
     Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
     Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
     Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
 
     // [STEP 1] Push all points in S to every bucket according to bitmap
-    for (i = 0; i < dataDimension; i++)
-        bucketCount *= 2;   // !!!!!! Dimension should not larger then 30 !!!!!!!!
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
-    bucket = StartBucket(bucket, &bucketSize, &bucketHead, &bucketTail, dataDimension);
-
-    for (i = 0; i < bucketCount; i++) {
-        tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));  // 1 bucket + 3 point => 232 bytes
-        InitBucket(tmpBucket, dataDimension);
-        PushBucket(tmpBucket, &bucketSize, &bucketTail);
-    }
+    H = InitializeTable(dataCount);
+    bitmapStr = (char *)malloc(sizeof(char) * dataDimension);
+    //buildBucketHashTable(0);
     ////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////
@@ -132,18 +139,24 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     while (tmpPointNext != NULL) {
         tmpPoint = tmpPointNext;
         tmpPointNext = tmpPoint->next;
-        tmpBucket = GetBucket(tmpPoint->bitmap, bucketHead);                // !! how to save time, there should be a trade off between time and space
+        tmpListNode = Find(tmpPoint->bitmap, H, dataDimension);
+        if (tmpListNode == NULL) {
+            tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));  // 1 bucket + 3 point => 232 bytes
+            InitBucket(tmpBucket, dataDimension);
+            Insert(tmpPoint->bitmap, H, dataDimension, tmpBucket, &firstBucket, &lastBucket);
+        } else {
+            tmpBucket = tmpListNode->bucket;
+        }
         PushPoint(tmpPoint, &tmpBucket->dataSize, &tmpBucket->dataTail);
     }
     ////////////////////////////////////////////////////
 
 
     // [STEP 2] Divide points in every bucket into Sl and Sln
-    tmpBucket = bucket;
+    tmpBucket = firstBucket;
     tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
 	
-	for (i = 0; i < bucketCount; i++) {
-        tmpBucket->bitmap = i;
+	while (tmpBucket != NULL) {
         tmpPoint = tmpBucket->data;
         tmpPointArray[0] = tmpPoint;
         for (j = 1; j < tmpBucket->dataSize; j++) {
@@ -164,11 +177,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                     }
                 }
 			}
-            if (k == tmpBucket->dataSize) { // which means data[j] is not dominted more than k times, then put it into Sl.
-                // PushPoint(tmpPoint, &tmpBucket->SlSize, &tmpBucket->SlTail);
-                // I think we do not need the above line code, because every point in Sl will be pushed
-                // to Stwh, therefore, we can just put it to Stwh directly. is that right???
-
+            if (k == tmpBucket->dataSize) {
                 //////////////////////////////////////////////////////////////////////////////////////////////////
                 // [STEP 3]  Push Bucket.Sl -> Stwh
                 // Origin:
@@ -317,8 +326,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     while (iterA != NULL) {
         iterCount++;
         tmpPointNext = iterA->next;
-        tmpBucket = bucket;
-        for (i = 0; i < bucketCount; i++) {
+        tmpBucket = firstBucket;
+        while (tmpBucket != NULL) {
             iterB = tmpBucket->Sln->next;
             while (iterB != NULL) {
                 if (isPoint1DominatePoint2(iterB, iterA)) {
@@ -347,11 +356,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
 int main(int argc, const char * argv[]) {
     int i, j;
-    two[0] = 0;
-    two[1] = 1;
-    for (i = 2; i < 31; i++) {
-        two[i] = two[i-1] * 2;
-    }
+
     scanf("%d %d", &dataDimension, &dataCount);
     inputData(dataDimension, dataCount);
     kValue = 1;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		763A67CE1B6085100083D522 /* HashTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 763A67CD1B6085100083D522 /* HashTable.c */; };
 		766B59441B4FA18F008C43E8 /* BucketVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59401B4FA18F008C43E8 /* BucketVector.c */; };
 		766B59451B4FA18F008C43E8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59411B4FA18F008C43E8 /* main.c */; };
 		766B59461B4FA18F008C43E8 /* PointVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 766B59431B4FA18F008C43E8 /* PointVector.c */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		763A67CC1B6084CB0083D522 /* HashTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashTable.h; sourceTree = "<group>"; };
+		763A67CD1B6085100083D522 /* HashTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HashTable.c; sourceTree = "<group>"; };
 		766B59351B4FA164008C43E8 /* KeySkyBandQuery */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KeySkyBandQuery; sourceTree = BUILT_PRODUCTS_DIR; };
 		766B593F1B4FA18F008C43E8 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
 		766B59401B4FA18F008C43E8 /* BucketVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BucketVector.c; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				766B593F1B4FA18F008C43E8 /* Bucket.h */,
 				7676175A1B5499A300F327FC /* BucketVector.h */,
 				766B59401B4FA18F008C43E8 /* BucketVector.c */,
+				763A67CC1B6084CB0083D522 /* HashTable.h */,
+				763A67CD1B6085100083D522 /* HashTable.c */,
 				766B59421B4FA18F008C43E8 /* Point.h */,
 				767617591B5498E600F327FC /* PointVector.h */,
 				766B59431B4FA18F008C43E8 /* PointVector.c */,
@@ -132,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				763A67CE1B6085100083D522 /* HashTable.c in Sources */,
 				766B59451B4FA18F008C43E8 /* main.c in Sources */,
 				766B59461B4FA18F008C43E8 /* PointVector.c in Sources */,
 				766B59441B4FA18F008C43E8 /* BucketVector.c in Sources */,
