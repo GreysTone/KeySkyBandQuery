@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "inputData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "inputData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/BucketVector.c"
-            timestampString = "459005458.476021"
+            timestampString = "459394201.676561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "StartBucket()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,23 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
@@ -170,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +170,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "inputData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,23 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -458,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,23 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
@@ -506,7 +474,55 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -522,12 +538,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "isPoint1DominatePoint2()"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,7 +554,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
@@ -554,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,59 +586,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
             endingLineNumber = "174"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -778,11 +778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -794,13 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
+            startingLineNumber = "93"
+            endingLineNumber = "93">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -810,11 +808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "isPoint1DominatePoint2()"
             landmarkType = "7">
          </BreakpointContent>
@@ -826,27 +824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "isPoint1DominatePoint2()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -858,7 +840,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
@@ -874,11 +888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -890,11 +904,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -906,11 +920,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -922,7 +936,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "254"
@@ -938,11 +952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -954,11 +968,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -970,11 +984,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "main()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,11 +1016,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1002,11 +1032,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1018,11 +1064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1034,53 +1080,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
@@ -1096,11 +1096,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1112,11 +1112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1128,11 +1128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1144,11 +1144,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1160,11 +1160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1176,11 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1192,11 +1192,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
+            landmarkName = "main()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1208,25 +1224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1238,39 +1240,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -1286,11 +1256,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1302,11 +1272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1318,11 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1334,11 +1304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1350,11 +1320,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1430,11 +1400,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1446,11 +1416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1462,59 +1432,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "thicknessWarehouse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364741.753765"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
             endingLineNumber = "143"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459391075.177603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1531,7 +1485,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
-            landmarkName = "Find()"
+            landmarkName = "Insert()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1558,11 +1512,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364769.875577"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1574,11 +1528,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364771.091372"
+            timestampString = "459391075.177603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1586,15 +1540,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364864.039485"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1602,15 +1556,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364868.085094"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1618,15 +1572,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364870.906168"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1634,15 +1588,255 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KeySkyBandQuery/main.c"
-            timestampString = "459364875.224785"
+            timestampString = "459400676.126812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "main()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459392312.166511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459392323.686286"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459393881.884188"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459393887.915665"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459393894.577656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459394063.172484"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "thicknessWarehouse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459397022.45646"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459397023.195904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459397103.843567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459397107.379879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459397225.57881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "isPoint1DominatePoint2()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KeySkyBandQuery/main.c"
+            timestampString = "459400676.126812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "thicknessWarehouse()"
             landmarkType = "7">
          </BreakpointContent>

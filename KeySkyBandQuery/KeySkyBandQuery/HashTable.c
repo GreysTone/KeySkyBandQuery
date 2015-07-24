@@ -45,12 +45,8 @@ int NextPrime(int size) {
         return 3145739;
     else if (size < 6291469)
         return 6291469;
-    else if (size < 12582917)
-        return 12582917;
-    else if (size < 25165843)
-        return 25165843;
     else
-        return 50331653;
+        return 12582917;
 }
 
 // BKDR Hash Function

@@ -19,7 +19,6 @@ int dataCount;
 int *tmpInt;
 int **tmpIntStar;
 int *dominateBucket;
-char *bitmapStr;
 
 struct HashTable *H;
 
@@ -50,19 +49,20 @@ void inputData(int dataDimension, int dataCount) {
 
         for(j = 0; j < dataDimension; j++) {
             *(*(tmpInput->data) + j) = rand() % 30;             // Input Actual Data
-            //printf("%d ", *(*(tmpInput->data) + j));
+            printf("%2d ", *(*(tmpInput->data) + j));
         }
-        //printf("\n");
+        printf("\n");
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
             bitValid = rand() % 2;
-            //printf("%d  ", bitValid);
+            printf("%2d ", bitValid);
             if (bitValid != 1)
                 *(tmpInput->bitmap + j) = '0';
             else
                 *(tmpInput->bitmap + j) = '1';
+            //printf("%c", *(tmpInput->bitmap + j));
         }
-        //printf("\n");
+        printf("\n");
 
         PushPoint(tmpInput, &SSize, &STail);        // Push point to S
     }
@@ -78,8 +78,8 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
     for (i = 0; i < dimension; i++) {
         x1 = *(*(p1->data)+i);
         x2 = *(*(p2->data)+i);
-        x1IsNull = !(*(p1->bitmap + i));
-        x2IsNull = !(*(p2->bitmap + i));
+        x1IsNull = (*(p1->bitmap + i)) == '0';
+        x2IsNull = (*(p2->bitmap + i)) == '0';
         if (x1IsNull || x2IsNull) {
             smallCount++;
         } else {
@@ -93,19 +93,6 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
 
 int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
     return v1->domainatedCount > v2->domainatedCount;
-}
-
-void buildBucketHashTable(int depth) {
-    if (depth == dataDimension) {
-        tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));  // 1 bucket + 3 point => 232 bytes
-        InitBucket(tmpBucket, dataDimension);
-        Insert(bitmapStr, H, dataDimension, tmpBucket, &firstBucket, &lastBucket);
-        return;
-    }
-    *(bitmapStr + depth) = '0';
-    buildBucketHashTable(depth + 1);
-    *(bitmapStr + depth) = '1';
-    buildBucketHashTable(depth + 1);
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
@@ -128,8 +115,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     ////////////////////////////////////////////////////
     // Origin: bucket = new gtBucket[bucketCount];
     H = InitializeTable(dataCount);
-    bitmapStr = (char *)malloc(sizeof(char) * dataDimension);
-    //buildBucketHashTable(0);
     ////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////
@@ -191,12 +176,12 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpBucket = tmpBucket->next;
     }
 
-
     free(tmpPointArray);
 
-
     // [STEP 4] Push Swth -> Ses
-    // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
+    //if (kValue > 1) {
+        // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
+    //}
 
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +215,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         while (iterB != StwhHead) {
             iterCountB++;
             tmpPoint = iterB->previous;
-            if (iterA->bitmap == iterB->bitmap ) {
+            if (sameBitmap(iterA->bitmap, iterB->bitmap, dataDimension)) {
                 iterB = tmpPoint;
                 continue;
             }
@@ -262,8 +247,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     // Test:
     //
     // int test = 0;
-    // tmpBucket = bucket;
-    // for (i = 0; i < bucketCount; i++) {
+    // tmpBucket = firstBucket;
+    // while (tmpBucket != NULL) {
     //     test += tmpBucket->SlnSize - 1;
     //     tmpBucket = tmpBucket->next;
     // }
@@ -292,7 +277,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 if (iterA->domainatedCount >= kValue) {
                     DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
                     deleted++;  // for test
-                    free(iterA);
                     iterCount--;
                     break;
                 }
@@ -334,7 +318,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                     iterA->domainatedCount++;
                     if (iterA->domainatedCount >= kValue) {
                         DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
-                        free(iterA);
                         iterCount--;
                         break;
                     }
