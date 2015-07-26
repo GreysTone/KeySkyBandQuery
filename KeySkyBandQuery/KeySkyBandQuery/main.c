@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h"
 #include "stdlib.h"
 #include "PointVector.h"
@@ -19,20 +18,18 @@ int dataCount;
 int *tmpInt;
 int **tmpIntStar;
 int *dominateBucket;
+int tmpSize;
+int SSize, StwhSize, SesSize, SgSize;
 
-struct HashTable *H;
-
-int tmpSize = 0;
-int SSize = 0; //Total data size.
-int StwhSize = 0, SesSize = 0, SgSize = 0;
 struct gtPoint *tmpInput, *tmpHead, *tmpTail;
 struct gtPoint *S, *SHead, *STail;
 struct gtPoint *Stwh, *StwhHead, *StwhTail;
 struct gtPoint *Ses, *SesHead, *SesTail;
 struct gtPoint *Sg, *SgHead, *SgTail;
-struct gtBucket *tmpBucket = NULL;
-struct gtBucket *firstBucket = NULL, *lastBucket = NULL;
+struct gtBucket *tmpBucket;
+struct gtBucket *firstBucket, *lastBucket;
 struct ListNode *tmpListNode;
+struct HashTable *H;
 
 
 void inputData(int dataDimension, int dataCount) {
@@ -96,8 +93,8 @@ int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
-    int i, j, k;
-    int iterCount = 0, iterCountB;
+    int i, j;
+    int iterCount, iterCountB;
 
     struct gtPoint *iterA;
     struct gtPoint *iterB;
@@ -140,19 +137,20 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     // [STEP 2] Divide points in every bucket into Sl and Sln
     tmpBucket = firstBucket;
     tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
-	
-	while (tmpBucket != NULL) {
+    //if (tmpPointArray == NULL)
+    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Step2: Cannot palloc PointArray for insert point into Sln")));
+    while (tmpBucket != NULL) {
         tmpPoint = tmpBucket->data;
         tmpPointArray[0] = tmpPoint;
-        for (j = 1; j < tmpBucket->dataSize; j++) {
+        for (i = 1; i < tmpBucket->dataSize; i++) {
             tmpPoint = tmpPoint->next;
-            tmpPointArray[j] = tmpPoint;
+            tmpPointArray[i] = tmpPoint;
         }
-        for (j = 1; j < tmpBucket->dataSize; j++) {
-            tmpPoint = tmpPointArray[j];
-            for (k = 1; k < tmpBucket->dataSize; k++) {
-                tmpPoint2 = tmpPointArray[k];
-                if (j != k ) {
+        for (i = 1; i < tmpBucket->dataSize; i++) {
+            tmpPoint = tmpPointArray[i];
+            for (j = 1; j < tmpBucket->dataSize; j++) {
+                tmpPoint2 = tmpPointArray[j];
+                if (i != j ) {
                     if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)) {
                         tmpPoint->domainatedCount++;
                         if (tmpPoint->domainatedCount >= kValue) {
@@ -161,24 +159,18 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                         }
                     }
                 }
-			}
-            if (k == tmpBucket->dataSize) {
-                //////////////////////////////////////////////////////////////////////////////////////////////////
-                // [STEP 3]  Push Bucket.Sl -> Stwh
-                // Origin:
-                // for (int j = 0; j < bucket[i].SlSize(); j++) {
-                //    PushPoint(bucket[i].Sl[j],&StwhSize,&StwhTail);
-                // }
-                PushPoint(tmpPoint, &StwhSize, &StwhTail);
-                //////////////////////////////////////////////////////////////////////////////////////////////////
             }
-		}
+            if (j == tmpBucket->dataSize) // which means data[j] is not dominted more than k times, then put it into Sl.
+                PushPoint(tmpPoint, &StwhSize, &StwhTail);
+        }
         tmpBucket = tmpBucket->next;
     }
 
     free(tmpPointArray);
 
     // [STEP 4] Push Swth -> Ses
+    // struct gtPoint **pointSorted = NULL;
+    // pointSorted = (struct gtPoint **)malloc(sizeof(struct gtPoint *));
     //if (kValue > 1) {
         // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
     //}
@@ -339,6 +331,14 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
 int main(int argc, const char * argv[]) {
     int i, j;
+
+    tmpSize = 0;
+    SSize = 0;
+    StwhSize = 0;
+    SesSize = 0;
+    SgSize = 0;
+    firstBucket = NULL;
+    lastBucket = NULL;
 
     scanf("%d %d", &dataDimension, &dataCount);
     inputData(dataDimension, dataCount);

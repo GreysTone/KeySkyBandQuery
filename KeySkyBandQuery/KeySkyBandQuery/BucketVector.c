@@ -14,11 +14,9 @@ void InitBucket(struct gtBucket *Bucket, int Dimension) {
 
 struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struct gtBucket **BucketHead, struct gtBucket **BucketTail, int Dimension) {
     StartBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));
-	//StartNode = (gtPoint *)palloc(sizeof(gtPoint));
-	//if (StartNode == NULL)
-	//	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
-	//else{
-
+    //if (StartBucket == NULL)
+    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Cannot start a linked list.")));
+    //else{
 	InitBucket(StartBucket, Dimension);
     *BucketHead = StartBucket;
 	*BucketTail = StartBucket;
@@ -28,12 +26,6 @@ struct gtBucket *StartBucket(struct gtBucket *StartBucket, int *TotalSize, struc
 }
 
 void PushBucket(struct gtBucket *NewBucket, int *TotalSize, struct gtBucket **BucketTail) {
-	//NewBucket = (gtPoint *)malloc(sizeof(gtPoint));
-	//NewBucket = (gtPoint *)palloc(sizeof(gtPoint));
-	//if (NewBucket == NULL)
-	//	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Cannot start a linked list."))));
-	//else{
-	//Initialized(NewBucket);
 	(*BucketTail) -> next = NewBucket;
     NewBucket -> previous = *BucketTail;
 	NewBucket -> next = NULL;
@@ -51,7 +43,7 @@ struct gtBucket *GetBucket(int Position, struct gtBucket *BucketHead) {
         else break;
     }
     //if (i != Position)
-    //ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Illegal GetNode."))));
+    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Illegal GetNode.")));
     return Pointer;
 }
 
@@ -66,13 +58,12 @@ void DeleteBucket(int Position, struct gtBucket **BucketHead, int *TotalSize) {
         else break;
     }
     //if (i != Position)
-    //	ereport(ERROR,(errcode(ERROR_OUT_OF_MEMORY_ERROR,errmsg("Illegal GetNode."))));
+    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Illegal GetNode.")));
     Pointer -> previous -> next = Pointer -> next;
     Pointer -> next = NULL;
     Pointer -> previous = NULL;
     free(Pointer);
     *TotalSize = *TotalSize - 1;
-    //pfree(Pointer);
 }
 
 void FreeAllBuckets(struct gtBucket *Bucket, int *TotalSize) {
