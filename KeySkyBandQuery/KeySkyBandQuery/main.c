@@ -46,20 +46,20 @@ void inputData(int dataDimension, int dataCount) {
 
         for(j = 0; j < dataDimension; j++) {
             *(*(tmpInput->data) + j) = rand() % 30;             // Input Actual Data
-            printf("%2d ", *(*(tmpInput->data) + j));
+            //printf("%2d ", *(*(tmpInput->data) + j));
         }
-        printf("\n");
+        //printf("\n");
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
             bitValid = rand() % 2;
-            printf("%2d ", bitValid);
+            //printf("%2d ", bitValid);
             if (bitValid != 1)
                 *(tmpInput->bitmap + j) = '0';
             else
                 *(tmpInput->bitmap + j) = '1';
             //printf("%c", *(tmpInput->bitmap + j));
         }
-        printf("\n");
+        //printf("\n");
 
         PushPoint(tmpInput, &SSize, &STail);        // Push point to S
     }
@@ -88,8 +88,34 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
     else return 0;
 }
 
-int gtSortAlgo(const struct gtPoint *v1, const struct gtPoint *v2) {
-    return v1->domainatedCount > v2->domainatedCount;
+int cmpFunc(const void *v1, const void *v2) {
+    const struct gtPoint **t1 = (const struct gtPoint **)v1;
+    const struct gtPoint **t2 = (const struct gtPoint **)v2;
+    return (**t2).domainatedCount - (**t1).domainatedCount;
+}
+
+void QsortStwh(int size) {
+    int i;
+    struct gtPoint *pointArray[size];
+    struct gtPoint * tmpP;
+    if (kValue > 1) {
+        tmpP = StwhHead;
+        for (i = 0; i < size; i++) {
+            pointArray[i] = tmpP->next;
+            tmpP = tmpP->next;
+        }
+        qsort(pointArray, size, sizeof(pointArray[0]), cmpFunc);
+        StwhHead->next = pointArray[0];
+        pointArray[0]->previous = StwhHead;
+        pointArray[0]->next = NULL;
+        StwhTail = pointArray[0];
+        for (i = 1; i < size; i++) {
+            StwhTail->next = pointArray[i];
+            pointArray[i]->previous = StwhTail;
+            pointArray[i]->next = NULL;
+            StwhTail = pointArray[i];
+        }
+    }
 }
 
 void thicknessWarehouse(int dataDimension, int kValue) {
@@ -169,12 +195,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     free(tmpPointArray);
 
     // [STEP 4] Push Swth -> Ses
-    // struct gtPoint **pointSorted = NULL;
-    // pointSorted = (struct gtPoint **)malloc(sizeof(struct gtPoint *));
-    //if (kValue > 1) {
-        // std::sort(Stwh.begin(), Stwh.end(), gtSortAlgo);
-    //}
-
+    QsortStwh(StwhSize - 1);
 
     /////////////////////////////////////////////////////////////////////////////////////
     // Origin:
@@ -207,10 +228,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         while (iterB != StwhHead) {
             iterCountB++;
             tmpPoint = iterB->previous;
-            if (sameBitmap(iterA->bitmap, iterB->bitmap, dataDimension)) {
-                iterB = tmpPoint;
-                continue;
-            }
+            if (sameBitmap(iterA->bitmap, iterB->bitmap, dataDimension))
+                break;
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->domainatedCount++;
                 if (iterA->domainatedCount >= kValue) {
@@ -342,7 +361,7 @@ int main(int argc, const char * argv[]) {
 
     scanf("%d %d", &dataDimension, &dataCount);
     inputData(dataDimension, dataCount);
-    kValue = 1;
+    kValue = 3000;
     thicknessWarehouse(dataDimension, kValue);
 
     printf("\n!!!!!!!!!!!!!!!!!!!!!!!!\n");
