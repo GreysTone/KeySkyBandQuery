@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76914BE11B9CAFE400AA589B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 76914BE01B9CAFE400AA589B /* main.c */; };
+		76DCD9B71B9CB00700C61F92 /* BucketVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9AF1B9CB00700C61F92 /* BucketVector.c */; };
+		76DCD9B81B9CB00700C61F92 /* HashTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B11B9CB00700C61F92 /* HashTable.c */; };
+		76DCD9B91B9CB00700C61F92 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B31B9CB00700C61F92 /* Makefile */; };
+		76DCD9BA1B9CB00700C61F92 /* PointVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B51B9CB00700C61F92 /* PointVector.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		76914BDB1B9CAFE400AA589B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		76914BDD1B9CAFE400AA589B /* KSkyBandQuery-C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "KSkyBandQuery-C"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76914BE01B9CAFE400AA589B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		76DCD9AE1B9CB00700C61F92 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
+		76DCD9AF1B9CB00700C61F92 /* BucketVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BucketVector.c; sourceTree = "<group>"; };
+		76DCD9B01B9CB00700C61F92 /* BucketVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BucketVector.h; sourceTree = "<group>"; };
+		76DCD9B11B9CB00700C61F92 /* HashTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HashTable.c; sourceTree = "<group>"; };
+		76DCD9B21B9CB00700C61F92 /* HashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTable.h; sourceTree = "<group>"; };
+		76DCD9B31B9CB00700C61F92 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		76DCD9B41B9CB00700C61F92 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		76DCD9B51B9CB00700C61F92 /* PointVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointVector.c; sourceTree = "<group>"; };
+		76DCD9B61B9CB00700C61F92 /* PointVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointVector.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76914BDA1B9CAFE400AA589B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76914BD41B9CAFE400AA589B = {
+			isa = PBXGroup;
+			children = (
+				76914BDF1B9CAFE400AA589B /* KSkyBandQuery-C */,
+				76914BDE1B9CAFE400AA589B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76914BDE1B9CAFE400AA589B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76914BDD1B9CAFE400AA589B /* KSkyBandQuery-C */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76914BDF1B9CAFE400AA589B /* KSkyBandQuery-C */ = {
+			isa = PBXGroup;
+			children = (
+				76DCD9AE1B9CB00700C61F92 /* Bucket.h */,
+				76DCD9AF1B9CB00700C61F92 /* BucketVector.c */,
+				76DCD9B01B9CB00700C61F92 /* BucketVector.h */,
+				76DCD9B11B9CB00700C61F92 /* HashTable.c */,
+				76DCD9B21B9CB00700C61F92 /* HashTable.h */,
+				76DCD9B31B9CB00700C61F92 /* Makefile */,
+				76DCD9B41B9CB00700C61F92 /* Point.h */,
+				76DCD9B51B9CB00700C61F92 /* PointVector.c */,
+				76DCD9B61B9CB00700C61F92 /* PointVector.h */,
+				76914BE01B9CAFE400AA589B /* main.c */,
+			);
+			path = "KSkyBandQuery-C";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76914BDC1B9CAFE400AA589B /* KSkyBandQuery-C */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76914BE41B9CAFE400AA589B /* Build configuration list for PBXNativeTarget "KSkyBandQuery-C" */;
+			buildPhases = (
+				76914BD91B9CAFE400AA589B /* Sources */,
+				76914BDA1B9CAFE400AA589B /* Frameworks */,
+				76914BDB1B9CAFE400AA589B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KSkyBandQuery-C";
+			productName = "KSkyBandQuery-C";
+			productReference = 76914BDD1B9CAFE400AA589B /* KSkyBandQuery-C */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76914BD51B9CAFE400AA589B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = ZJU;
+				TargetAttributes = {
+					76914BDC1B9CAFE400AA589B = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 76914BD81B9CAFE400AA589B /* Build configuration list for PBXProject "KSkyBandQuery-C" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 76914BD41B9CAFE400AA589B;
+			productRefGroup = 76914BDE1B9CAFE400AA589B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76914BDC1B9CAFE400AA589B /* KSkyBandQuery-C */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76914BD91B9CAFE400AA589B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DCD9BA1B9CB00700C61F92 /* PointVector.c in Sources */,
+				76DCD9B81B9CB00700C61F92 /* HashTable.c in Sources */,
+				76DCD9B71B9CB00700C61F92 /* BucketVector.c in Sources */,
+				76DCD9B91B9CB00700C61F92 /* Makefile in Sources */,
+				76914BE11B9CAFE400AA589B /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		76914BE21B9CAFE400AA589B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		76914BE31B9CAFE400AA589B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		76914BE51B9CAFE400AA589B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76914BE61B9CAFE400AA589B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76914BD81B9CAFE400AA589B /* Build configuration list for PBXProject "KSkyBandQuery-C" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76914BE21B9CAFE400AA589B /* Debug */,
+				76914BE31B9CAFE400AA589B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76914BE41B9CAFE400AA589B /* Build configuration list for PBXNativeTarget "KSkyBandQuery-C" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76914BE51B9CAFE400AA589B /* Debug */,
+				76914BE61B9CAFE400AA589B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76914BD51B9CAFE400AA589B /* Project object */;
+}
