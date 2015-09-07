@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 ZJU. All rights reserved.
 //
 
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "PointVector.h"
 #include "BucketVector.h"
 #include "HashTable.h"
@@ -20,6 +21,8 @@ int **tmpIntStar;
 int tmpSize;
 int SSize, StwhSize, SesSize, SgSize;
 
+FILE *fin, *fout;
+
 struct gtPoint *tmpInput, *tmpHead, *tmpTail;
 struct gtPoint *S, *SHead, *STail;
 struct gtPoint *Stwh, *StwhHead, *StwhTail;
@@ -31,7 +34,7 @@ struct ListNode *tmpListNode;
 struct HashTable *H;
 
 
-void inputData(int dataDimension, int dataCount) {
+void inputData(int dataCount, int dataDimension) {
     int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
@@ -44,19 +47,21 @@ void inputData(int dataDimension, int dataCount) {
         tmpInput->bitmap = (char *)malloc(sizeof(char) * dataDimension);
 
         for(j = 0; j < dataDimension; j++) {
-            *(*(tmpInput->data) + j) = rand() % 30;             // Input Actual Data
+            fscanf(fin, "%d", (*(tmpInput->data) + j));// Input Actual Data
+            //*(*(tmpInput->data) + j) = rand() % 30;
             //printf("%2d ", *(*(tmpInput->data) + j));
         }
         //printf("\n");
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            bitValid = rand() % 2;
+            //bitValid = rand() % 2;
+            fscanf(fin, "%d", &bitValid);
             //printf("%2d ", bitValid);
             if (bitValid != 1)
                 *(tmpInput->bitmap + j) = '0';
             else
                 *(tmpInput->bitmap + j) = '1';
-            //printf("%c", *(tmpInput->bitmap + j));
+            //printf("%c ", *(tmpInput->bitmap + j));
         }
         //printf("\n");
 
@@ -126,7 +131,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     struct gtPoint *iterA;
     struct gtPoint *iterB;
     struct gtPoint *tmpPoint = NULL;
-	struct gtPoint *tmpPoint2 = NULL;
+    struct gtPoint *tmpPoint2 = NULL;
     struct gtPoint *tmpPointNext;
     struct gtPoint **tmpPointArray;
 
@@ -161,7 +166,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     }
     ////////////////////////////////////////////////////
 
-
     // [STEP 2] Divide points in every bucket into Sl and Sln
     tmpBucket = firstBucket;
     tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
@@ -188,7 +192,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                     }
                 }
             }
-            if (j == tmpBucket->dataSize) // which means data[j] is not dominted more than k times, then put it into Sl.
+            if (j == tmpBucket->dataSize) //which means data[j] is not dominted more than k times, then put it into Sl.
                 PushPoint(tmpPoint, &StwhSize, &StwhTail);
         }
         tmpBucket = tmpBucket->next;
@@ -339,9 +343,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
             }
             if (iterB != NULL) break;
             tmpBucket = tmpBucket->next;
-		}
-		iterA = tmpPointNext;
-	}
+        }
+        iterA = tmpPointNext;
+    }
 
     SgSize = StwhSize;
     SgHead = StwhHead;
@@ -350,7 +354,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 }
 
 
-int main(int argc, const char * argv[]) {
+int main(void) {
     int i, j;
 
     tmpSize = 0;
@@ -361,20 +365,26 @@ int main(int argc, const char * argv[]) {
     firstBucket = NULL;
     lastBucket = NULL;
 
-    scanf("%d %d", &dataDimension, &dataCount);
-    inputData(dataDimension, dataCount);
-    kValue = 3000;
-    thicknessWarehouse(dataDimension, kValue);
+    fin = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/stdin.txt", "r+");
+    fscanf(fin, "%d %d %d", &dataCount, &dataDimension, &kValue);
+    inputData(dataCount, dataDimension);
+    fclose(fin);
 
-    printf("\n!!!!!!!!!!!!!!!!!!!!!!!!\n");
+    clock_t  start = clock(), diff;
+    thicknessWarehouse(dataDimension, kValue);
+    diff = clock() - start;
+    unsigned long msec = diff * 1000 / CLOCKS_PER_SEC;
+    printf("Skyline: %lu.%lus\n", msec/1000, msec%1000);
+
+    fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/skylineout.txt", "w+");
     for (i = 1; i < SgSize; i++) {
         tmpInput = GetPoint(i, SgHead);
         for (j = 0; j < dataDimension; j++) {
-            printf("%d ", *(*(tmpInput->data) + j));
+            fprintf(fout, "%d ", *(*(tmpInput->data) + j));
         }
-        printf("\n");
+        fprintf(fout, "\n");
     }
-    printf("!!!!!!!!!!!!!!!!!!!!!!!!\n");
+    fclose(fout);
 
     return 0;
 }

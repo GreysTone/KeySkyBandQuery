@@ -1,0 +1,5 @@
+*.o
+*.txt
+main
+Test/Brute
+Test/DataGen
