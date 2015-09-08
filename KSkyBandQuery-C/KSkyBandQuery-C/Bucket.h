@@ -13,14 +13,13 @@
 
 struct gtBucket {
     int dataSize;
-	int SlSize;
-	int SlnSize;
-    struct gtPoint *data;
+    struct gtPoint *dataHead;
     struct gtPoint *dataTail;
-    struct gtPoint *Sl;
-    struct gtPoint *SlTail;
-    struct gtPoint *Sln;
+
+	int SlnSize;
+    struct gtPoint *SlnHead;
     struct gtPoint *SlnTail;
+
     struct gtBucket *next;
     struct gtBucket *previous;
 };

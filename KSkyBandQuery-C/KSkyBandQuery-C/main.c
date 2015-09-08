@@ -16,32 +16,30 @@
 int kValue;
 int dataDimension;
 int dataCount;
+int tmpSize, SSize, StwhSize, SesSize, SgSize;
 int *tmpInt;
 double **tmpDoubleStar;
-int tmpSize;
-int SSize, StwhSize, SesSize, SgSize;
 
-FILE *fin, *fout;
-
-struct gtPoint *tmpInput, *tmpHead, *tmpTail;
-struct gtPoint *S, *SHead, *STail;
-struct gtPoint *Stwh, *StwhHead, *StwhTail;
-struct gtPoint *Ses, *SesHead, *SesTail;
-struct gtPoint *Sg, *SgHead, *SgTail;
-struct gtBucket *tmpBucket;
-struct gtBucket *firstBucket, *lastBucket;
+struct gtPoint *tmpInput, *tmpTail;
+struct gtPoint *SHead, *STail;
+struct gtPoint *StwhHead, *StwhTail;
+struct gtPoint *SesHead, *SesTail;
+struct gtPoint *SgHead, *SgTail;
+struct gtBucket *tmpBucket, *firstBucket, *lastBucket;
 struct ListNode *tmpListNode;
 struct HashTable *H;
 
+FILE *fin, *fout;
+
 void inputData(int dataCount, int dataDimension) {
     int i, j;
-    int bitValid;
-    S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
+    int bitmap;
+    SHead = StartPoint(&SSize, &SHead, &STail, dataDimension);
 
     tmpDoubleStar = (double **)malloc(sizeof(double*) * dataCount);
 
     for (i = 0; i < dataCount; i++) {
-        tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
+        tmpInput = StartPoint(&tmpSize, &tmpInput, &tmpTail, dataDimension);
         tmpDoubleStar[i] = (double *)malloc(sizeof(double) * dataDimension);
         tmpInput->data = &(tmpDoubleStar[i]);
         tmpInput->bitmap = (char *)malloc(sizeof(char) * dataDimension);
@@ -50,8 +48,8 @@ void inputData(int dataCount, int dataDimension) {
             fscanf(fin, "%lf", (*(tmpInput->data) + j));// Input Actual Data
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            fscanf(fin, "%d", &bitValid);
-            if (bitValid != 1)
+            fscanf(fin, "%d", &bitmap);
+            if (bitmap != 1)
                 *(tmpInput->bitmap + j) = '0';
             else
                 *(tmpInput->bitmap + j) = '1';
@@ -128,9 +126,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     struct gtPoint *tmpPointNext;
     struct gtPoint **tmpPointArray;
 
-    Stwh = StartPoint(Stwh, &StwhSize, &StwhHead, &StwhTail, dataDimension);
-    Ses = StartPoint(Ses, &SesSize, &SesHead, &SesTail, dataDimension);
-    Sg = StartPoint(Sg, &SgSize, &SgHead, &SgTail, dataDimension);
+    StwhHead = StartPoint(&StwhSize, &StwhHead, &StwhTail, dataDimension);
+    SesHead = StartPoint(&SesSize, &SesHead, &SesTail, dataDimension);
+    SgHead = StartPoint(&SgSize, &SgHead, &SgTail, dataDimension);
 
     // [STEP 1] Push all points in S to every bucket according to bitmap
 
@@ -142,7 +140,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     ////////////////////////////////////////////////////
     // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
     firstBucket = NULL;
-    tmpPoint = S;
+    tmpPoint = SHead;
     tmpPointNext = tmpPoint->next;
     while (tmpPointNext != NULL) {
         tmpPoint = tmpPointNext;
@@ -165,7 +163,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     //if (tmpPointArray == NULL)
     //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Step2: Cannot palloc PointArray for insert point into Sln")));
     while (tmpBucket != NULL) {
-        tmpPoint = tmpBucket->data;
+        tmpPoint = tmpBucket->dataHead;
         tmpPointArray[0] = tmpPoint;
         for (i = 1; i < tmpBucket->dataSize; i++) {
             tmpPoint = tmpPoint->next;
@@ -218,7 +216,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     // }
 
     iterCount = 0;
-    iterA = Stwh->next;
+    iterA = StwhHead->next;
     while (iterA != NULL) {
         iterCount++;
         tmpPointNext = iterA->next;
@@ -271,11 +269,11 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     // Stwh VS Ses
     iterCount = 0;
-    iterA = Stwh->next;
+    iterA = StwhHead->next;
     while (iterA != NULL) {
         iterCount++;
         tmpPointNext = iterA->next;
-        iterB = Ses->next;
+        iterB = SesHead->next;
         while (iterB != NULL) {
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->domainatedCount++;
@@ -307,13 +305,13 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     // Stwh VS Sln
     iterCount = 0;
-    iterA = Stwh->next;
+    iterA = StwhHead->next;
     while (iterA != NULL) {
         iterCount++;
         tmpPointNext = iterA->next;
         tmpBucket = firstBucket;
         while (tmpBucket != NULL) {
-            iterB = tmpBucket->Sln->next;
+            iterB = tmpBucket->SlnHead->next;
             while (iterB != NULL) {
                 if (isPoint1DominatePoint2(iterB, iterA)) {
                     iterA->domainatedCount++;
@@ -334,13 +332,11 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     SgSize = StwhSize;
     SgHead = StwhHead;
     SgTail = StwhTail;
-    Sg = Stwh;
+    SgHead = StwhHead;
 }
 
 
-int main(void) {
-    int i, j;
-
+void init() {
     tmpSize = 0;
     SSize = 0;
     StwhSize = 0;
@@ -348,26 +344,40 @@ int main(void) {
     SgSize = 0;
     firstBucket = NULL;
     lastBucket = NULL;
+}
 
+void input() {
     fin = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/stdin.txt", "r+");
     fscanf(fin, "%d %d %d", &dataCount, &dataDimension, &kValue);
     inputData(dataCount, dataDimension);
     fclose(fin);
+}
 
+void kisb() {
     clock_t  start = clock(), diff;
     thicknessWarehouse(dataDimension, kValue);
     diff = clock() - start;
     unsigned long msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Skyline: %lu.%lus\n", msec/1000, msec%1000);
+}
 
+void output() {
+    int i, j;
     fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/skylineout.txt", "w+");
-    for (i = 1; i < SgSize; i++) {
-        tmpInput = GetPoint(i, SgHead);
+    tmpInput = SgHead;
+    for (i = 0; i < SgSize - 1; i++) {
+        tmpInput = tmpInput->next;
         for (j = 0; j < dataDimension; j++)
             fprintf(fout, "%.6lf ", *(*(tmpInput->data) + j));
         fprintf(fout, "\n");
     }
     fclose(fout);
+}
 
+int main(void) {
+    init();
+    input();
+    kisb();
+    output();
     return 0;
 }
