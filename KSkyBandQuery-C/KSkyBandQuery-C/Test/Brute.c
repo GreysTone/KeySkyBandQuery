@@ -3,9 +3,13 @@
 #include <time.h>
 
 int n, m, k;
-int input[100000][1000];
+double input[100000][1000];
 int dominateNum[100000];
-int isNotNull[100000][1000];
+int bitmap[100000][1000];
+
+int isInteger(double x) {
+    return x - (double)(int)x == 0.0;
+}
 
 void init() {
     FILE *fin;
@@ -13,13 +17,11 @@ void init() {
     fin = fopen("stdin.txt", "r+");
     if (fin != NULL) {
         fscanf(fin, "%d %d %d", &n, &m, &k);
-        for (i = 0; i < n; ++i) {
-            for (j = 0; j < m; j++) {
-                fscanf(fin, "%d", &input[i][j]);
-            }
-            for (j = 0; j < m; j++) {
-                fscanf(fin, "%d", &isNotNull[i][j]);
-            }
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < m; j++)
+                fscanf(fin, "%lf", &input[i][j]);
+            for (j = 0; j < m; j++)
+                fscanf(fin, "%d", &bitmap[i][j]);
         }
         fclose(fin);
     }
@@ -28,18 +30,19 @@ void init() {
     }
 }
 
-int isDominate(int p1, int p2) {
+int isDominate(int x1, int x2) {
     int i;
     int smallCount = 0;
     int atLeastOneSmall = 0;
-    for (i = 0; i < m; ++i) {
-        if (!isNotNull[p1][i] || !isNotNull[p2][i]) {
+    int x1IsNull, x2IsNull;
+    for (i = 0; i < m; i++) {
+        x1IsNull = (bitmap[x1][i] == 0);
+        x2IsNull = (bitmap[x2][i] == 0);
+        if (x1IsNull || x2IsNull) {
             smallCount++;
-        } else if (input[p1][i] < input[p2][i]) {
-            smallCount++;
-            atLeastOneSmall++;
-        } else if (input[p1][i] == input[p2][i]) {
-            smallCount++;
+        } else {
+            if (input[x1][i] <= input[x2][i]) smallCount++;
+            if (input[x1][i] < input[x2][i]) atLeastOneSmall = 1;
         }
     }
     if ((smallCount == m) && atLeastOneSmall)
@@ -51,8 +54,8 @@ int isDominate(int p1, int p2) {
 void brute() {
     clock_t  start = clock(), diff;
     int i, j;
-    for (i = 0; i < n; ++i) {
-        for (j = 0; j < i; ++j) {
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < i; j++) {
             if (i != j) {
                 if (isDominate(i, j)) {
                     dominateNum[j]++;
@@ -73,9 +76,8 @@ void print() {
     fout = fopen("stdout.txt", "w+");
     for (i = 0; i < n; ++i) {
         if (dominateNum[i] < k) {
-            for (j = 0; j < m; j++) {
-                fprintf(fout, "%d ", input[i][j]);
-            }
+            for (j = 0; j < m; j++)
+                fprintf(fout, "%.6lf ", input[i][j]);
             fprintf(fout, "\n");
         }
     }

@@ -17,7 +17,7 @@ int kValue;
 int dataDimension;
 int dataCount;
 int *tmpInt;
-int **tmpIntStar;
+double **tmpDoubleStar;
 int tmpSize;
 int SSize, StwhSize, SesSize, SgSize;
 
@@ -33,44 +33,37 @@ struct gtBucket *firstBucket, *lastBucket;
 struct ListNode *tmpListNode;
 struct HashTable *H;
 
-
 void inputData(int dataCount, int dataDimension) {
     int i, j;
     int bitValid;
     S = StartPoint(S, &SSize, &SHead, &STail, dataDimension);
-    tmpIntStar = (int **)malloc(sizeof(int*) * dataCount);
+
+    tmpDoubleStar = (double **)malloc(sizeof(double*) * dataCount);
 
     for (i = 0; i < dataCount; i++) {
         tmpInput = StartPoint(tmpInput, &tmpSize, &tmpHead, &tmpTail, dataDimension);
-        tmpIntStar[i] = (int *)malloc(sizeof(int) * dataDimension);
-        tmpInput->data = &(tmpIntStar[i]);
+        tmpDoubleStar[i] = (double *)malloc(sizeof(double) * dataDimension);
+        tmpInput->data = &(tmpDoubleStar[i]);
         tmpInput->bitmap = (char *)malloc(sizeof(char) * dataDimension);
 
-        for(j = 0; j < dataDimension; j++) {
-            fscanf(fin, "%d", (*(tmpInput->data) + j));// Input Actual Data
-            //*(*(tmpInput->data) + j) = rand() % 30;
-            //printf("%2d ", *(*(tmpInput->data) + j));
-        }
-        //printf("\n");
+        for(j = 0; j < dataDimension; j++)
+            fscanf(fin, "%lf", (*(tmpInput->data) + j));// Input Actual Data
 
         for(j = 0; j < dataDimension; j++) {            // Set Bit Map
-            //bitValid = rand() % 2;
             fscanf(fin, "%d", &bitValid);
-            //printf("%2d ", bitValid);
             if (bitValid != 1)
                 *(tmpInput->bitmap + j) = '0';
             else
                 *(tmpInput->bitmap + j) = '1';
-            //printf("%c ", *(tmpInput->bitmap + j));
         }
-        //printf("\n");
 
         PushPoint(tmpInput, &SSize, &STail);        // Push point to S
     }
 }
 
 int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
-    int i, x1, x2;
+    double x1, x2;
+    int i;
     int dimension = p1->dimension;
     int smallCount = 0;
     int atLeastOneSmall = 0;
@@ -273,13 +266,8 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     //
     /////////////////////////////////////////////////////////////////////////////
 
-    i = StwhSize;
-    tmpPoint = Stwh;
-
     //[STEP 5] (Stwh, Ses) -> Sg
     /////////////////////////////////////////////////////////////////////////////////////
-
-    int deleted = 0;
 
     // Stwh VS Ses
     iterCount = 0;
@@ -293,7 +281,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
                 iterA->domainatedCount++;
                 if (iterA->domainatedCount >= kValue) {
                     DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
-                    deleted++;  // for test
                     iterCount--;
                     break;
                 }
@@ -302,9 +289,6 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         }
         iterA = tmpPointNext;
     }
-
-    i = StwhSize;
-    tmpPoint = Stwh;
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -379,9 +363,8 @@ int main(void) {
     fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/skylineout.txt", "w+");
     for (i = 1; i < SgSize; i++) {
         tmpInput = GetPoint(i, SgHead);
-        for (j = 0; j < dataDimension; j++) {
-            fprintf(fout, "%d ", *(*(tmpInput->data) + j));
-        }
+        for (j = 0; j < dataDimension; j++)
+            fprintf(fout, "%.6lf ", *(*(tmpInput->data) + j));
         fprintf(fout, "\n");
     }
     fclose(fout);

@@ -12,7 +12,7 @@ void generate() {
         fprintf(fout, "%d %d %d\n", n, m, k);
         for (i = 0; i < n; ++i) {
             for (j = 0; j < m; ++j)
-                fprintf(fout, "%d ", rand() % 200);
+                fprintf(fout, "%lf ", rand() % 50000 / 100.0);
             fprintf(fout, "\n");
             for (j = 0; j < m; ++j) {
                 tmp = rand() % 100;
