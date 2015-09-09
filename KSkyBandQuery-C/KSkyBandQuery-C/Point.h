@@ -1,21 +1,21 @@
 //
 //  Point.h
-//  gtKeySkyBandQueryPlus
+//  KeySkyBandQuery
 //
 //  Created by Armour on 7/10/15.
-//  Copyright (c) 2015 GreysTone. All rights reserved.
+//  Copyright (c) 2015 Armour. All rights reserved.
 //
 
-#ifndef gtKeySkyBandQueryPlus_Point_h
-#define gtKeySkyBandQueryPlus_Point_h
+#ifndef KeySkyBandQuery_Point_h
+#define KeySkyBandQuery_Point_h
 
-struct gtPoint {
-    int dimension;            // point dimension
-    double **data;
-    char *bitmap;
-    int domainatedCount;
-    struct gtPoint *next;
-    struct gtPoint *previous;
+struct skyPoint {
+    int dimension;              // Point dimension
+    double **data;              // Stored data of this point
+    char *bitmap;               // Bitmap of this point
+    int dominatedCount;         // The number of dominated times of this point
+    struct skyPoint *next;
+    struct skyPoint *previous;   // Stored as a list
 };
 
 #endif

@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		76914BE11B9CAFE400AA589B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 76914BE01B9CAFE400AA589B /* main.c */; };
-		76DCD9B71B9CB00700C61F92 /* BucketVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9AF1B9CB00700C61F92 /* BucketVector.c */; };
+		76DCD9B71B9CB00700C61F92 /* BucketList.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9AF1B9CB00700C61F92 /* BucketList.c */; };
 		76DCD9B81B9CB00700C61F92 /* HashTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B11B9CB00700C61F92 /* HashTable.c */; };
-		76DCD9B91B9CB00700C61F92 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B31B9CB00700C61F92 /* Makefile */; };
-		76DCD9BA1B9CB00700C61F92 /* PointVector.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B51B9CB00700C61F92 /* PointVector.c */; };
+		76DCD9BA1B9CB00700C61F92 /* PointList.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DCD9B51B9CB00700C61F92 /* PointList.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,14 +29,13 @@
 		76914BDD1B9CAFE400AA589B /* KSkyBandQuery-C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "KSkyBandQuery-C"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76914BE01B9CAFE400AA589B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		76DCD9AE1B9CB00700C61F92 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
-		76DCD9AF1B9CB00700C61F92 /* BucketVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BucketVector.c; sourceTree = "<group>"; };
-		76DCD9B01B9CB00700C61F92 /* BucketVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BucketVector.h; sourceTree = "<group>"; };
+		76DCD9AF1B9CB00700C61F92 /* BucketList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BucketList.c; sourceTree = "<group>"; };
+		76DCD9B01B9CB00700C61F92 /* BucketList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BucketList.h; sourceTree = "<group>"; };
 		76DCD9B11B9CB00700C61F92 /* HashTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HashTable.c; sourceTree = "<group>"; };
 		76DCD9B21B9CB00700C61F92 /* HashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTable.h; sourceTree = "<group>"; };
-		76DCD9B31B9CB00700C61F92 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		76DCD9B41B9CB00700C61F92 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
-		76DCD9B51B9CB00700C61F92 /* PointVector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointVector.c; sourceTree = "<group>"; };
-		76DCD9B61B9CB00700C61F92 /* PointVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointVector.h; sourceTree = "<group>"; };
+		76DCD9B51B9CB00700C61F92 /* PointList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointList.c; sourceTree = "<group>"; };
+		76DCD9B61B9CB00700C61F92 /* PointList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointList.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,15 +68,14 @@
 		76914BDF1B9CAFE400AA589B /* KSkyBandQuery-C */ = {
 			isa = PBXGroup;
 			children = (
-				76DCD9AE1B9CB00700C61F92 /* Bucket.h */,
-				76DCD9AF1B9CB00700C61F92 /* BucketVector.c */,
-				76DCD9B01B9CB00700C61F92 /* BucketVector.h */,
-				76DCD9B11B9CB00700C61F92 /* HashTable.c */,
-				76DCD9B21B9CB00700C61F92 /* HashTable.h */,
-				76DCD9B31B9CB00700C61F92 /* Makefile */,
 				76DCD9B41B9CB00700C61F92 /* Point.h */,
-				76DCD9B51B9CB00700C61F92 /* PointVector.c */,
-				76DCD9B61B9CB00700C61F92 /* PointVector.h */,
+				76DCD9B61B9CB00700C61F92 /* PointList.h */,
+				76DCD9B51B9CB00700C61F92 /* PointList.c */,
+				76DCD9AE1B9CB00700C61F92 /* Bucket.h */,
+				76DCD9B01B9CB00700C61F92 /* BucketList.h */,
+				76DCD9AF1B9CB00700C61F92 /* BucketList.c */,
+				76DCD9B21B9CB00700C61F92 /* HashTable.h */,
+				76DCD9B11B9CB00700C61F92 /* HashTable.c */,
 				76914BE01B9CAFE400AA589B /* main.c */,
 			);
 			path = "KSkyBandQuery-C";
@@ -140,10 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76DCD9BA1B9CB00700C61F92 /* PointVector.c in Sources */,
+				76DCD9BA1B9CB00700C61F92 /* PointList.c in Sources */,
 				76DCD9B81B9CB00700C61F92 /* HashTable.c in Sources */,
-				76DCD9B71B9CB00700C61F92 /* BucketVector.c in Sources */,
-				76DCD9B91B9CB00700C61F92 /* Makefile in Sources */,
+				76DCD9B71B9CB00700C61F92 /* BucketList.c in Sources */,
 				76914BE11B9CAFE400AA589B /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

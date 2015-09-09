@@ -3,14 +3,14 @@
 //  KeySkyBandQuery
 //
 //  Created by Armour on 7/10/15.
-//  Copyright (c) 2015 ZJU. All rights reserved.
+//  Copyright (c) 2015 Armour. All rights reserved.
 //
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "PointVector.h"
-#include "BucketVector.h"
+#include "PointList.h"
+#include "BucketList.h"
 #include "HashTable.h"
 
 int kValue;
@@ -20,12 +20,12 @@ int tmpSize, SSize, StwhSize, SesSize, SgSize;
 int *tmpInt;
 double **tmpDoubleStar;
 
-struct gtPoint *tmpInput, *tmpTail;
-struct gtPoint *SHead, *STail;
-struct gtPoint *StwhHead, *StwhTail;
-struct gtPoint *SesHead, *SesTail;
-struct gtPoint *SgHead, *SgTail;
-struct gtBucket *tmpBucket, *firstBucket, *lastBucket;
+struct skyPoint *tmpInput, *tmpTail;
+struct skyPoint *SHead, *STail;
+struct skyPoint *StwhHead, *StwhTail;
+struct skyPoint *SesHead, *SesTail;
+struct skyPoint *SgHead, *SgTail;
+struct skyBucket *tmpBucket, *firstBucket, *lastBucket;
 struct ListNode *tmpListNode;
 struct HashTable *H;
 
@@ -59,7 +59,7 @@ void inputData(int dataCount, int dataDimension) {
     }
 }
 
-int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
+int isPoint1DominatePoint2(struct skyPoint *p1, struct skyPoint *p2) {
     double x1, x2;
     int i;
     int dimension = p1->dimension;
@@ -86,15 +86,15 @@ int isPoint1DominatePoint2(struct gtPoint *p1, struct gtPoint *p2) {
 }
 
 int cmpFunc(const void *v1, const void *v2) {
-    const struct gtPoint **t1 = (const struct gtPoint **)v1;
-    const struct gtPoint **t2 = (const struct gtPoint **)v2;
-    return (**t2).domainatedCount - (**t1).domainatedCount;
+    const struct skyPoint **t1 = (const struct skyPoint **)v1;
+    const struct skyPoint **t2 = (const struct skyPoint **)v2;
+    return (**t2).dominatedCount - (**t1).dominatedCount;
 }
 
 void QsortStwh(int size) {
     int i;
-    struct gtPoint *pointArray[size];
-    struct gtPoint *tmpP;
+    struct skyPoint *pointArray[size];
+    struct skyPoint *tmpP;
     if (kValue > 1) {
         tmpP = StwhHead;
         for (i = 0; i < size; i++) {
@@ -119,12 +119,12 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     int i, j;
     int iterCount, iterCountB;
 
-    struct gtPoint *iterA;
-    struct gtPoint *iterB;
-    struct gtPoint *tmpPoint = NULL;
-    struct gtPoint *tmpPoint2 = NULL;
-    struct gtPoint *tmpPointNext;
-    struct gtPoint **tmpPointArray;
+    struct skyPoint *iterA;
+    struct skyPoint *iterB;
+    struct skyPoint *tmpPoint = NULL;
+    struct skyPoint *tmpPoint2 = NULL;
+    struct skyPoint *tmpPointNext;
+    struct skyPoint **tmpPointArray;
 
     StwhHead = StartPoint(&StwhSize, &StwhHead, &StwhTail, dataDimension);
     SesHead = StartPoint(&SesSize, &SesHead, &SesTail, dataDimension);
@@ -133,7 +133,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     // [STEP 1] Push all points in S to every bucket according to bitmap
 
     ////////////////////////////////////////////////////
-    // Origin: bucket = new gtBucket[bucketCount];
+    // Origin: bucket = new skyBucket[bucketCount];
     H = InitializeTable(dataCount);
     ////////////////////////////////////////////////////
 
@@ -147,7 +147,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpPointNext = tmpPoint->next;
         tmpListNode = Find(tmpPoint->bitmap, H, dataDimension);
         if (tmpListNode == NULL) {
-            tmpBucket = (struct gtBucket *)malloc(sizeof(struct gtBucket));  // 1 bucket + 3 point => 232 bytes
+            tmpBucket = (struct skyBucket *)malloc(sizeof(struct skyBucket));  // 1 bucket + 3 point => 232 bytes
             InitBucket(tmpBucket, dataDimension);
             Insert(tmpPoint->bitmap, H, dataDimension, tmpBucket, &firstBucket, &lastBucket);
         } else {
@@ -159,25 +159,23 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     // [STEP 2] Divide points in every bucket into Sl and Sln
     tmpBucket = firstBucket;
-    tmpPointArray = (struct gtPoint **)malloc(sizeof(struct gtPoint*) * tmpBucket->dataSize);
-    //if (tmpPointArray == NULL)
-    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Step2: Cannot palloc PointArray for insert point into Sln")));
+    tmpPointArray = (struct skyPoint **)malloc(sizeof(struct skyPoint*) * tmpBucket->dataSize);
     while (tmpBucket != NULL) {
         tmpPoint = tmpBucket->dataHead;
         tmpPointArray[0] = tmpPoint;
-        for (i = 1; i < tmpBucket->dataSize; i++) {
+        for (i = 0; i < tmpBucket->dataSize; i++) {
             tmpPoint = tmpPoint->next;
             tmpPointArray[i] = tmpPoint;
         }
-        for (i = 1; i < tmpBucket->dataSize; i++) {
+        for (i = 0; i < tmpBucket->dataSize; i++) {
             tmpPoint = tmpPointArray[i];
-            for (j = 1; j < tmpBucket->dataSize; j++) {
+            for (j = 0; j < tmpBucket->dataSize; j++) {
                 tmpPoint2 = tmpPointArray[j];
                 if (i != j ) {
                     if (isPoint1DominatePoint2(tmpPoint2, tmpPoint)) {
-                        tmpPoint->domainatedCount++;
-                        if (tmpPoint->domainatedCount >= kValue) {
-                            PushPoint(tmpPoint, &tmpBucket->SlnSize, &tmpBucket->SlnTail);
+                        tmpPoint->dominatedCount++;
+                        if (tmpPoint->dominatedCount>= kValue) {
+                            PushPoint(tmpPoint, &tmpBucket->slnSize, &tmpBucket->slnTail);
                             break;
                         }
                     }
@@ -192,11 +190,11 @@ void thicknessWarehouse(int dataDimension, int kValue) {
     free(tmpPointArray);
 
     // [STEP 4] Push Swth -> Ses
-    QsortStwh(StwhSize - 1);
+    QsortStwh(StwhSize);
 
     /////////////////////////////////////////////////////////////////////////////////////
     // Origin:
-    // vector<gtPoint *>::iterator itHead, itTail;
+    // vector<skyPoint *>::iterator itHead, itTail;
     // for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
     //    if(!*itHead) continue;
     //    for (itTail = Stwh.end(); itTail != Stwh.begin(); itTail--) {
@@ -228,20 +226,20 @@ void thicknessWarehouse(int dataDimension, int kValue) {
             if (sameBitmap(iterA->bitmap, iterB->bitmap, dataDimension))
                 break;
             if (isPoint1DominatePoint2(iterB, iterA)) {
-                iterA->domainatedCount++;
-                if (iterA->domainatedCount >= kValue) {
-                    DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
+                iterA->dominatedCount++;
+                if (iterA->dominatedCount >= kValue) {
+                    DeletePoint(iterCount, &StwhSize, &StwhHead, &StwhTail);
                     PushPoint(iterA, &SesSize, &SesTail);
                     iterCount--;
                     break;
                 }
             }
             if (isPoint1DominatePoint2(iterA, iterB)) {
-                iterB->domainatedCount++;
-                if (iterB->domainatedCount >= kValue) {
+                iterB->dominatedCount++;
+                if (iterB->dominatedCount >= kValue) {
                     if (tmpPointNext == iterB) // if two nearby nodes, we delete the second, then update first node's next.
                         tmpPointNext = iterB->next;
-                    DeletePoint(StwhSize - iterCountB, &StwhHead, &StwhSize, &StwhTail);
+                    DeletePoint(StwhSize - iterCountB + 1, &StwhSize, &StwhHead, &StwhTail);
                     PushPoint(iterB, &SesSize, &SesTail);
                     iterCountB--;
                 }
@@ -276,9 +274,9 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         iterB = SesHead->next;
         while (iterB != NULL) {
             if (isPoint1DominatePoint2(iterB, iterA)) {
-                iterA->domainatedCount++;
-                if (iterA->domainatedCount >= kValue) {
-                    DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
+                iterA->dominatedCount++;
+                if (iterA->dominatedCount >= kValue) {
+                    DeletePoint(iterCount, &StwhSize, &StwhHead, &StwhTail);
                     iterCount--;
                     break;
                 }
@@ -311,12 +309,12 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         tmpPointNext = iterA->next;
         tmpBucket = firstBucket;
         while (tmpBucket != NULL) {
-            iterB = tmpBucket->SlnHead->next;
+            iterB = tmpBucket->slnHead->next;
             while (iterB != NULL) {
                 if (isPoint1DominatePoint2(iterB, iterA)) {
-                    iterA->domainatedCount++;
-                    if (iterA->domainatedCount >= kValue) {
-                        DeletePoint(iterCount, &StwhHead, &StwhSize, &StwhTail);
+                    iterA->dominatedCount++;
+                    if (iterA->dominatedCount >= kValue) {
+                        DeletePoint(iterCount, &StwhSize, &StwhHead, &StwhTail);
                         iterCount--;
                         break;
                     }
@@ -358,14 +356,14 @@ void kisb() {
     thicknessWarehouse(dataDimension, kValue);
     diff = clock() - start;
     unsigned long msec = diff * 1000 / CLOCKS_PER_SEC;
-    printf("Skyline: %lu.%lus\n", msec/1000, msec%1000);
+    printf("Skyline: %lus %lums\n", msec/1000, msec%1000);
 }
 
 void output() {
     int i, j;
     fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/skylineout.txt", "w+");
     tmpInput = SgHead;
-    for (i = 0; i < SgSize - 1; i++) {
+    for (i = 0; i < SgSize; i++) {
         tmpInput = tmpInput->next;
         for (j = 0; j < dataDimension; j++)
             fprintf(fout, "%.6lf ", *(*(tmpInput->data) + j));

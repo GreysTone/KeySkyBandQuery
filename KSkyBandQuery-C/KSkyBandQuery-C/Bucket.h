@@ -3,7 +3,7 @@
 //  KeySkyBandQuery
 //
 //  Created by Armour on 7/10/15.
-//  Copyright (c) 2015 ZJU. All rights reserved.
+//  Copyright (c) 2015 Armour. All rights reserved.
 //
 
 #ifndef KeySkyBandQuery_Bucket_h
@@ -11,17 +11,17 @@
 
 #include "Point.h"
 
-struct gtBucket {
+struct skyBucket {
     int dataSize;
-    struct gtPoint *dataHead;
-    struct gtPoint *dataTail;
+    struct skyPoint *dataHead;
+    struct skyPoint *dataTail;       // Used to store points in this bucket
 
-	int SlnSize;
-    struct gtPoint *SlnHead;
-    struct gtPoint *SlnTail;
+	int slnSize;
+    struct skyPoint *slnHead;
+    struct skyPoint *slnTail;        // Store Sln points in this bucket
 
-    struct gtBucket *next;
-    struct gtBucket *previous;
+    struct skyBucket *next;
+    struct skyBucket *previous;      // Stored as a list
 };
 
 #endif

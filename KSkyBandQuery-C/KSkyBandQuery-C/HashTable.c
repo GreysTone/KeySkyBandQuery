@@ -3,7 +3,7 @@
 //  KeySkyBandQuery
 //
 //  Created by Armour on 7/23/15.
-//  Copyright (c) 2015 ZJU. All rights reserved.
+//  Copyright (c) 2015 Armour. All rights reserved.
 //
 
 #include "HashTable.h"
@@ -75,16 +75,10 @@ struct HashTable* InitializeTable(int TableSize) {
     struct HashTable* H;
     int i;
     H = (struct HashTable *)malloc(sizeof(struct HashTable));  /* Allocate table */
-    //if (H == NULL)
-    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Cannot start a hash table.")));
     H->TableSize = NextPrime(TableSize);  /* Better be prime */
     H->TheLists = (struct ListNode **)malloc(sizeof(struct ListNode *) * H->TableSize );  /*Array of lists*/
-    //if (H->TheLists == NULL)
-    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Cannot start a hash table's lists.")));
     for( i = 0; i < H->TableSize; i++ ) {   /* Allocate list headers */
         H->TheLists[i] = (struct ListNode *)malloc(sizeof(struct ListNode)); /* Slow! */
-    //    if (H->TheLists == NULL)
-    //        ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Cannot start a hash table's list node.")));
         H->TheLists[i]->Next = NULL;
     }
     return H;
@@ -100,15 +94,13 @@ struct ListNode *Find(char *bitmap, struct HashTable *H, int dataDimension) {
     return P;
 }
 
-void Insert(char *bitmap, struct HashTable *H, int dataDimension, struct gtBucket* bucket, struct gtBucket** firstBucket, struct gtBucket** lastBucket) {
+void Insert(char *bitmap, struct HashTable *H, int dataDimension, struct skyBucket* bucket, struct skyBucket** firstBucket, struct skyBucket** lastBucket) {
     struct ListNode *NewCell;
     struct ListNode *L;
     int i;
     NewCell = (struct ListNode *)malloc(sizeof(struct ListNode));
     NewCell->bitmap = (char *)malloc(sizeof(char) * dataDimension);
     NewCell->bucket = bucket;
-    //if (NewCell == NULL)
-    //    ereport(ERROR, (errcode(ERRCODE_OUT_OF_MEMORY), errmsg("Cannot start a insert.")));
     L = H->TheLists[BKDRHash(bitmap, H->TableSize, dataDimension)];
     NewCell->Next = L->Next;
     for (i = 0; i < dataDimension; i++)

@@ -67,7 +67,7 @@ void brute() {
     }
     diff = clock() - start;
     unsigned long msec = diff * 1000 / CLOCKS_PER_SEC;
-    printf("Brute: %lu.%lus\n", msec/1000, msec%1000 );
+    printf("Brute: %lus %lums\n", msec/1000, msec%1000);
 }
 
 void print() {
