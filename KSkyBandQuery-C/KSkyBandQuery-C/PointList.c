@@ -22,7 +22,7 @@
 void InitPoint(struct skyPoint *point) {
     point -> data = NULL;
     point -> bitmap = NULL;
-    point -> dominatedCount = 0;             // dominatedCount should be zero at first
+    point -> dominatedCount = 0;             // DominatedCount should be zero at first
     point -> next = NULL;
     point -> previous = NULL;
 }
@@ -44,7 +44,7 @@ struct skyPoint *StartPoint(int *size, struct skyPoint **head, struct skyPoint *
     *head = (struct skyPoint *)malloc(sizeof(struct skyPoint));
     (*head)->dimension = d;
     InitPoint(*head);
-    *tail = *head;          // because there is only one head point
+    *tail = *head;          // Because there is only one head point
     *size = 0;
     return *head;
 }
@@ -84,22 +84,22 @@ void PushPoint(struct skyPoint *point, int *size, struct skyPoint **tail) {
  */
 
 void DeletePoint(int p, int *size, struct skyPoint **head, struct skyPoint **tail) {
-    struct skyPoint *point;                  // a temp point
+    struct skyPoint *point;                 // A temp point
     int i = 0;
     point = *head;
-    for (i = 0; i < p; i++)                 // to find the point in the right position
+    for (i = 0; i < p; i++)                 // To find the point in the right position
         if (point -> next != NULL)
             point = point -> next;
         else
             break;
-    if (point -> previous != NULL) {        // if deleted point is not the first point
-        if (point -> next == NULL)          // if deleted point is the last point, then update tail
+    if (point -> previous != NULL) {        // If deleted point is not the first point
+        if (point -> next == NULL)          // If deleted point is the last point, then update tail
             *tail = (*tail)->previous;
-        if (point -> previous != NULL)      // update previous point of deleted point
+        if (point -> previous != NULL)      // Update previous point of deleted point
             point -> previous -> next = point -> next;
-        if (point -> next != NULL)          // update next point of deleted point
+        if (point -> next != NULL)          // Update next point of deleted point
             point -> next -> previous = point -> previous;
-        point -> next = NULL;               // delete this point
+        point -> next = NULL;               // Delete this point
         point -> previous = NULL;
         *size = *size - 1;
     }

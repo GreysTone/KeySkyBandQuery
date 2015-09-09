@@ -22,10 +22,10 @@
  */
 
 void InitBucket(struct skyBucket *bucket, int d) {
-    bucket -> dataSize = 0;                 // init data list in bucket
+    bucket -> dataSize = 0;                 // Init data list in bucket
     bucket -> dataTail = NULL;
     bucket -> dataHead = StartPoint(&bucket->dataSize, &bucket->dataHead, &bucket->dataTail, d);
-    bucket -> slnSize = 0;                  // init sln list in bucket
+    bucket -> slnSize = 0;                  // Init sln list in bucket
     bucket -> slnTail = NULL;
     bucket -> slnHead = StartPoint(&bucket->slnSize, &bucket->slnHead, &bucket->slnTail, d);;
     bucket -> next = NULL;
@@ -48,7 +48,7 @@ void InitBucket(struct skyBucket *bucket, int d) {
 struct skyBucket *StartBucket(int *size, struct skyBucket **head, struct skyBucket **tail, int d) {
     *head = (struct skyBucket *)malloc(sizeof(struct skyBucket));
 	InitBucket(*head, d);
-	*tail = *head;              // because there is only one head point
+	*tail = *head;              // Because there is only one head point
     *size = 0;
     return *head;
 }

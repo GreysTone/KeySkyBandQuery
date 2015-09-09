@@ -134,7 +134,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
 
     ////////////////////////////////////////////////////
     // Origin: bucket = new skyBucket[bucketCount];
-    H = InitializeTable(dataCount);
+    H = InitTable(dataCount);
     ////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ void thicknessWarehouse(int dataDimension, int kValue) {
         while (iterB != StwhHead) {
             iterCountB++;
             tmpPoint = iterB->previous;
-            if (sameBitmap(iterA->bitmap, iterB->bitmap, dataDimension))
+            if (SameBitmap(iterA->bitmap, iterB->bitmap, dataDimension))
                 break;
             if (isPoint1DominatePoint2(iterB, iterA)) {
                 iterA->dominatedCount++;
