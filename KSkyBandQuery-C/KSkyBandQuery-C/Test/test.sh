@@ -10,6 +10,6 @@ cd Test
 for (( i = 0; i < 100; i++ )); do
     ./DataGen $1 $2 $3
     ./Brute
-    ../main
+    ../sky_query
     python Check.py
 done
