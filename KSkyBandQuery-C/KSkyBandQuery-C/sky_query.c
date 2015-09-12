@@ -78,7 +78,7 @@ void InputPoints() {
                 *(tmp_head->bitmap + j) = '1';
         }
 
-        PushPoint(tmp_head, &s_size, &s_tail);                          /* Push point to S */
+        PushPoint(tmp_head, &s_size, &s_tail);                          /* Push all points to S */
     }
 }
 
@@ -101,14 +101,14 @@ int IsP1DominateP2(SkyPoint *p1, SkyPoint *p2) {
     int dim = p1->dim;
     int is_small = 0;                       /* Used to decide if there exist one dimension that p1 is smaller than p2 */
     int cnt_small_or_equal = 0;             /* Count of dimension number that p1 is smaller than or equal to p2 in such dimension */
-    int x1IsNull, x2IsNull;
+    int is_null_x1, is_null_x2;
     if (!p1 || !p2) return 0;               /* If p1 or p2 is not exist */
     for (i = 0; i < dim; i++) {             /* Look at each dimension */
         x1 = *(*(p1->data)+i);
         x2 = *(*(p2->data)+i);
-        x1IsNull = (*(p1->bitmap + i)) == '0';
-        x2IsNull = (*(p2->bitmap + i)) == '0';
-        if (x1IsNull || x2IsNull) {         /* If p1 or p2's bitmap is '0', which means incomplete data */
+        is_null_x1 = (*(p1->bitmap + i)) == '0';
+        is_null_x2 = (*(p2->bitmap + i)) == '0';
+        if (is_null_x1 || is_null_x2) {         /* If p1 or p2's bitmap is '0', which means incomplete data */
             cnt_small_or_equal++;
         } else {                            /* Else just do comparation */
             if (x1 <= x2) cnt_small_or_equal++;
@@ -186,216 +186,194 @@ void QsortStwh(int n) {
 
 void ThicknessWarehouse() {
     int i, j;
-    int iterCount, iterCountB;
+    int cnt_a, cnt_b;
 
-    SkyPoint *iterA;
-    SkyPoint *iterB;
-    SkyPoint *tmp_pointoint = NULL;
-    SkyPoint *tmp_pointoint2 = NULL;
-    SkyPoint *tmp_pointointNext;
-    SkyPoint **tmp_pointointArray;
+    SkyPoint *iter_a;
+    SkyPoint *iter_b;
+    SkyPoint *tmp_point = NULL;
+    SkyPoint *tmp_point2 = NULL;
+    SkyPoint *tmp_next;
+    SkyPoint **tmp_array;
 
+    /* Create start point of Stwh, Ses and Sg */
     stwh_head = StartPoint(&stwh_size, &stwh_head, &stwh_tail, sky_dim);
     ses_head = StartPoint(&ses_size, &ses_head, &ses_tail, sky_dim);
     sg_head = StartPoint(&sg_size, &sg_head, &sg_tail, sky_dim);
 
-    // [STEP 1] Push all points in S to every bucket according to bitmap
+    //////////////////////////////////////////////////////////////////////////
+    //                                                                      //
+    // [STEP 1]                                                             //
+    //      Push all points in S to every bucket according to bitmap        //
+    //                                                                      //
+    //////////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////
-    // Origin: bucket = new SkyBucket[bucketCount];
+    /* Create hashtable */
     h = InitTable(sky_cnt);
-    ////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////
-    // Origin: bucket[S[i]->bitmap].data.push_back(S[i]);
+    /* Push every point in S to a bucket depends on its bitmap */
     first_bucket = NULL;
-    tmp_pointoint = s_head;
-    tmp_pointointNext = tmp_pointoint->next;
-    while (tmp_pointointNext != NULL) {
-        tmp_pointoint = tmp_pointointNext;
-        tmp_pointointNext = tmp_pointoint->next;
-        tmp_listnode = Find(tmp_pointoint->bitmap, h, sky_dim);
+    tmp_point = s_head;
+    tmp_next = tmp_point->next;
+    while (tmp_next != NULL) {
+        tmp_point = tmp_next;
+        tmp_next = tmp_point->next;
+        tmp_listnode = Find(tmp_point->bitmap, h, sky_dim);             /* Find the list of nodes in hashtable according to bimap */
         if (tmp_listnode == NULL) {
-            tmp_bucket = (SkyBucket *)malloc(sizeof(SkyBucket));  // 1 bucket + 3 point => 232 bytes
+            tmp_bucket = (SkyBucket *)malloc(sizeof(SkyBucket));        /* If not exist, then we create a node for this bitmap in hashtable */
             InitBucket(tmp_bucket, sky_dim);
-            Insert(tmp_pointoint->bitmap, h, sky_dim, tmp_bucket, &first_bucket, &last_bucket);
+            Insert(tmp_point->bitmap, h, sky_dim, tmp_bucket, &first_bucket, &last_bucket);
         } else {
-            tmp_bucket = tmp_listnode->bucket;
+            tmp_bucket = tmp_listnode->bucket;                          /* Get the bucket of this bitmap */
         }
-        PushPoint(tmp_pointoint, &tmp_bucket->data_size, &tmp_bucket->data_tail);
+        PushPoint(tmp_point, &tmp_bucket->data_size, &tmp_bucket->data_tail);       /* Push point into the bucket of this bitmap */
     }
-    ////////////////////////////////////////////////////
 
-    // [STEP 2] Divide points in every bucket into Sl and Sln
+    //////////////////////////////////////////////////////////////////////////
+    //                                                                      //
+    // [STEP 2]                                                             //
+    //      Divide points in every bucket into Sl and Sln, then put all     //
+    //  points in Sl into Stwh.                                             //
+    //                                                                      //
+    //////////////////////////////////////////////////////////////////////////
+
     tmp_bucket = first_bucket;
-    tmp_pointointArray = (SkyPoint **)malloc(sizeof(SkyPoint*) * tmp_bucket->data_size);
+    tmp_array = (SkyPoint **)malloc(sizeof(SkyPoint*) * tmp_bucket->data_size);
     while (tmp_bucket != NULL) {
-        tmp_pointoint = tmp_bucket->data_head;
-        tmp_pointointArray[0] = tmp_pointoint;
-        for (i = 0; i < tmp_bucket->data_size; i++) {
-            tmp_pointoint = tmp_pointoint->next;
-            tmp_pointointArray[i] = tmp_pointoint;
+        tmp_point = tmp_bucket->data_head;
+        tmp_array[0] = tmp_point;
+        for (i = 0; i < tmp_bucket->data_size; i++) {                           /* Put points in list into array */
+            tmp_point = tmp_point->next;
+            tmp_array[i] = tmp_point;
         }
         for (i = 0; i < tmp_bucket->data_size; i++) {
-            tmp_pointoint = tmp_pointointArray[i];
-            for (j = 0; j < tmp_bucket->data_size; j++) {
-                tmp_pointoint2 = tmp_pointointArray[j];
-                if (i != j ) {
-                    if (IsP1DominateP2(tmp_pointoint2, tmp_pointoint)) {
-                        tmp_pointoint->cnt_domi++;
-                        if (tmp_pointoint->cnt_domi>= sky_k) {
-                            PushPoint(tmp_pointoint, &tmp_bucket->sln_size, &tmp_bucket->sln_tail);
-                            break;
-                        }
+            tmp_point = tmp_array[i];
+            for (j = i + 1; j < tmp_bucket->data_size; j++) {                       /* Compare each pair of points in array */
+                tmp_point2 = tmp_array[j];
+                if (IsP1DominateP2(tmp_point2, tmp_point)) {                /* If point A dominate point B */
+                    tmp_point->cnt_domi++;                                  /* Add cnt_domi of B */
+                    if (tmp_point->cnt_domi>= sky_k) {                      /* If cnt_domi of B is larger than sky_k, we put B into Sln */
+                        PushPoint(tmp_point, &tmp_bucket->sln_size, &tmp_bucket->sln_tail);
+                        break;
                     }
                 }
             }
-            if (j == tmp_bucket->data_size) //which means data[j] is not dominted more than k times, then put it into Sl.
-                PushPoint(tmp_pointoint, &stwh_size, &stwh_tail);
+            if (j == tmp_bucket->data_size)             /* which means data[j] is not dominted more than k times, then put it into Sl */
+                PushPoint(tmp_point, &stwh_size, &stwh_tail);
         }
         tmp_bucket = tmp_bucket->next;
     }
 
-    free(tmp_pointointArray);
+    /* Free the memory alloc of tmp_array */
+    free(tmp_array);
 
-    // [STEP 4] Push Swth -> Ses
+    //////////////////////////////////////////////////////////////////////////
+    //                                                                      //
+    // [STEP 3]                                                             //
+    //      Quick sort all points in Stwh according to cnt_domi             //
+    //                                                                      //
+    //////////////////////////////////////////////////////////////////////////
+
     QsortStwh(stwh_size);
 
-    /////////////////////////////////////////////////////////////////////////////////////
-    // Origin:
-    // vector<SkyPoint *>::iterator itHead, itTail;
-    // for (itHead = Stwh.begin(); itHead != Stwh.end(); itHead++) {
-    //    if(!*itHead) continue;
-    //    for (itTail = Stwh.end(); itTail != Stwh.begin(); itTail--) {
-    //        if(!*itTail) continue;
-    //        if (IsP1DominateP2(*itTail, *itHead)) (*itHead)->domainatedCount ++;
-    //        if ((*itHead)->domainatedCount > sky_k) {
-    //            Ses.push_back(*itHead);
-    //            Stwh.erase(itHead);
-    //            break;
-    //        }
-    //        if (IsP1DominateP2(*itHead, *itTail)) (*itTail)->domainatedCount ++;
-    //        if ((*itTail)->domainatedCount > sky_k) {
-    //            Ses.push_back(*itTail);
-    //            Stwh.erase(itTail);
-    //        }
-    //    }
-    // }
+    //////////////////////////////////////////////////////////////////////////
+    //                                                                      //
+    // [STEP 4]                                                             //
+    //      Comparing all points in Swth and push expired points to Ses     //
+    //                                                                      //
+    //////////////////////////////////////////////////////////////////////////
 
-    iterCount = 0;
-    iterA = stwh_head->next;
-    while (iterA != NULL) {
-        iterCount++;
-        tmp_pointointNext = iterA->next;
-        iterB = stwh_tail;
-        iterCountB = 0;
-        while (iterB != stwh_head) {
-            iterCountB++;
-            tmp_pointoint = iterB->prev;
-            if (SameBitmap(iterA->bitmap, iterB->bitmap, sky_dim))
+    cnt_a = 0;
+    iter_a = stwh_head->next;
+    while (iter_a != NULL) {                                                        /* Iter_a starts from stwh_head to stwh_tail */
+        cnt_a++;
+        tmp_next = iter_a->next;
+        iter_b = stwh_tail;
+        cnt_b = 0;
+        while (iter_b != stwh_head) {                                               /* Iter_b starts from stwh_tali to stwh_head */
+            cnt_b++;
+            tmp_point = iter_b->prev;
+            if (SameBitmap(iter_a->bitmap, iter_b->bitmap, sky_dim))                /* If converge at same bitmap, then break */
                 break;
-            if (IsP1DominateP2(iterB, iterA)) {
-                iterA->cnt_domi++;
-                if (iterA->cnt_domi >= sky_k) {
-                    DeletePoint(iterCount, &stwh_size, &stwh_head, &stwh_tail);
-                    PushPoint(iterA, &ses_size, &ses_tail);
-                    iterCount--;
+            if (IsP1DominateP2(iter_b, iter_a)) {
+                iter_a->cnt_domi++;
+                if (iter_a->cnt_domi >= sky_k) {
+                    DeletePoint(cnt_a, &stwh_size, &stwh_head, &stwh_tail);
+                    PushPoint(iter_a, &ses_size, &ses_tail);
+                    cnt_a--;
                     break;
                 }
             }
-            if (IsP1DominateP2(iterA, iterB)) {
-                iterB->cnt_domi++;
-                if (iterB->cnt_domi >= sky_k) {
-                    if (tmp_pointointNext == iterB) // if two nearby nodes, we delete the second, then update first node's next.
-                        tmp_pointointNext = iterB->next;
-                    DeletePoint(stwh_size - iterCountB + 1, &stwh_size, &stwh_head, &stwh_tail);
-                    PushPoint(iterB, &ses_size, &ses_tail);
-                    iterCountB--;
+            if (IsP1DominateP2(iter_a, iter_b)) {
+                iter_b->cnt_domi++;
+                if (iter_b->cnt_domi >= sky_k) {
+                    if (tmp_next == iter_b)                 /* If two nearby nodes, we delete the second, then update first node's next */
+                        tmp_next = iter_b->next;
+                    DeletePoint(stwh_size - cnt_b + 1, &stwh_size, &stwh_head, &stwh_tail);
+                    PushPoint(iter_b, &ses_size, &ses_tail);
+                    cnt_b--;
                 }
             }
-            iterB = tmp_pointoint;
+            iter_b = tmp_point;
         }
-        iterA = tmp_pointointNext;
+        iter_a = tmp_next;
     }
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Test:
-    //
-    // int test = 0;
-    // tmp_bucket = first_bucket;
-    // while (tmp_bucket != NULL) {
-    //     test += tmp_bucket->SlnSize - 1;
-    //     tmp_bucket = tmp_bucket->next;
-    // }
-    // printf("%d %d %d", test, stwh_size - 1, ses_size - 1);    // sum should be total number of point  // success!
-    //
-    /////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //                                                                      //
+    // [STEP 5]                                                             //
+    //      Comparing points in Swth with Ses and Sln, get the final        //
+    //  result Sg.                                                          //
+    //                                                                      //
+    //////////////////////////////////////////////////////////////////////////
 
-    //[STEP 5] (Stwh, Ses) -> Sg
-    /////////////////////////////////////////////////////////////////////////////////////
-
-    // Stwh VS Ses
-    iterCount = 0;
-    iterA = stwh_head->next;
-    while (iterA != NULL) {
-        iterCount++;
-        tmp_pointointNext = iterA->next;
-        iterB = ses_head->next;
-        while (iterB != NULL) {
-            if (IsP1DominateP2(iterB, iterA)) {
-                iterA->cnt_domi++;
-                if (iterA->cnt_domi >= sky_k) {
-                    DeletePoint(iterCount, &stwh_size, &stwh_head, &stwh_tail);
-                    iterCount--;
+    /* Stwh VS Ses */
+    cnt_a = 0;
+    iter_a = stwh_head->next;
+    while (iter_a != NULL) {
+        cnt_a++;
+        tmp_next = iter_a->next;
+        iter_b = ses_head->next;
+        while (iter_b != NULL) {
+            if (IsP1DominateP2(iter_b, iter_a)) {
+                iter_a->cnt_domi++;
+                if (iter_a->cnt_domi >= sky_k) {
+                    DeletePoint(cnt_a, &stwh_size, &stwh_head, &stwh_tail);
+                    cnt_a--;
                     break;
                 }
             }
-            iterB = iterB->next;
+            iter_b = iter_b->next;
         }
-        iterA = tmp_pointointNext;
+        iter_a = tmp_next;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Test:
-    //
-    // int test = 0;
-    // tmp_bucket = bucket;
-    // for (i = 0; i < bucketCount; i++) {
-    //     test += tmp_bucket->SlnSize - 1;
-    //     tmp_bucket = tmp_bucket->next;
-    // }
-    // printf("%d %d %d %d", test, deleted, stwh_size - 1, ses_size - 1);    // sum should be total number of point  // success!
-    //
-    /////////////////////////////////////////////////////////////////////////////
-
-    // Stwh VS Sln
-    iterCount = 0;
-    iterA = stwh_head->next;
-    while (iterA != NULL) {
-        iterCount++;
-        tmp_pointointNext = iterA->next;
+    /* Stwh VS Sln */
+    cnt_a = 0;
+    iter_a = stwh_head->next;
+    while (iter_a != NULL) {
+        cnt_a++;
+        tmp_next = iter_a->next;
         tmp_bucket = first_bucket;
         while (tmp_bucket != NULL) {
-            iterB = tmp_bucket->sln_head->next;
-            while (iterB != NULL) {
-                if (IsP1DominateP2(iterB, iterA)) {
-                    iterA->cnt_domi++;
-                    if (iterA->cnt_domi >= sky_k) {
-                        DeletePoint(iterCount, &stwh_size, &stwh_head, &stwh_tail);
-                        iterCount--;
+            iter_b = tmp_bucket->sln_head->next;
+            while (iter_b != NULL) {
+                if (IsP1DominateP2(iter_b, iter_a)) {
+                    iter_a->cnt_domi++;
+                    if (iter_a->cnt_domi >= sky_k) {
+                        DeletePoint(cnt_a, &stwh_size, &stwh_head, &stwh_tail);
+                        cnt_a--;
                         break;
                     }
                 }
-                iterB = iterB->next;
+                iter_b = iter_b->next;
             }
-            if (iterB != NULL) break;
+            if (iter_b != NULL) break;
             tmp_bucket = tmp_bucket->next;
         }
-        iterA = tmp_pointointNext;
+        iter_a = tmp_next;
     }
 
+    /* Sg is equal to Stwh now, and it is the answer of the query */
     sg_size = stwh_size;
     sg_head = stwh_head;
     sg_tail = stwh_tail;

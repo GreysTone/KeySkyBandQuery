@@ -4,7 +4,7 @@
 
 int n, m, k;
 
-void generate() {
+void Generate() {
     FILE *fout;
     int i, j, tmp;
     fout = fopen("stdin.txt", "w");
@@ -31,6 +31,6 @@ int main(int argc, char *argv[]) {
     m = strtol(argv[2], NULL, 10);
     k = strtol(argv[3], NULL, 10);
     srand((unsigned int)time(NULL));
-    generate();
+    Generate();
     return 0;
 }

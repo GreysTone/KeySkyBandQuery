@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-gcc DataGen.c -o DataGen
-gcc Brute.c -o Brute
+gcc data_gen.c -o data_gen
+gcc brute_force.c -o brute_force
 cd ..
 make clean
 make
 cd Test
 
-for (( i = 0; i < 100; i++ )); do
-    ./DataGen $1 $2 $3
-    ./Brute
+for (( i = 0; i < 10; i++ )); do
+    ./data_gen $1 $2 $3
+    ./brute_force
     ../sky_query
-    python Check.py
+    python check.py
 done
