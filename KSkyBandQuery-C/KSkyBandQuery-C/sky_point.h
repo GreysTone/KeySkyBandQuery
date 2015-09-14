@@ -1,7 +1,7 @@
 /*-------------------------------------------------
  *
  *  sky_point.h
- *  KeySkyBandQuery
+ *  KSkyBandQuery
  *
  *  Created by Armour on 7/10/15.
  *  Copyright (c) 2015 Armour. All rights reserved.
@@ -9,8 +9,8 @@
  *-------------------------------------------------
  */
 
-#ifndef KEYSKYBANDQUERY_SKYPOINT_H
-#define KEYSKYBANDQUERY_SKYPOINT_H
+#ifndef KSKYBANDQUERY_SKYPOINT_H
+#define KSKYBANDQUERY_SKYPOINT_H
 
 typedef struct SkyPoint {
     int dim;                    /* Point dimension */

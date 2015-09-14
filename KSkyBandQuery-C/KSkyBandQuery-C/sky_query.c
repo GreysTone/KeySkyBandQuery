@@ -237,8 +237,8 @@ void ThicknessWarehouse() {
     //////////////////////////////////////////////////////////////////////////
 
     tmp_bucket = first_bucket;
-    tmp_array = (SkyPoint **)malloc(sizeof(SkyPoint*) * tmp_bucket->data_size);
     while (tmp_bucket != NULL) {
+        tmp_array = (SkyPoint **)malloc(sizeof(SkyPoint*) * tmp_bucket->data_size);
         tmp_point = tmp_bucket->data_head;
         tmp_array[0] = tmp_point;
         for (i = 0; i < tmp_bucket->data_size; i++) {                           /* Put points in list into array */
@@ -247,13 +247,15 @@ void ThicknessWarehouse() {
         }
         for (i = 0; i < tmp_bucket->data_size; i++) {
             tmp_point = tmp_array[i];
-            for (j = i + 1; j < tmp_bucket->data_size; j++) {                       /* Compare each pair of points in array */
-                tmp_point2 = tmp_array[j];
-                if (IsP1DominateP2(tmp_point2, tmp_point)) {                /* If point A dominate point B */
-                    tmp_point->cnt_domi++;                                  /* Add cnt_domi of B */
-                    if (tmp_point->cnt_domi>= sky_k) {                      /* If cnt_domi of B is larger than sky_k, we put B into Sln */
-                        PushPoint(tmp_point, &tmp_bucket->sln_size, &tmp_bucket->sln_tail);
-                        break;
+            for (j = 0; j < tmp_bucket->data_size; j++) {               /* Compare each pair of points in array */
+                if (i != j) {
+                    tmp_point2 = tmp_array[j];
+                    if (IsP1DominateP2(tmp_point2, tmp_point)) {                /* If point A dominate point B */
+                        tmp_point->cnt_domi++;                                  /* Add cnt_domi of B */
+                        if (tmp_point->cnt_domi>= sky_k) {                      /* If cnt_domi of B is larger than sky_k, we put B into Sln */
+                            PushPoint(tmp_point, &tmp_bucket->sln_size, &tmp_bucket->sln_tail);
+                            break;
+                        }
                     }
                 }
             }
@@ -261,10 +263,9 @@ void ThicknessWarehouse() {
                 PushPoint(tmp_point, &stwh_size, &stwh_tail);
         }
         tmp_bucket = tmp_bucket->next;
+        /* Free the memory alloc of tmp_array */
+        free(tmp_array);
     }
-
-    /* Free the memory alloc of tmp_array */
-    free(tmp_array);
 
     //////////////////////////////////////////////////////////////////////////
     //                                                                      //

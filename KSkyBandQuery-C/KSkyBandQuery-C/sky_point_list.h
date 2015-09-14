@@ -1,7 +1,7 @@
 /*-------------------------------------------------
  *
  *  sky_point_list.h
- *  KeySkyBandQuery
+ *  KSkyBandQuery
  *
  *  Created by Armour on 7/14/15.
  *  Copyright (c) 2015 Armour. All rights reserved.
@@ -9,8 +9,8 @@
  *-------------------------------------------------
  */
 
-#ifndef KEYSKYBANDQUERY_SKYPOINTLIST_H
-#define KEYSKYBANDQUERY_SKYPOINTLIST_H
+#ifndef KSKYBANDQUERY_SKYPOINTLIST_H
+#define KSKYBANDQUERY_SKYPOINTLIST_H
 
 #include "sky_point.h"
 

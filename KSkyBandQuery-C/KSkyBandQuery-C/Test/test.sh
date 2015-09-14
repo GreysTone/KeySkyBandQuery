@@ -7,7 +7,7 @@ make clean
 make
 cd Test
 
-for (( i = 0; i < 10; i++ )); do
+for (( i = 0; i < 100; i++ )); do
     ./data_gen $1 $2 $3
     ./brute_force
     ../sky_query

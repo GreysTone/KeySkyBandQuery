@@ -1,7 +1,7 @@
 /*-------------------------------------------------
  *
  *  sky_bucket.h
- *  KeySkyBandQuery
+ *  KSkyBandQuery
  *
  *  Created by Armour on 7/10/15.
  *  Copyright (c) 2015 Armour. All rights reserved.
@@ -9,8 +9,8 @@
  *-------------------------------------------------
  */
 
-#ifndef KEYSKYBANDQUERY_SKYBUCKET_H
-#define KEYSKYBANDQUERY_SKYBUCKET_H
+#ifndef KSKYBANDQUERY_SKYBUCKET_H
+#define KSKYBANDQUERY_SKYBUCKET_H
 
 #include "sky_point.h"
 
