@@ -1,5 +1,5 @@
 # K-Skyband-Query
-incomplete k-skyband, constrained skyline, and group-by skyline queries on incomplete data in postgresql
+incomplete k-skyband, constrained skyline, and group-by skyline queries on incomplete data in c and c++
 
 ## Algorithm Discription
 ### kISB algorithm:
@@ -7,61 +7,14 @@ incomplete k-skyband, constrained skyline, and group-by skyline queries on incom
 
 ## Testing Environment
   * Operation System: Mac OSX / Ubuntu 14.04
-  * PostgreSQL version: PostgreSQL 9.4.4
 
 ## How to use?
-### 0. Install postgresql-server-dev fist
+cd into c code directory
+just run 'make' and then you can execute './skyband' with three arguments m, n and k.
 
-for ubuntu:
-
-~~~terminal
-	sudo apt-get install postgreslq-server-dev-all
-~~~
-
-for mac:
-
-~~~terminal
-	brew install postgresql
-~~~
-
-### 1. Clone and enter my repo (in terminal)
-~~~terminal
-    git clone git@github.com:Armour/KeySkyBandQuery.git
-    cd KeySkyBandQuery
-~~~
-
-### 2. Make and install skyband function (in terminal)
-~~~terminal
-	cd skyband
-	make
-	sudo make install
-~~~
-
-you will see something like this:
-.....
-
-### 3. Import skyband function (in postgresql)
-
-use postgresql command to enter below command
-
-~~~sql
-	\i ..../skyband.sql
-~~~
-
-### 4. Performing skyband query with warehouse algorithem
-~~~sql
-	select * from skyband('select price, distance, noisy from hotel', 2) as (price real, distance real, noisy real);
-~~~
-
-### 5. Here's the result
-~~~sql
- a | b  | c | d  | distance 
----+----+---+----+----------
-   |    |   | 46 |      576
-   |    |   | 23 |      484
-   | 17 |   | 35 |      452
-(3 rows)
-~~~
+## Test
+cd into test directory
+just run './test.sh' with three arguments m, n and k, it will automaticly run both brute force and k-skyband algorithem, after both finished, it will check whether two results are the same and return the time that two algorithem taked.
 
 ## Contact us
 1. If you have any question about this paper, you can contact Mr. Gao: gaoyj@zju.edu.cn
