@@ -1,5 +1,5 @@
 *.o
 *.txt
-main
+sky_query
 Test/Brute
 Test/DataGen

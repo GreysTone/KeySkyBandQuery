@@ -1,16 +1,26 @@
-cc=gcc
-exe=sky_query
-obj=sky_query.o sky_bucket_list.o sky_point_list.o sky_hashtable.o
-$(exe):$(obj)
-	$(cc) -g -Wall -o $(exe) $(obj)
-sky_query.o:sky_query.c sky_bucket_list.h sky_point_list.h
-	$(cc) -c sky_query.c
-sky_bucket_list.o:sky_bucket_list.c sky_bucket_list.h
-	$(cc) -c sky_bucket_list.c
-sky_point_list.o:sky_point_list.c sky_point_list.h
-	$(cc) -c sky_point_list.c
-sky_hashtable.o:sky_hashtable.c sky_hashtable.h
-	$(cc) -c sky_hashtable.c
+# ------------------------------------------------
+#
+#   Makefile
+#   KSkyBandQuery
+#
+#   Created by Armour on 11/09/2015
+#   Copyright (c) 2015 Armour. All rights reserved.
+#
+# ------------------------------------------------
+
+CC = gcc
+CFALGS = -g -Wall
+TARGET = sky_query
+OBJECTS = sky_query.o sky_bucket_list.o sky_point_list.o sky_hashtable.o sky_domi_list.o
+
+.PHONY: all clean
+
+all: $(OBJECTS)
+	$(CC) $(CFALGS) -o $(TARGET) $^
+
+$%.o : %.c %.h
+	$(CC) $(CFALGS) -c $< -o $@
+
 clean:
-	rm -rf *.o
+	rm -rf *.o $(TARGET)
 
