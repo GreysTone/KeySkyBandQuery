@@ -429,7 +429,7 @@ void Init() {
     first_bucket = NULL;
     last_bucket = NULL;
 
-    fin = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/stdin.txt", "r+");
+    fin = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/Test/stdin.txt", "r+");
     fscanf(fin, "%d %d %d", &sky_cnt, &sky_dim, &sky_k);
 
     domi_table = InitDomiTable(sky_cnt);       /* Initailize dominate lists */
@@ -472,7 +472,7 @@ void Query() {
 
 void Output() {
     int i, j;
-    fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/KSkyBandQuery-C/Test/skylineout.txt", "w+");
+    fout = fopen("/Users/armour/Desktop/KSkyBandQuery/KSkyBandQuery-C/Test/skylineout.txt", "w+");
     tmp_head = sg_head;
     for (i = 0; i < sg_size; i++) {
         tmp_head = tmp_head->next;
